@@ -133,17 +133,21 @@ def sitemap_urls(base, rp):
             print("sitemap KO", m, e, file=sys.stderr)
             continue
         for loc in re.findall(r"<loc>\s*([^<\s]+)\s*</loc>", xml):
-            (mappe if loc.endswith(".xml") else urls).append(loc)
+            if loc.endswith(".xml"):
+                if "yacht-sitemap" in loc:      # Yoast: solo la sitemap dei modelli (no post, pagine, brokerage, categorie)
+                    mappe.append(loc)
+            else:
+                urls.append(loc)
         time.sleep(0.5)
     return [u for u in dict.fromkeys(urls) if rp.can_fetch(UA, u)]
 
 
 def sembra_modello(url, lang):
-    """Euristica: percorso con lingua e un segmento che contiene una cifra (es. /yachts/flybridge/azimut-60)."""
-    p = urllib.parse.urlparse(url).path.lower()
-    if lang and lang.lower() not in p:
+    """/<lang>/serie-fly/fly-78/ (it) oppure /<lang>/fly-series/fly-78/ (en): lingua + serie + modello."""
+    p = urllib.parse.urlparse(url).path.lower().strip("/").split("/")
+    if len(p) != 3 or not re.search(r"serie|series", p[1]):
         return False
-    return bool(re.search(r"/(yachts?|models?|modelli|collection|collezion\w*|imbarcazion\w*)/", p)) and bool(re.search(r"\d", p.rsplit("/", 1)[-1] or p))
+    return not lang or p[0] == lang.lower().split("-")[0]
 
 
 def codice_da(url, nome):
@@ -152,11 +156,11 @@ def codice_da(url, nome):
 
 
 def famiglia_da(url, nome):
-    p = urllib.parse.urlparse(url).path.lower()
-    for s in ("flybridge", "magellano", "grande", "atlantis", "s-collection", "seadeck", "verve", "fly"):
-        if s in p or s in nome.lower():
-            return s.replace("-collection", "").capitalize()
-    return "Azimut"
+    """serie-fly / fly-series -> Fly; serie-s / s-series -> S."""
+    parts = urllib.parse.urlparse(url).path.strip("/").split("/")
+    seg = parts[1] if len(parts) > 1 else ""
+    seg = re.sub(r"^serie-|-series$", "", seg)
+    return seg.replace("-", " ").title() or "Azimut"
 
 
 def parse_modello(url, page, base):
@@ -215,8 +219,8 @@ def scrivi_excel(rows, out):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--base", default="https://www.azimutyachts.com")
-    ap.add_argument("--lang", default="", help="segmento lingua nell'URL, es. it-it (vuoto = tutti)")
+    ap.add_argument("--base", default="https://azimutyachts.com")
+    ap.add_argument("--lang", default="it", help="lingua nell'URL: it o en")
     ap.add_argument("--out", default="../excel/catalogo_azimut.xlsx")
     ap.add_argument("--delay", type=float, default=1.5)
     ap.add_argument("--images", default="../images")
