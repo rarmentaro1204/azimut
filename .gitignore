@@ -7,3 +7,5 @@ dist-lean/
 data/*_vs_*.xlsx
 configuratore-offerte-codice.zip
 .claude/settings.local.json
+dist/data/
+dist-lean/
