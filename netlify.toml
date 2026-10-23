@@ -1,0 +1,35 @@
+# Netlify pubblica SOLO dist/index.html: file unico con foto incorporate (nessuna build lato Netlify).
+# Dopo ogni modifica ai sorgenti: python3 tools/build_single_html.py  e poi commit + push di dist/.
+[build]
+  publish = "dist"
+  command = ""
+
+# L'HTML e i listini si ricontrollano sempre; le immagini (nomi stabili) restano in cache una settimana.
+# Regole per percorso preciso (non /*): su Netlify una regola generale vincerebbe su quella delle immagini.
+[[headers]]
+  for = "/"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"   # strumento interno: non indicizzare
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/index.html"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/data/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+    Cache-Control = "public, max-age=604800"
+
+# funzione ponte verso la repo GitHub privata (variabile GITHUB_TOKEN impostata su Netlify)
+[functions]
+  directory = "netlify/functions"

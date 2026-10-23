@@ -1,21 +1,19 @@
-# Configuratore offerte yacht — Azimut Yachts
+# Configuratore offerte yacht — stile Azimut
 
-Stesso lavoro della repo `ferretti` (configuratore HTML a 5 passi, catalogo Excel, PDF, registro offerte), per Azimut.
+Configuratore HTML (nessun backend) a 5 passi: Cliente → Programma di navigazione → Prodotto → Opzioni → Offerta (PDF A4), con registro, richiamo, dashboard e salvataggio su GitHub privata.
+È il configuratore della repo `ferretti` con **grafica Azimut Yachts** (kit brand ufficiale Azimut Avigliana): Helvetica Neue Light, antracite `#1D1D1B`, un solo accento rosso `#C21632`, logo wordmark ufficiale.
 
-## Stato
-- **Brand**: `brand/BRAND_GUIDELINES.md`, `css/brand.css`, `assets/azimut-logo-wordmark.png` — dal kit ufficiale Azimut Avigliana. **Non ancora confrontato col sito pubblico.**
-- **Scraper**: `scraper/scrape_azimut.py` — stesso schema colonne di Ferretti (foglio `Macchine`, intestazione riga 4, + `Brochure_URL`). Provato **solo su una pagina di prova sintetica** (modalità `--html-dir`): selettori/etichette vanno tarati sul sito reale.
-- **Catalogo (`excel/catalogo_azimut.xlsx`) e immagini: NON generati.** Il sito azimutyachts.com non era raggiungibile dall'ambiente di sviluppo (proxy di rete), quindi nessun dato è stato scaricato né inventato.
-- **Brochure**: non scaricate (stesso motivo). Lo scraper le cerca come link PDF nelle pagine modello (`--brochures DIR`).
+## Cosa è Azimut e cosa è Ferretti
+- **Stile Azimut**: `css/brand.css`, `css/luxury.css`, `js/config/brand.js` (logo, prefisso offerta `AZ-`), `brand/BRAND_GUIDELINES.md`.
+- **Barche = catalogo Ferretti** (11 modelli, `excel/catalogo_ferretti.xlsx`, `js/data/catalogo.js`). Foto, testi e brochure dei modelli sono di Ferretti Yachts e riportano il loro marchio: è un prototipo di grafica, non un catalogo Azimut. Per un catalogo Azimut vedi `scraper/scrape_azimut.py` (non eseguito: serve prima l'ok di Azimut sull'uso dei contenuti).
+- **Segnaposto da completare**: anagrafica emittente (`js/config/brand.js`), commerciali (`js/data/defaults.js`), condizioni generali (`js/data/general-terms.js`).
+- **Prezzi**: nessuno nel repo. Si caricano a runtime da Excel ("Carica listino", "Carica matrice optional"); i file riservati vanno in `data-private/` (in `.gitignore`).
 
 ## Comandi
 ```
-cd scraper
-python3 scrape_azimut.py --dry-run                  # elenca gli URL modello trovati dalla sitemap
-python3 scrape_azimut.py --lang it-it --brochures ../brochures
-python3 scrape_azimut.py --html-dir DIR             # offline: pagine .html salvate a mano (nome file = codice)
+python3 -m http.server 8781                  # sviluppo: http://localhost:8781/index.html
+python3 tools/build_single_html.py           # -> dist/index.html (pubblicato da Netlify)
 ```
-## Prossimi passi
-1. Consentire `www.azimutyachts.com` (e il dominio delle brochure) nella rete dell'ambiente, oppure lanciare lo scraper in locale.
-2. Tarare lo scraper su una pagina modello reale, rigenerare l'Excel, rifinire il brand dal sito.
-3. Portare qui il configuratore (js/, css/app.css, tools/, index.html) da `ferretti` e adattarlo seguendo `04_CHECKLIST_ADATTAMENTO_YACHT.md` di quella repo.
+## Note
+- Repo e sito devono restare **privati**: contengono foto/brochure di terzi. Il token GitHub resta solo nel browser; l'app rifiuta repo dati pubbliche.
+- Font: Helvetica Neue è di sistema su Mac/iOS; altrove Arial.

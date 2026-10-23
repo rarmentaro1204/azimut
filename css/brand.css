@@ -13,3 +13,19 @@
   --font-title:'Helvetica Neue',Helvetica,Arial,sans-serif;
   --font-accent:'Helvetica Neue',Helvetica,Arial,sans-serif;
 }
+*{box-sizing:border-box}
+body{margin:0;font-family:var(--font-body);color:var(--ink);background:#fff}
+button{font-family:inherit;cursor:pointer}
+input,select,textarea{font-family:inherit;font-size:14px}
+.app-hide{display:none!important}
+
+/* titoli: Helvetica Neue Light, maiuscolo, spaziatura ampia (kit brand Azimut) */
+.topbar h1,.card h2,.hbar .r,.hbar .l,.cover .ctitle,.gc-title,.load-title,.sol .head .nm,.cat .ttl{
+  font-family:var(--font-title);font-weight:300;letter-spacing:.06em;text-transform:uppercase}
+.topbar h1{font-size:17px;font-weight:500}.card h2{font-size:22px;font-weight:300;letter-spacing:.03em}.hbar .r{font-size:16px}.hbar .l{font-size:14px}
+.cover .ctitle{font-size:24px;font-weight:300}.cover .ctitle .nm{font-size:28px;font-weight:400}
+.gc-title{font-size:16px}.sol .head .nm{font-size:18px}.cat .ttl{font-size:15px}
+.hint,.cd{font-family:var(--font-body)}
+/* accenti */
+.step.active{border-color:var(--red)}
+.btn.prim{box-shadow:none}

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Azimut Yachts · Configuratore Offerte</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="assets/azimut-favicon.svg" type="image/svg+xml">
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<link rel="stylesheet" href="css/brand.css">
+<link rel="stylesheet" href="css/app.css">
+<link rel="stylesheet" href="css/luxury.css">
+</head>
+<body>
+<div class="topbar">
+  <div class="brand"><span id="brandLogo"></span><h1>Configuratore Offerte</h1></div>
+  <div class="spacer"></div>
+  <button id="ghBtn" class="btn sm" style="background:#4a4a4a;color:#fff;white-space:nowrap" title="Collega GitHub">GitHub</button>
+  <button id="offersBtn" class="btn sm" style="background:#292929;color:#fff;white-space:nowrap">Offerte</button>
+  <button id="dashBtn" class="btn sm" style="background:var(--red);color:#fff;white-space:nowrap">Dashboard</button>
+  <div class="lang-wrap"><span>🌐</span>
+    <select id="langSel">
+      <option value="it">Italiano</option><option value="en">English</option>
+    </select></div>
+</div>
+
+<div class="stepper" id="stepper"></div>
+
+<div class="wrap" id="view"></div>
+
+<div class="navbar app-noprint">
+  <div class="inner">
+    <button class="btn ghost" id="btnPrev">‹ <span id="lbl-prev">Indietro</span></button>
+    <button class="btn nav" id="btnNext"><span id="lbl-next">Avanti</span> ›</button>
+  </div>
+</div>
+
+<!-- dati e configurazione -->
+<script src="js/config/brand.js"></script>
+<script src="js/data/i18n.js"></script>
+<script src="js/data/i18n-yacht.js"></script>
+<script src="js/data/general-terms.js"></script>
+<script src="js/data/catalogo.js"></script>
+<script src="js/data/defaults.js"></script>
+<!-- applicazione (ordine rilevante: condividono lo scope globale) -->
+<script src="js/app/core.js"></script>
+<script src="js/app/fx.js"></script>
+<script src="js/app/steps-customer-application.js"></script>
+<script src="js/app/step-product.js"></script>
+<script src="js/app/step-options.js"></script>
+<script src="js/app/quote.js"></script>
+<script src="js/app/quote-pages.js"></script>
+<script src="js/app/export-xlsx.js"></script>
+<script src="js/app/router.js"></script>
+<script src="js/app/persistence.js"></script>
+<script src="js/app/folder-pdf.js"></script>
+<script src="js/app/dashboard.js"></script>
+<script src="js/app/github.js"></script>
+<script src="js/app/settings.js"></script>
+<script src="js/app/recall.js"></script>
+<script src="js/app/xlsx-loader.js"></script>
+<script src="js/app/hubspot.js"></script>
+<script src="js/app/init.js"></script>
+</body>
+</html>

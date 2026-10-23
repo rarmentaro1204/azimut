@@ -2,3 +2,8 @@ data-private/
 brochures/
 __pycache__/
 *.pyc
+.DS_Store
+dist-lean/
+data/*_vs_*.xlsx
+configuratore-offerte-codice.zip
+.claude/settings.local.json
