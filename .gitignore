@@ -1,0 +1,4 @@
+data-private/
+brochures/
+__pycache__/
+*.pyc

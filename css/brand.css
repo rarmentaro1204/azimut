@@ -1,0 +1,15 @@
+/* ==========================================================================
+   AZIMUT YACHTS — design tokens (kit brand ufficiale, vedi brand/BRAND_GUIDELINES.md)
+   Antracite #1D1D1B · Rosso #C21632 (unico accento) · grigi · Helvetica Neue / Arial
+   I nomi --red/--navy sono storici del configuratore (ereditato da Depureco/Ferretti).
+   ========================================================================== */
+:root{
+  --red:#C21632; --red-700:#9A1127; --red-300:#D9677A; --red-100:#F6DDE1;
+  --navy:#1D1D1B; --navy2:#2B2B29;
+  --yellow:#D7D8DB; --yellow-700:#A1A3A5; --yellow-100:#EBECED;   /* grigi (nessun giallo nel brand) */
+  --ink:#1D1D1B; --line:#C3C6CA; --soft:#EBECED; --muted:#6E6E6F; --white:#fff;
+  --steel:#6E6E6F; --steelL:#A1A3A5; --greybar:#EBECED; --valtint:#C3C6CA;
+  --font-body:'Helvetica Neue',Helvetica,Arial,sans-serif;
+  --font-title:'Helvetica Neue',Helvetica,Arial,sans-serif;
+  --font-accent:'Helvetica Neue',Helvetica,Arial,sans-serif;
+}
