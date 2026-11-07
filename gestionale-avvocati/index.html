@@ -187,6 +187,137 @@ main.enter .g4>:nth-child(2),main.enter .g2>:nth-child(2){animation-delay:.08s}m
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 
 @media(max-width:860px){body{flex-direction:column}nav{width:100%;height:auto;position:static;padding:20px 0 14px}.brand{margin:0 20px 16px}nav .sec{display:none}nav .links{display:flex;overflow-x:auto;padding:0 10px}nav .links a{padding:8px 12px!important;font-size:16px;white-space:nowrap}nav .links a::before,nav .links a em{display:none}.who{padding:14px 20px 0;margin-top:12px}main{padding:30px 18px 100px}.g2{grid-template-columns:1fr}#botbtn{right:16px;bottom:16px}#bot{right:3vw;bottom:80px}.notice{flex-wrap:wrap}}
+
+/* ===== calendario stile Google ===== */
+.cal{display:grid;grid-template-columns:236px 1fr;gap:26px;align-items:start}
+.cal-side{position:sticky;top:20px}
+.create{border-radius:30px!important;padding:14px 24px 14px 18px!important;background:var(--card);box-shadow:0 8px 22px -10px #0f1a2e59;font:500 14px var(--sans)!important;letter-spacing:.01em!important;margin-bottom:26px;border:1px solid var(--line)!important}
+.create svg{width:22px;height:22px;color:var(--gold);stroke-width:1.6}
+.create:hover{box-shadow:0 12px 28px -10px #0f1a2e70}
+.mini{margin-bottom:28px}.mini-h{display:flex;align-items:center;justify-content:space-between;margin:0 0 8px 6px}
+.mini-h b{font:500 17px var(--serif)}.mini-h button{padding:4px 7px;border:0;background:none;color:var(--mut)}
+.mini-g{display:grid;grid-template-columns:repeat(7,1fr);gap:1px;text-align:center;font-size:11px}
+.mini-g span{color:var(--mut);font-size:9.5px;padding:4px 0;letter-spacing:.06em}
+.mini-g a{border:0;display:grid;place-items:center;height:28px;width:28px;margin:0 auto;border-radius:50%;cursor:pointer;color:var(--ink);font-variant-numeric:tabular-nums;transition:background .2s}
+.mini-g a:hover{background:var(--pill)}.mini-g a.o{color:var(--mut);opacity:.45}.mini-g a.we{color:var(--mut)}
+.mini-g a.sel{background:var(--goldl);color:var(--navy)}.mini-g a.td{background:var(--navy);color:#fff}
+.mini-g a.has::after{content:"";position:absolute}
+.cal-side h4{margin:0 0 8px;font-size:9.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--mut);font-weight:500}
+.calu{display:flex;gap:10px;align-items:center;padding:6px 4px;font-size:13px;cursor:pointer;border-radius:4px}.calu:hover{background:var(--pill)}
+.calu input{accent-color:var(--c)}.calu i{width:10px;height:10px;border-radius:3px;background:var(--c);flex-shrink:0}
+.cal-main{background:var(--card);border:1px solid var(--line);border-radius:2px;overflow:hidden}
+.cal-bar{display:flex;gap:8px;align-items:center;padding:14px 18px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.cal-bar .rb{border-radius:30px;padding:8px 18px}.cal-bar .ar{border:0;background:none;padding:8px;border-radius:50%;color:var(--ink2)}.cal-bar .ar:hover{background:var(--pill)}
+.cal-title{font:500 26px/1 var(--serif);margin:0 0 0 8px;white-space:nowrap}
+.cal-bar select{width:auto;border-radius:30px;padding:8px 14px}
+.scope{display:inline-flex;background:var(--pill);border-radius:30px;padding:3px}
+.scope button{border:0;border-radius:30px;padding:7px 16px;background:none;letter-spacing:.02em;font-size:12.5px;color:var(--mut)}
+.scope button.on{background:var(--card);color:var(--ink);box-shadow:0 2px 6px -2px #0f1a2e40}
+.tg-head,.tg-all,.tg-body{display:grid}
+.tg-head{border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--card);z-index:5}
+.tg-day{text-align:center;padding:12px 0 10px}
+.tg-day span{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--mut)}
+.tg-day b{display:grid;place-items:center;width:46px;height:46px;margin:4px auto 0;border-radius:50%;font:300 25px var(--sans);cursor:pointer;transition:background .2s;font-variant-numeric:tabular-nums}
+.tg-day b:hover{background:var(--pill)}.tg-day.today span{color:var(--bord);font-weight:600}.tg-day.today b{background:var(--navy);color:#fff}
+.tg-all{border-bottom:1px solid var(--line)}.tg-all>div{min-width:0;padding:4px 3px;border-left:1px solid var(--line2);min-height:32px}
+.tg-all .lbl{font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);padding:10px 8px 0 0;border:0;text-align:right}
+.tg-body{position:relative}
+.tg-hours div{position:relative}.tg-hours span{position:absolute;top:-8px;right:10px;font-size:10.5px;color:var(--mut);font-variant-numeric:tabular-nums}
+.tg-col{position:relative;border-left:1px solid var(--line2);cursor:pointer;background-image:repeating-linear-gradient(to bottom,var(--line2) 0 1px,transparent 1px 52px),repeating-linear-gradient(to bottom,transparent 0 26px,#e4dccb55 26px 27px,transparent 27px 52px)}
+.tg-col:hover{background-color:#a7834a06}
+.ev{position:absolute;border-radius:6px;padding:4px 8px;font-size:12px;line-height:1.3;overflow:hidden;background:color-mix(in srgb,var(--c) 15%,var(--card));border-left:3px solid var(--c);color:var(--ink);cursor:pointer;transition:box-shadow .25s,transform .25s;animation:up .5s var(--ease) both}
+.ev:hover{box-shadow:0 10px 22px -10px #0f1a2e66;z-index:3;transform:translateY(-1px)}
+.ev b{display:block;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.ev small{color:var(--mut);font-size:11px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ev.priv{background-image:repeating-linear-gradient(135deg,transparent 0 6px,#ffffff40 6px 8px)}
+.chip{display:block;padding:3px 9px;margin:2px 0;border-radius:5px;font-size:11.5px;background:var(--c);color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer;transition:filter .2s}
+.chip:hover{filter:brightness(1.12)}.chip b{font-weight:600}
+.chip.t{background:color-mix(in srgb,var(--c) 14%,transparent);color:var(--ink)}.chip.t::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--c);margin-right:6px}
+.now{position:absolute;left:-1px;right:0;height:2px;background:var(--bord);z-index:4;pointer-events:none}.now::before{content:"";position:absolute;left:-6px;top:-5px;width:12px;height:12px;border-radius:50%;background:var(--bord)}
+.mg-h,.mg{display:grid;grid-template-columns:repeat(5,minmax(0,1fr))}
+.mg-h div{text-align:center;padding:10px 0;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--mut);border-bottom:1px solid var(--line)}
+.mc{min-height:122px;border-right:1px solid var(--line2);border-bottom:1px solid var(--line2);padding:6px 6px 8px;cursor:pointer;transition:background .2s}.mc:hover{background:#a7834a06}
+.mc:nth-child(5n){border-right:0}
+.mc .n{font-size:12px;width:26px;height:26px;display:grid;place-items:center;border-radius:50%;margin:0 auto 4px;font-variant-numeric:tabular-nums}
+.mc.out .n{color:var(--mut);opacity:.5}.mc.today .n{background:var(--navy);color:#fff}
+.more{font-size:11px;color:var(--mut);padding:2px 8px}
+.evp-h{display:flex;gap:16px;align-items:flex-start;margin-bottom:18px}.evp-h i{width:16px;height:16px;border-radius:4px;background:var(--c);margin-top:12px;flex-shrink:0}
+.evp-h h3{margin:0}.evp-r{display:flex;gap:14px;align-items:center;padding:8px 0;font-size:13.5px;color:var(--ink2)}.evp-r svg{color:var(--mut)}
+
+/* ===== tab anagrafiche ===== */
+.tabs{display:flex;gap:34px;border-bottom:1px solid var(--line);margin-bottom:28px;overflow-x:auto}
+.tabs button{border:0;background:none;padding:12px 0 14px;font:400 23px var(--serif);color:var(--mut);overflow:visible;letter-spacing:0;white-space:nowrap}
+.tabs button small{font:500 10px var(--sans);letter-spacing:.1em;margin-left:6px;color:var(--mut);vertical-align:middle;background:var(--pill);padding:2px 8px;border-radius:20px}
+.tabs button::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--gold);transform:scaleX(0);transition:transform .45s var(--ease)}
+.tabs button.on{color:var(--ink)}.tabs button.on::after{transform:scaleX(1)}.tabs button:hover{color:var(--ink)}
+.md{display:grid;grid-template-columns:350px 1fr;gap:24px;align-items:start}
+.md-list{padding:10px 0;max-height:74vh;overflow:auto}.md-list .search{margin:8px 22px 12px;max-width:none}
+.md-item{display:flex;gap:14px;align-items:center;padding:13px 22px;cursor:pointer;border-left:2px solid transparent;transition:background .25s,border-color .25s,padding .35s var(--ease)}
+.md-item:hover{background:#a7834a0a;padding-left:26px}.md-item.on{background:#a7834a14;border-left-color:var(--gold)}
+.md-item b{font-weight:500;display:block;line-height:1.3}.md-item small{color:var(--mut);font-size:11.5px;display:block;margin-top:2px}
+.av.sm{width:36px;height:36px;font-size:11px}.av.lg{width:68px;height:68px;font-size:21px}.av.xs{width:28px;height:28px;font-size:10px}
+.av.ente{background:var(--navy);color:var(--gold2);border:1px solid var(--gold2)}.av.contro{background:var(--pill);color:var(--ink2);border:1px solid var(--line)}
+.md-detail{padding:36px 40px;animation:up .6s var(--ease) both}
+.dh{display:flex;gap:22px;align-items:center;margin-bottom:30px}.dh h3{font:500 36px/1.08 var(--serif);margin:0 0 8px}
+.ct{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.ctc{border:1px solid var(--line);padding:16px 18px;display:flex;gap:14px;align-items:flex-start;transition:border-color .3s,box-shadow .3s;background:var(--card);min-width:0}
+.ctc:hover{border-color:var(--gold);box-shadow:0 10px 24px -16px #0f1a2e55}
+.ctc svg{color:var(--gold);margin-top:4px;width:18px;height:18px}.ctc div{min-width:0;flex:1}
+.ctc .lab{font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--mut);display:block;margin-bottom:3px}
+.ctc a,.ctc span.v{border:0;font-size:14px;word-break:break-word;color:var(--ink)}
+.ctc button{padding:4px 6px;border:0;background:none;color:var(--mut)}
+.sec-t{font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:var(--mut);margin:34px 0 12px;padding-bottom:10px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}
+.sec-t:first-child{margin-top:0}
+.lrow2{display:flex;gap:16px;align-items:center;padding:13px 0;border-bottom:1px solid var(--line2);cursor:pointer;transition:padding .35s var(--ease)}
+.lrow2:hover{padding-left:6px}.lrow2:last-child{border:0}.lrow2 .x{flex:1;min-width:0}.lrow2 small{display:block;color:var(--mut);font-size:11.5px}
+.lrow2 .go{color:var(--mut);transition:transform .3s var(--ease),color .3s}.lrow2:hover .go{transform:translateX(4px);color:var(--gold)}
+
+/* ===== pratiche ===== */
+.prs{display:grid;grid-template-columns:repeat(auto-fill,minmax(350px,1fr));gap:24px}
+.pr{cursor:pointer;display:flex;flex-direction:column}.pr:hover{transform:translateY(-3px)}
+.pr-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.rgb{font:600 11px var(--sans);letter-spacing:.16em;color:var(--gold);text-transform:uppercase}
+.pr h3{font-size:25px;margin-bottom:6px;display:block}.pr h3 em{font-style:italic;color:var(--gold)}
+.pr-obj{color:var(--ink2);margin:0 0 4px}.pr-meta{font-size:12px;color:var(--mut)}
+.phase{height:3px;background:var(--line2);margin:22px 0 8px}.phase div{height:3px;background:linear-gradient(90deg,var(--gold),var(--gold2));transform-origin:left;animation:grow 1.2s var(--ease) both .3s}
+.phase-l{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--mut)}
+.pr-foot{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:16px;border-top:1px solid var(--line2);font-size:12px;color:var(--mut);gap:10px}
+.pr-body{flex:1;margin-bottom:18px}
+.avs{display:flex}.avs .av{border:2px solid var(--card);margin-left:-5px}.avs .av:first-child{margin-left:0}
+.back{display:inline-flex;align-items:center;gap:10px;font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--mut);cursor:pointer;margin-bottom:26px;border:0}
+.back:hover{color:var(--gold)}.back svg{transition:transform .3s var(--ease)}.back:hover svg{transform:translateX(-4px)}
+.steps{display:flex;padding:28px 20px 24px;margin-bottom:24px}
+.st{flex:1;position:relative;text-align:center;cursor:pointer;font-size:12px;color:var(--mut);padding:0 6px}
+.st i{display:block;width:14px;height:14px;border-radius:50%;border:1px solid var(--line);background:var(--card);margin:0 auto 12px;position:relative;z-index:1;transition:all .4s var(--ease)}
+.st::before{content:"";position:absolute;top:7px;left:-50%;right:50%;height:1px;background:var(--line)}.st:first-child::before{display:none}
+.st.ok i{background:var(--gold);border-color:var(--gold)}.st.ok{color:var(--ink2)}.st.ok::before,.st.cur::before{background:var(--gold)}
+.st.cur i{border:2px solid var(--gold);box-shadow:0 0 0 6px #a7834a22}.st.cur{color:var(--ink);font-weight:500}
+.st:hover i{border-color:var(--gold)}
+.dos{display:grid;grid-template-columns:minmax(0,1fr) 370px;gap:24px;align-items:start}.dos-main,.dos-side{display:grid;gap:24px;min-width:0}
+.tl-item{display:flex;gap:20px;padding:15px 0;border-bottom:1px solid var(--line2);align-items:center;cursor:pointer;transition:padding .35s var(--ease)}
+.tl-item:hover{padding-left:6px}.tl-item:last-child{border:0}
+.tl-d{width:54px;text-align:center;flex-shrink:0;border-right:1px solid var(--line);padding-right:16px}
+.tl-d b{display:block;font:300 28px/1 var(--sans);font-variant-numeric:tabular-nums}.tl-d span{font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--mut)}
+.tl-item .x{flex:1;min-width:0}.tl-item small{display:block;color:var(--mut);font-size:11.5px;margin-top:2px}
+.tl-item.past{opacity:.55}.tl-item.past:hover{opacity:1}
+.tl-sub{font-size:9.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);margin:18px 0 4px}.tl-sub:first-of-type{margin-top:0}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:11px 18px;margin:0;font-size:13.5px}
+.kv dt{font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--mut);padding-top:3px}.kv dd{margin:0}
+.who2{display:flex;gap:14px;align-items:center;padding:11px 0;border-bottom:1px solid var(--line2)}.who2:last-child{border:0}
+.who2 b{font-weight:500;display:block}.who2 small{color:var(--mut);font-size:11.5px}.who2 .r{margin-left:auto;text-align:right;font-size:12px;color:var(--mut)}
+.mct{display:grid;gap:8px;margin-top:12px;font-size:13px}.mct div{display:flex;gap:10px;align-items:center;min-width:0}.mct svg{color:var(--gold);width:14px;height:14px}
+.mct a{border:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.party{padding-bottom:18px;margin-bottom:18px;border-bottom:1px solid var(--line2)}.party:last-child{border:0;padding:0;margin:0}
+.party .nm{font:500 20px/1.2 var(--serif);cursor:pointer;border:0}.party .nm:hover{color:var(--gold)}
+.party .rl{font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--mut);display:block;margin-bottom:4px}
+.doc{display:flex;gap:14px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line2)}.doc:last-child{border:0}
+.doc .fi{width:34px;height:40px;border:1px solid var(--line);display:grid;place-items:center;font:600 8.5px var(--sans);letter-spacing:.08em;color:var(--bord);background:var(--paper);flex-shrink:0}
+.doc .x{flex:1}.doc small{display:block;color:var(--mut);font-size:11.5px}
+.stat3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.stat3 div{text-align:left}.stat3 span{font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--mut);display:block}.stat3 b{font:300 22px var(--sans);font-variant-numeric:tabular-nums}
+dialog .chk{display:flex;flex-wrap:wrap;gap:8px 16px}dialog .chk label{display:flex;gap:7px;align-items:center;margin:0;text-transform:none;letter-spacing:0;font-size:13px;color:var(--ink)}
+dialog .two{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}
+dialog{max-height:92vh;overflow:auto}
+
+@media(max-width:1100px){.cal{grid-template-columns:1fr}.cal-side{display:none}.dos{grid-template-columns:1fr}.md{grid-template-columns:1fr}.md-list{max-height:none}}
 </style>
 </head>
 <body>
@@ -217,7 +348,6 @@ main.enter .g4>:nth-child(2),main.enter .g2>:nth-child(2){animation-delay:.08s}m
   <form id="botform" onsubmit="return false"><input id="botin" placeholder="Detti un impegno o una scadenza…" autocomplete="off"><button type="button" class="p" id="botsend">Invia</button></form>
 </section>
 <dialog id="dlg"></dialog>
-
 <script>
 /* ============ utilità ============ */
 const $=s=>document.querySelector(s);
@@ -225,102 +355,151 @@ const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&
 const p2=n=>String(n).padStart(2,'0');
 const iso=d=>`${d.getFullYear()}-${p2(d.getMonth()+1)}-${p2(d.getDate())}`;
 const T0=(()=>{const d=new Date();d.setHours(0,0,0,0);return d})();
+const TODAY=iso(T0);
 const addD=(n,b=T0)=>{const d=new Date(b);d.setDate(d.getDate()+n);return d};
 const isoOff=n=>iso(addD(n));
 const dd=s=>s?new Date(s+'T00:00'):null;
 const diff=s=>Math.round((dd(s)-T0)/864e5);
 const GIORNI=['domenica','lunedì','martedì','mercoledì','giovedì','venerdì','sabato'];
+const GS=['Dom','Lun','Mar','Mer','Gio','Ven','Sab'];
 const MESI=['gennaio','febbraio','marzo','aprile','maggio','giugno','luglio','agosto','settembre','ottobre','novembre','dicembre'];
+const cap=s=>s.charAt(0).toUpperCase()+s.slice(1);
 const fIt=s=>{if(!s)return'';const d=dd(s);return `${p2(d.getDate())}/${p2(d.getMonth()+1)}/${d.getFullYear()}`};
 const fLong=s=>{const d=dd(s);return `${GIORNI[d.getDay()]} ${d.getDate()} ${MESI[d.getMonth()]}`};
 const eur=n=>Number(n||0).toLocaleString('it-IT',{style:'currency',currency:'EUR'});
 const uid=()=>Math.random().toString(36).slice(2,9);
+const ini=n=>n.replace(/^(Avv\.|Dott\.ssa|Dott\.|Ing\.)\s*/,'').split(/\s+/).filter(w=>/^[A-ZÀ-Ü]/.test(w)).slice(0,2).map(w=>w[0]).join('');
+const monday=d=>{const x=new Date(d);x.setDate(x.getDate()-((x.getDay()+6)%7));return x};
 const FEST=['01-01','01-06','04-25','05-01','06-02','08-15','11-01','12-08','12-25','12-26'];
 const isWork=d=>d.getDay()%6!==0&&!FEST.includes(iso(d).slice(5));
 const nextWork=d=>{d=new Date(d);while(!isWork(d))d.setDate(d.getDate()+1);return d};
+const prevWork=d=>{d=new Date(d);while(!isWork(d))d.setDate(d.getDate()-1);return d};
 const fixWork=s=>iso(nextWork(dd(s)));
 const wOff=n=>{let d=new Date(T0);if(n>=0){d=nextWork(d);for(let i=0;i<n;i++){d.setDate(d.getDate()+1);d=nextWork(d)}}else{for(let i=0;i<-n;i++){do d.setDate(d.getDate()-1);while(!isWork(d))}}return iso(d)};
-const WD=iso(nextWork(T0));const CLOSED=WD!==iso(T0);
+const WD=iso(nextWork(T0));const CLOSED=WD!==TODAY;
 function when(s){const n=diff(s);return n<0?`scaduta da ${-n}g`:n===0?'oggi':n===1?'domani':`tra ${n}g`}
 function urg(s){const n=diff(s);return n<=0?'t-bad':n<=3?'t-warn':'';}
 
-const ICO={dash:'<path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/>',agenda:'<rect x="3" y="5" width="18" height="16" rx="1"/><path d="M3 10h18M8 3v4M16 3v4"/>',todo:'<path d="M9 11l3 3 8-8"/><path d="M20 12v7a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h11"/>',fatture:'<path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 13h7M9 17h5"/>',registro:'<path d="M12 3v18M5 7h14M7 7l-3 7a3 3 0 0 0 6 0zM17 7l-3 7a3 3 0 0 0 6 0zM8 21h8"/>',rubrica:'<rect x="4" y="3" width="16" height="18" rx="1"/><circle cx="12" cy="10" r="3"/><path d="M7 18c1-2.5 3-3.5 5-3.5s4 1 5 3.5"/>',ore:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',edit:'<path d="M4 20h4L19 9l-4-4L4 16z"/>',search:'<circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/>',plus:'<path d="M12 5v14M5 12h14"/>',pen:'<path d="M3 21l3-1 12-12-2-2L4 18z"/><path d="M14 6l4 4M17 3l4 4"/>',check:'<path d="M5 12l5 5L20 7"/>'};
+const ICO={phone:'<path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/>',mail:'<rect x="3" y="5" width="18" height="14" rx="1"/><path d="M3 7l9 6 9-6"/>',pec:'<rect x="3" y="5" width="18" height="14" rx="1"/><path d="M3 7l9 6 9-6"/><circle cx="18" cy="17" r="3.2" fill="var(--card)"/><path d="M16.8 17l.9.9 1.6-1.7"/>',pin:'<path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/>',id:'<rect x="3" y="5" width="18" height="14" rx="1"/><circle cx="9" cy="11" r="2.2"/><path d="M5.5 16c.8-1.6 2-2.3 3.5-2.3s2.7.7 3.5 2.3M15 10h4M15 13h3"/>',edit:'<path d="M4 20h4L19 9l-4-4L4 16z"/>',search:'<circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/>',plus:'<path d="M12 5v14M5 12h14"/>',check:'<path d="M5 12l5 5L20 7"/>',copy:'<rect x="8" y="8" width="12" height="12" rx="1"/><path d="M16 8V4H4v12h4"/>',left:'<path d="M15 6l-6 6 6 6"/>',right:'<path d="M9 6l6 6-6 6"/>',arrow:'<path d="M5 12h14M13 6l6 6-6 6"/>',clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',cal:'<rect x="3" y="5" width="18" height="16" rx="1"/><path d="M3 10h18M8 3v4M16 3v4"/>',user:'<circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/>',folder:'<path d="M3 6h6l2 2h10v11H3z"/>',lock:'<rect x="5" y="11" width="14" height="10" rx="1"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>',note:'<path d="M5 4h14v16H5zM9 9h6M9 13h6M9 17h3"/>'};
 const ic=k=>`<svg class="i" viewBox="0 0 24 24">${ICO[k]}</svg>`;
-/* ============ dati (localStorage) ============ */
-const KEY='gestionale-avv-poc-v2';
-const USERS=[{id:'u1',nome:'Avv. Marco Rossi',ruolo:'Socio fondatore',mail:'m.rossi',ini:'MR'},{id:'u2',nome:'Avv. Giulia Bianchi',ruolo:'Associata',mail:'g.bianchi',ini:'GB'},{id:'u3',nome:'Dott.ssa Elena Verdi',ruolo:'Segreteria',mail:'e.verdi',ini:'EV'},{id:'u4',nome:'Dott. Luca Neri',ruolo:'Praticante',mail:'l.neri',ini:'LN'}];
+
+/* ============ dati ============ */
+const KEY='gestionale-avv-poc-v3';
+const USERS=[{id:'u1',nome:'Avv. Marco Rossi',ruolo:'Socio fondatore',mail:'m.rossi',col:'#2f4f86'},{id:'u2',nome:'Avv. Giulia Bianchi',ruolo:'Associata',mail:'g.bianchi',col:'#93394a'},{id:'u3',nome:'Dott.ssa Elena Verdi',ruolo:'Segreteria',mail:'e.verdi',col:'#3f7558'},{id:'u4',nome:'Dott. Luca Neri',ruolo:'Praticante',mail:'l.neri',col:'#a7834a'}];
+const TYPECOL={Udienza:'#93394a',Scadenza:'#b07a1c',Appuntamento:'#2f4f86',Riunione:'#3f7558'};
+const FASI=['Apertura','Fase introduttiva','Istruttoria','Decisione','Definita'];
 function seed(){
- const C=[['c1','Mario Esposito','Persona fisica','RSPMRA70A01H501X'],['c2','Costruzioni Ferrari S.r.l.','Società','01234567890'],['c3','Anna Conti','Persona fisica','CNTNNA82C45F205Z'],['c4','Alfa Logistica S.p.A.','Società','09876543210'],['c5','Paolo Ricci','Persona fisica','RCCPLA65M10L219K']];
+ const A=(id,tipo,nome,forma,cf,tel,email,pec,indirizzo,note='',referenti=[])=>({id,tipo,nome,forma,cf,tel,email,pec,indirizzo,note,referenti});
  return{
- clients:C.map(([id,nome,tipo,cf])=>({id,nome,tipo,cf})),
+ anag:[
+  A('a1','Cliente','Mario Esposito','Persona fisica','SPSMRA70A01H501X','+39 333 1234567','mario.esposito@email.it','mario.esposito@pec.it','Via Tuscolana 120, 00181 Roma'),
+  A('a2','Cliente','Costruzioni Ferrari S.r.l.','Società','01234567890','+39 02 5551234','amministrazione@ferraricostruzioni.it','ferraricostruzioni@legalmail.it','Viale Monza 88, 20127 Milano','Cliente storico dal 2015',[{nome:'Ing. Paolo Ferrari',ruolo:'Amministratore unico',tel:'+39 335 7788990',email:'p.ferrari@ferraricostruzioni.it'}]),
+  A('a3','Cliente','Anna Conti','Persona fisica','CNTNNA82C45F205Z','+39 347 9876543','anna.conti@email.it','','Corso Francia 21, 10138 Torino'),
+  A('a4','Cliente','Alfa Logistica S.p.A.','Società','09876543210','+39 051 777888','legale@alfalogistica.it','alfalogistica@pec.it','Via Emilia 400, 40132 Bologna','',[{nome:'Dott.ssa Sara Galli',ruolo:'Responsabile ufficio legale',tel:'+39 051 7778899',email:'s.galli@alfalogistica.it'}]),
+  A('a5','Cliente','Paolo Ricci','Persona fisica','RCCPLA65M10L219K','+39 340 5556677','paolo.ricci@email.it','','Via Toledo 210, 80134 Napoli'),
+  A('x1','Controparte','Condominio Via Appia 45','Condominio','97123450587','+39 06 7812233','amministrazione@studiobruni.it','condominioappia45@pec.it','Via Appia Nuova 45, 00183 Roma','Amministratore: Studio Bruni'),
+  A('x2','Controparte','Beta Edil S.r.l.','Società','04455667788','+39 02 6677889','info@betaedil.it','betaedil@legalmail.it','Via Padova 12, 20127 Milano'),
+  A('x3','Controparte','Gamma S.p.A.','Società','03322110099','+39 02 4433221','legal@gammaspa.it','gammaspa@pec.it','Corso Buenos Aires 77, 20124 Milano'),
+  A('x4','Controparte','Omega Servizi S.r.l.','Società','07766554433','+39 011 5544332','hr@omegaservizi.it','omegaservizi@pec.it','Via Nizza 150, 10126 Torino'),
+  A('x5','Controparte','Delta Trasporti S.r.l.','Società','05544332211','+39 051 2233445','amministrazione@deltatrasporti.it','deltatrasporti@pec.it','Via Stalingrado 30, 40128 Bologna'),
+  A('x6','Controparte','Unipol Assicurazioni S.p.A.','Compagnia assicurativa','00284160371','+39 051 5076111','sinistri.napoli@unipol.it','unipol@pec.unipol.it','Via Stalingrado 45, 40128 Bologna','Ufficio sinistri – Napoli'),
+  A('e1','Ente','Tribunale di Roma','Ufficio giudiziario','','+39 06 68831','','prot.tribunale.roma@giustiziacert.it','Piazzale Clodio, 00195 Roma','Cancelleria civile – II Sezione, piano 3'),
+  A('e2','Ente','Tribunale di Milano – Sezione Imprese','Ufficio giudiziario','','+39 02 54331','','civile.tribunale.milano@giustiziacert.it','Via Freguglia 1, 20122 Milano'),
+  A('e3','Ente','Corte d’Appello di Milano','Ufficio giudiziario','','+39 02 54331','','ca.milano@giustiziacert.it','Via Freguglia 1, 20122 Milano'),
+  A('e4','Ente','Tribunale di Torino – Sezione Lavoro','Ufficio giudiziario','','+39 011 4329111','','lavoro.tribunale.torino@giustiziacert.it','Corso Vittorio Emanuele II 130, 10138 Torino'),
+  A('e5','Ente','Giudice di Pace di Napoli','Ufficio giudiziario','','+39 081 2233100','','gdp.napoli@giustiziacert.it','Via Diocleziano 330, 80125 Napoli'),
+  A('e6','Ente','Tribunale di Bologna','Ufficio giudiziario','','+39 051 201111','','civile.tribunale.bologna@giustiziacert.it','Via Farini 1, 40124 Bologna'),
+  A('e7','Ente','UNEP Roma – Ufficiali giudiziari','Ufficio notifiche','','+39 06 3233100','','unep.roma@giustiziacert.it','Viale Giulio Cesare 52, 00192 Roma'),
+  A('e8','Ente','Agenzia delle Entrate – DP Roma I','Pubblica amministrazione','','+39 06 50541','','dp.roma1@pce.agenziaentrate.it','Via Ippolito Nievo 36, 00153 Roma'),
+  A('e9','Ente','Ordine degli Avvocati di Roma','Ordine professionale','','+39 06 68301000','info@ordineavvocatiroma.it','segreteria@pec.ordineavvocatiroma.org','Piazza Cavour, 00193 Roma')],
  pratiche:[
-  {id:'p1',clientId:'c1',rg:'1234/2025',tribunale:'Tribunale di Roma',sezione:'II Civile',oggetto:'Risarcimento danni',controparte:'Condominio Via Appia',stato:'In corso'},
-  {id:'p2',clientId:'c2',rg:'876/2025',tribunale:'Tribunale di Milano',sezione:'Imprese',oggetto:'Recupero crediti',controparte:'Beta Edil S.r.l.',stato:'In corso'},
-  {id:'p3',clientId:'c2',rg:'2210/2024',tribunale:'Corte d’Appello di Milano',sezione:'I Civile',oggetto:'Appello contratto appalto',controparte:'Gamma S.p.A.',stato:'In corso'},
-  {id:'p4',clientId:'c3',rg:'554/2025',tribunale:'Tribunale di Torino',sezione:'Lavoro',oggetto:'Impugnazione licenziamento',controparte:'Omega Servizi S.r.l.',stato:'In corso'},
-  {id:'p5',clientId:'c4',rg:'3901/2023',tribunale:'Tribunale di Bologna',sezione:'III Civile',oggetto:'Opposizione a decreto ingiuntivo',controparte:'Delta Trasporti',stato:'Chiusa'},
-  {id:'p6',clientId:'c5',rg:'99/2026',tribunale:'Giudice di Pace di Napoli',sezione:'—',oggetto:'Sinistro stradale',controparte:'Unipol Assicurazioni',stato:'In corso'}],
- contacts:[
-  {id:'k1',nome:'Mario Esposito',cat:'Cliente',tel:'+39 333 1234567',email:'mario.esposito@email.it',pec:'mario.esposito@pec.it',note:''},
-  {id:'k2',nome:'Costruzioni Ferrari S.r.l.',cat:'Cliente',tel:'+39 02 5551234',email:'amm@ferraricostruzioni.it',pec:'ferraricostruzioni@pec.it',note:'Ref.: ing. Ferrari'},
-  {id:'k3',nome:'Anna Conti',cat:'Cliente',tel:'+39 347 9876543',email:'anna.conti@email.it',pec:'',note:''},
-  {id:'k4',nome:'Alfa Logistica S.p.A.',cat:'Cliente',tel:'+39 051 777888',email:'legale@alfalogistica.it',pec:'alfalogistica@pec.it',note:''},
-  {id:'k5',nome:'Tribunale di Roma – Cancelleria Civile',cat:'Ente',tel:'+39 06 68831',email:'',pec:'prot.tribunale.roma@giustiziacert.it',note:'Palazzo di Giustizia, Piazzale Clodio'},
-  {id:'k6',nome:'Tribunale di Milano – Sez. Imprese',cat:'Ente',tel:'+39 02 54331',email:'',pec:'civile.tribunale.milano@giustiziacert.it',note:''},
-  {id:'k7',nome:'Agenzia delle Entrate – Roma',cat:'Ente',tel:'+39 06 5051',email:'',pec:'dp.roma@pce.agenziaentrate.it',note:''},
-  {id:'k8',nome:'Ordine Avvocati di Roma',cat:'Ente',tel:'+39 06 6830 1000',email:'info@ordineavvocatiroma.it',pec:'segreteria@pec.ordineavvocatiroma.org',note:''}],
+  {id:'p1',clientId:'a1',controparteId:'x1',rg:'1234/2025',tribunale:'Tribunale di Roma',sezione:'II Sezione civile',giudice:'Dott. Andrea Mancini',oggetto:'Risarcimento danni da infiltrazioni',valore:48000,stato:'In corso',fase:2,resp:'u1',team:['u1','u4'],apertura:wOff(-230),avvNome:'Avv. Carlo Bruni',avvTel:'+39 06 7723344',avvMail:'c.bruni@studiobruni.it',avvPec:'carlobruni@ordineavvocatiroma.org',note:'In attesa del deposito della CTU. Valutare proposta transattiva della controparte (circa € 30.000).',docs:[['Atto di citazione',wOff(-225)],['Comparsa di costituzione e risposta',wOff(-190)],['Memoria ex art. 171-ter n. 1',wOff(-150)],['Verbale di udienza',wOff(-40)]]},
+  {id:'p2',clientId:'a2',controparteId:'x2',rg:'876/2025',tribunale:'Tribunale di Milano',sezione:'Sezione Imprese',giudice:'Dott.ssa Laura Ferri',oggetto:'Recupero crediti per forniture non pagate',valore:126500,stato:'In corso',fase:1,resp:'u2',team:['u2','u3'],apertura:wOff(-120),avvNome:'Avv. Stefano Colombo',avvTel:'+39 02 8899001',avvMail:'s.colombo@colombolegal.it',avvPec:'stefano.colombo@milano.pecavvocati.it',note:'Il cliente chiede aggiornamento settimanale. Possibile richiesta di provvisoria esecuzione.',docs:[['Ricorso per decreto ingiuntivo',wOff(-118)],['Opposizione a D.I. (controparte)',wOff(-80)],['Fatture e DDT – allegati',wOff(-118)]]},
+  {id:'p3',clientId:'a2',controparteId:'x3',rg:'2210/2024',tribunale:'Corte d’Appello di Milano',sezione:'I Sezione civile',giudice:'Pres. Giorgio Rinaldi',oggetto:'Appello – risoluzione contratto d’appalto',valore:310000,stato:'In corso',fase:3,resp:'u1',team:['u1','u2'],apertura:wOff(-300),avvNome:'Avv. Federica Sala',avvTel:'+39 02 7766554',avvMail:'f.sala@salapartners.it',avvPec:'federica.sala@milano.pecavvocati.it',note:'Causa in decisione: comparsa conclusionale da depositare entro il termine.',docs:[['Sentenza di primo grado',wOff(-310)],['Atto di appello',wOff(-295)],['Comparsa di risposta appellato',wOff(-250)]]},
+  {id:'p4',clientId:'a3',controparteId:'x4',rg:'554/2025',tribunale:'Tribunale di Torino',sezione:'Sezione Lavoro',giudice:'Dott. Marco Greco',oggetto:'Impugnazione licenziamento per giusta causa',valore:35000,stato:'In corso',fase:2,resp:'u2',team:['u2','u4'],apertura:wOff(-140),avvNome:'Avv. Luisa Martini',avvTel:'+39 011 5566778',avvMail:'l.martini@martinilavoro.it',avvPec:'luisa.martini@torino.pecavvocati.it',note:'Testimoni da citare: 3 colleghi della ricorrente.',docs:[['Ricorso ex art. 414 c.p.c.',wOff(-138)],['Memoria difensiva Omega',wOff(-100)]]},
+  {id:'p5',clientId:'a4',controparteId:'x5',rg:'3901/2023',tribunale:'Tribunale di Bologna',sezione:'III Sezione civile',giudice:'Dott.ssa Paola Lodi',oggetto:'Opposizione a decreto ingiuntivo',valore:87000,stato:'Chiusa',fase:4,resp:'u1',team:['u1'],apertura:wOff(-520),avvNome:'Avv. Roberto Gatti',avvTel:'+39 051 3344556',avvMail:'r.gatti@gattistudio.it',avvPec:'roberto.gatti@bologna.pecavvocati.it',note:'Opposizione accolta. Spese liquidate a favore del cliente.',docs:[['Sentenza n. 1180/2026',wOff(-60)]]},
+  {id:'p6',clientId:'a5',controparteId:'x6',rg:'99/2026',tribunale:'Giudice di Pace di Napoli',sezione:'Sezione civile',giudice:'Avv. Rosa Iorio (GdP)',oggetto:'Risarcimento sinistro stradale',valore:4800,stato:'In corso',fase:0,resp:'u1',team:['u1','u4'],apertura:wOff(-20),avvNome:'Avv. Gennaro Russo',avvTel:'+39 081 4455667',avvMail:'g.russo@russolegale.it',avvPec:'gennaro.russo@napoli.pecavvocati.it',note:'Raccolta documentazione medica in corso.',docs:[['Constatazione amichevole',wOff(-20)],['Certificato medico',wOff(-18)]]}],
  events:[
-  {id:'e1',title:'Udienza Esposito c/ Condominio – RG 1234/2025',date:wOff(0),time:'10:30',type:'Udienza',owner:'u1',shared:true,clientId:'c1',note:'Aula 14'},
-  {id:'e2',title:'Deposito memoria ex art. 183 – Ferrari',date:wOff(2),time:'',type:'Scadenza',owner:'u2',shared:true,clientId:'c2',note:'Termine perentorio'},
-  {id:'e3',title:'Udienza Conti c/ Omega',date:wOff(5),time:'09:30',type:'Udienza',owner:'u2',shared:true,clientId:'c3',note:''},
-  {id:'e4',title:'Riunione di studio settimanale',date:wOff(1),time:'17:00',type:'Riunione',owner:'u1',shared:true,clientId:'',note:''},
-  {id:'e5',title:'Colloquio nuovo cliente Ricci',date:wOff(1),time:'11:00',type:'Appuntamento',owner:'u1',shared:true,clientId:'c5',note:''},
-  {id:'e6',title:'Dentista',date:wOff(3),time:'15:00',type:'Appuntamento',owner:'u1',shared:false,clientId:'',note:''},
-  {id:'e7',title:'Termine appello Alfa Logistica',date:wOff(12),time:'',type:'Scadenza',owner:'u1',shared:true,clientId:'c4',note:''},
-  {id:'e8',title:'Scadenza F24 studio',date:wOff(8),time:'',type:'Scadenza',owner:'u3',shared:true,clientId:'',note:''},
-  {id:'e9',title:'Udienza di precisazione conclusioni – Ferrari',date:wOff(20),time:'11:00',type:'Udienza',owner:'u1',shared:true,clientId:'c2',note:''}],
+  ['Udienza Esposito – escussione testi',0,'10:30',90,'Udienza','u1',1,'p1','Aula 14, piano 3'],
+  ['Call con Ing. Ferrari',0,'15:00',45,'Appuntamento','u2',1,'p2',''],
+  ['Studio fascicolo Gamma',0,'08:30',90,'Appuntamento','u1',0,'p3','Preparazione conclusionale'],
+  ['Colloquio cliente Ricci',1,'11:00',60,'Appuntamento','u1',1,'p6','In studio, sala riunioni'],
+  ['Deposito telematico memoria Conti',1,'09:30',30,'Scadenza','u3',1,'p4',''],
+  ['Riunione di studio settimanale',1,'17:00',60,'Riunione','u1',1,'',''],
+  ['Deposito memoria ex art. 171-ter – Ferrari',2,'',60,'Scadenza','u2',1,'p2','Termine perentorio'],
+  ['Notifica atto – UNEP',2,'10:00',60,'Appuntamento','u4',1,'p4',''],
+  ['Sopralluogo CTU – Via Appia 45',3,'09:00',120,'Appuntamento','u4',1,'p1','Presente il CTU Ing. Leone'],
+  ['Visita medica',3,'15:00',60,'Appuntamento','u1',0,'',''],
+  ['Pranzo con Avv. Bruni',4,'13:00',90,'Appuntamento','u1',0,'p1','Ipotesi transattiva'],
+  ['Udienza Conti c/ Omega – discussione',5,'09:30',60,'Udienza','u2',1,'p4',''],
+  ['Riunione mensile soci',6,'18:00',60,'Riunione','u1',1,'',''],
+  ['Scadenza F24 studio',8,'',60,'Scadenza','u3',1,'',''],
+  ['Termine comparsa conclusionale – Gamma',12,'',60,'Scadenza','u1',1,'p3','Art. 190 c.p.c.'],
+  ['Udienza GdP – prima comparizione Ricci',15,'12:00',60,'Udienza','u1',1,'p6',''],
+  ['Udienza precisazione conclusioni – Ferrari',20,'11:00',60,'Udienza','u1',1,'p2',''],
+  ['Udienza di prima comparizione Esposito',-40,'10:00',60,'Udienza','u1',1,'p1',''],
+  ['Deposito atto di citazione Esposito',-225,'',60,'Scadenza','u1',1,'p1',''],
+  ['Prima udienza Ferrari c/ Beta Edil',-30,'11:30',60,'Udienza','u2',1,'p2',''],
+  ['Udienza Conti – tentativo di conciliazione',-25,'09:00',60,'Udienza','u2',1,'p4',''],
+  ['Lettura sentenza Alfa Logistica',-60,'',60,'Scadenza','u1',1,'p5',''],
+  ['Mediazione Ferrari / Gamma',-80,'15:00',120,'Appuntamento','u1',1,'p3','Esito negativo']
+ ].map(([title,o,time,dur,type,owner,shared,praticaId,note],i)=>({id:'ev'+i,title,date:wOff(o),time,dur,type,owner,shared:!!shared,praticaId,note})),
  todos:[
-  {id:'t1',text:'Preparare fascicolo udienza Esposito',owner:'u1',due:wOff(0),done:false},
-  {id:'t2',text:'Redigere memoria Ferrari',owner:'u2',due:wOff(1),done:false},
-  {id:'t3',text:'Notificare atto Conti',owner:'u4',due:wOff(3),done:false},
-  {id:'t4',text:'Inviare parcella a Ricci',owner:'u3',due:wOff(2),done:false},
-  {id:'t5',text:'Aggiornare registro RG',owner:'u3',due:wOff(-1),done:false},
-  {id:'t6',text:'Rinnovo polizza RC professionale',owner:'u1',due:wOff(9),done:false}],
+  {id:'t1',text:'Preparare fascicolo udienza Esposito',owner:'u1',due:wOff(0),done:false,praticaId:'p1'},
+  {id:'t2',text:'Redigere memoria Ferrari',owner:'u2',due:wOff(1),done:false,praticaId:'p2'},
+  {id:'t3',text:'Notificare atto Conti',owner:'u4',due:wOff(2),done:false,praticaId:'p4'},
+  {id:'t4',text:'Inviare parcella a Ricci',owner:'u3',due:wOff(2),done:false,praticaId:'p6'},
+  {id:'t5',text:'Aggiornare registro RG',owner:'u3',due:wOff(-1),done:false,praticaId:''},
+  {id:'t6',text:'Bozza comparsa conclusionale Gamma',owner:'u1',due:wOff(8),done:false,praticaId:'p3'},
+  {id:'t7',text:'Richiedere documentazione medica a Ricci',owner:'u4',due:wOff(3),done:false,praticaId:'p6'},
+  {id:'t8',text:'Valutare proposta transattiva Bruni',owner:'u1',due:wOff(4),done:false,praticaId:'p1'}],
  invoices:[
-  {id:'i1',num:'12/2026',clientId:'c2',desc:'Acconto causa recupero crediti',importo:3500,emissione:wOff(-40),scadenza:wOff(-10),pagata:false},
-  {id:'i2',num:'13/2026',clientId:'c1',desc:'Onorari fase introduttiva',importo:1800,emissione:wOff(-25),scadenza:wOff(2),pagata:false},
-  {id:'i3',num:'14/2026',clientId:'c4',desc:'Saldo opposizione D.I.',importo:4200,emissione:wOff(-20),scadenza:wOff(6),pagata:false},
-  {id:'i4',num:'15/2026',clientId:'c3',desc:'Acconto lavoro',importo:1200,emissione:wOff(-5),scadenza:wOff(25),pagata:false},
-  {id:'i5',num:'11/2026',clientId:'c5',desc:'Consulenza stragiudiziale',importo:600,emissione:wOff(-60),scadenza:wOff(-30),pagata:true}],
- hours:[
-  ...[0,1,2,3,4].flatMap(i=>{const d=addD(-i);if([0,6].includes(d.getDay()))return[];return[
-   {id:'h'+i+'a',user:'u1',date:iso(d),ore:6,pratica:'p1',desc:'Studio atti e udienza'},
-   {id:'h'+i+'b',user:'u2',date:iso(d),ore:7.5,pratica:i%2?'p2':'p4',desc:'Redazione atti'},
-   {id:'h'+i+'c',user:'u3',date:iso(d),ore:8,pratica:'',desc:'Segreteria / depositi telematici'},
-   {id:'h'+i+'d',user:'u4',date:iso(d),ore:i%2?6:8,pratica:'p3',desc:'Ricerche giurisprudenziali'}]})]
+  {id:'i1',num:'12/2026',clientId:'a2',praticaId:'p2',desc:'Acconto causa recupero crediti',importo:3500,emissione:wOff(-30),scadenza:wOff(-8),pagata:false},
+  {id:'i2',num:'13/2026',clientId:'a1',praticaId:'p1',desc:'Onorari fase introduttiva',importo:1800,emissione:wOff(-18),scadenza:wOff(2),pagata:false},
+  {id:'i3',num:'14/2026',clientId:'a4',praticaId:'p5',desc:'Saldo opposizione D.I.',importo:4200,emissione:wOff(-15),scadenza:wOff(5),pagata:false},
+  {id:'i4',num:'15/2026',clientId:'a3',praticaId:'p4',desc:'Acconto causa di lavoro',importo:1200,emissione:wOff(-4),scadenza:wOff(18),pagata:false},
+  {id:'i5',num:'11/2026',clientId:'a5',praticaId:'p6',desc:'Consulenza stragiudiziale',importo:600,emissione:wOff(-45),scadenza:wOff(-22),pagata:true},
+  {id:'i6',num:'10/2026',clientId:'a2',praticaId:'p3',desc:'Onorari atto di appello',importo:6800,emissione:wOff(-90),scadenza:wOff(-60),pagata:true}],
+ hours:[...Array(10).keys()].flatMap(i=>{const d=wOff(-i-1);return[
+   {id:'h'+i+'a',user:'u1',date:d,ore:i%3?6:7,pratica:['p1','p3','p6'][i%3],desc:['Studio atti e udienza','Redazione conclusionale','Ricevimento cliente'][i%3]},
+   {id:'h'+i+'b',user:'u2',date:d,ore:7.5,pratica:i%2?'p2':'p4',desc:'Redazione atti'},
+   {id:'h'+i+'c',user:'u3',date:d,ore:8,pratica:'',desc:'Segreteria e depositi telematici'},
+   {id:'h'+i+'d',user:'u4',date:d,ore:i%2?6:8,pratica:i%2?'p1':'p4',desc:'Ricerche giurisprudenziali'}]})
  };}
 let DB;try{DB=JSON.parse(localStorage.getItem(KEY))}catch{}
-if(!DB||!DB.clients)DB=seed();
+if(!DB||!DB.anag)DB=seed();
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(DB))}catch{}};
 let me=(()=>{try{return localStorage.getItem(KEY+'-sess')}catch{}})()||null;
-const uName=id=>USERS.find(u=>u.id===id)?.nome||'—';
-const cName=id=>DB.clients.find(c=>c.id===id)?.nome||'';
-const pLabel=id=>{const p=DB.pratiche.find(x=>x.id===id);return p?`RG ${p.rg} – ${cName(p.clientId)}`:'—'};
+const U=id=>USERS.find(u=>u.id===id);
+const uName=id=>U(id)?.nome||'—';
+const AN=id=>DB.anag.find(a=>a.id===id);
+const aName=id=>AN(id)?.nome||'';
+const PR=id=>DB.pratiche.find(p=>p.id===id);
+const pTitle=p=>`${aName(p.clientId)} c/ ${aName(p.controparteId)||'—'}`;
+const pLabel=id=>{const p=PR(id);return p?`RG ${p.rg} – ${aName(p.clientId)}`:'—'};
+const avU=(id,cls='xs')=>`<div class="av ${cls}" title="${esc(uName(id))}" style="background:${U(id)?.col};color:#fff">${ini(uName(id))}</div>`;
+const avA=(a,cls='sm')=>`<div class="av ${cls} ${a.tipo==='Ente'?'ente':a.tipo==='Controparte'?'contro':''}">${esc(ini(a.nome)||a.nome.slice(0,2).toUpperCase())}</div>`;
 
-/* ============ form modale generica ============ */
+/* ============ form modale ============ */
 function openForm(title,fields,vals,onSave,onDelete){
  const d=$('#dlg');
- d.innerHTML=`<form onsubmit="return false"><h3 style="margin:0 0 6px">${esc(title)}</h3>${fields.map(f=>{
-  const v=vals?.[f.k]??f.def??'';let inp;
-  if(f.t==='select')inp=`<select name="${f.k}">${f.opts.map(o=>{const[val,lab]=Array.isArray(o)?o:[o,o];return`<option value="${esc(val)}" ${val==v?'selected':''}>${esc(lab)}</option>`}).join('')}</select>`;
-  else if(f.t==='check')inp=`<input type="checkbox" name="${f.k}" style="width:auto" ${v?'checked':''}>`;
-  else if(f.t==='area')inp=`<textarea name="${f.k}" rows="2">${esc(v)}</textarea>`;
+ const one=f=>{const v=vals?.[f.k]??f.def??'';let inp;
+  if(f.t==='select')inp=`<select name="${f.k}">${f.opts.map(o=>{const[val,lab]=Array.isArray(o)?o:[o,o];return`<option value="${esc(val)}" ${String(val)===String(v)?'selected':''}>${esc(lab)}</option>`}).join('')}</select>`;
+  else if(f.t==='multi')inp=`<div class="chk">${f.opts.map(([val,lab])=>`<label><input type="checkbox" name="${f.k}" value="${val}" ${(v||[]).includes(val)?'checked':''}> ${esc(lab)}</label>`).join('')}</div>`;
+  else if(f.t==='check')inp=`<div class="chk"><label><input type="checkbox" name="${f.k}" ${v?'checked':''}> ${esc(f.cl||'Sì')}</label></div>`;
+  else if(f.t==='area')inp=`<textarea name="${f.k}" rows="3">${esc(v)}</textarea>`;
   else inp=`<input name="${f.k}" type="${f.t||'text'}" ${f.step?`step="${f.step}"`:''} value="${esc(v)}" ${f.req?'required':''}>`;
-  return`<label>${esc(f.l)}</label>${inp}`}).join('')}
-  <div class="bar" style="margin:16px 0 0"><button type="button" class="p" data-a="ok">Salva</button><button type="button" data-a="x">Annulla</button><span class="sp"></span>${onDelete?'<button type="button" class="d" data-a="del">Elimina</button>':''}</div></form>`;
+  return`<div><label>${esc(f.l)}</label>${inp}</div>`};
+ let html='',i=0;while(i<fields.length){const f=fields[i];if(f.half&&fields[i+1]?.half){html+=`<div class="two">${one(f)}${one(fields[i+1])}</div>`;i+=2}else{html+=one(f);i++}}
+ d.innerHTML=`<form onsubmit="return false"><p class="eyebrow">${vals&&vals.id?'Modifica':'Nuovo inserimento'}</p><h3>${esc(title)}</h3>${html}
+  <div class="bar" style="margin:26px 0 0"><button type="button" class="p" data-a="ok">Salva</button><button type="button" data-a="x">Annulla</button><span class="sp"></span>${onDelete?'<button type="button" class="d" data-a="del">Elimina</button>':''}</div></form>`;
  d.onclose=()=>{
-  if(d.returnValue==='del'&&onDelete){onDelete();save();render();}
-  else if(d.returnValue==='ok'){const o={};fields.forEach(f=>{const el=d.querySelector(`[name="${f.k}"]`);o[f.k]=f.t==='check'?el.checked:f.t==='number'?parseFloat(el.value||0):el.value;if(f.work&&o[f.k]&&!isWork(dd(o[f.k]))){const n=fixWork(o[f.k]);toast(`${fLong(o[f.k])[0].toUpperCase()+fLong(o[f.k]).slice(1)} non è un giorno lavorativo: data spostata a ${fLong(n)}.`);o[f.k]=n}});onSave(o);save();render();}
+  if(d.returnValue==='del'&&onDelete){onDelete();save();render();toast('Elemento eliminato.')}
+  else if(d.returnValue==='ok'){const o={};fields.forEach(f=>{
+    if(f.t==='multi'){o[f.k]=[...d.querySelectorAll(`[name="${f.k}"]:checked`)].map(x=>x.value);return}
+    const el=d.querySelector(`[name="${f.k}"]`);o[f.k]=f.t==='check'?el.checked:f.t==='number'||f.int?parseFloat(el.value||0):el.value;
+    if(f.work&&o[f.k]&&!isWork(dd(o[f.k]))){const n=fixWork(o[f.k]);toast(`${cap(fLong(o[f.k]))} non è un giorno lavorativo: data spostata a ${fLong(n)}.`);o[f.k]=n}});
+   onSave(o);save();render();}
   d.returnValue='';};
  d.querySelectorAll('[data-a]').forEach(b=>b.addEventListener('click',()=>{const a=b.dataset.a,fm=d.querySelector('form');
   if(a==='ok'&&!fm.checkValidity()){fm.reportValidity();return}
@@ -329,130 +508,248 @@ function openForm(title,fields,vals,onSave,onDelete){
  d.querySelector('form').addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.tagName==='INPUT'){e.preventDefault();d.querySelector('[data-a=ok]').click()}});
  d.showModal();
 }
-const optClients=(blank)=>[...(blank?[['','—']]:[]),...DB.clients.map(c=>[c.id,c.nome])];
-const optUsers=USERS.map(u=>[u.id,u.nome]);
-const optPrat=[['','— nessuna —'],...DB.pratiche.map(p=>[p.id,pLabel(p.id)])];
+const optA=(tipo,blank)=>[...(blank?[['','—']]:[]),...DB.anag.filter(a=>a.tipo===tipo).sort((a,b)=>a.nome.localeCompare(b.nome)).map(a=>[a.id,a.nome])];
+const optUsers=()=>USERS.map(u=>[u.id,u.nome]);
+const optPrat=()=>[['','— nessuna pratica —'],...DB.pratiche.map(p=>[p.id,`RG ${p.rg} · ${pTitle(p)}`])];
 
-/* ============ viste ============ */
-let page='dash',agMode='tutte',pagoFilter='tutte',rubCat='Tutti',q='';
-const PAGES=[['dash','La giornata'],['agenda','Agenda'],['todo','Attività'],['registro','Registro clienti'],['rubrica','Rubrica'],['fatture','Scadenzario'],['ore','Ore collaboratori']];
+/* ============ stato ============ */
+let page='dash',q='',anTab='Cliente',anSel=null,prFilter='In corso',prMine=false,praticaSel=null,pagoFilter='tutte';
+let calView='week',calScope='mine',calDate=WD,miniM=WD.slice(0,8)+'01';const hiddenU=new Set();
+const PAGES=[['dash','La giornata'],['agenda','Agenda'],['pratiche','Pratiche'],['anag','Registro clienti'],['todo','Attività'],['fatture','Scadenzario'],['ore','Ore collaboratori']];
 
-function visibleEvents(mode){
- return DB.events.filter(e=>mode==='condivisa'?e.shared:mode==='personale'?e.owner===me:(e.shared||e.owner===me)).sort((a,b)=>(a.date+(a.time||'99')).localeCompare(b.date+(b.time||'99')));
-}
+/* ============ dati derivati ============ */
 function upcomingDeadlines(){
  const L=[];
- DB.events.filter(e=>(e.shared||e.owner===me)&&['Scadenza','Udienza'].includes(e.type)&&diff(e.date)<=14&&diff(e.date)>=0).forEach(e=>L.push({date:e.date,txt:e.title,kind:e.type,sub:e.shared?'Studio':'Riservato'}));
+ DB.events.filter(e=>(e.shared||e.owner===me)&&['Scadenza','Udienza'].includes(e.type)&&diff(e.date)<=14&&diff(e.date)>=0).forEach(e=>L.push({date:e.date,txt:e.title,kind:e.type,sub:e.shared?'Studio':'Riservato',ev:e.id}));
  DB.todos.filter(t=>t.owner===me&&!t.done&&t.due&&diff(t.due)<=14).forEach(t=>L.push({date:t.due,txt:t.text,kind:'Attività',sub:'Riservata'}));
- DB.invoices.filter(i=>!i.pagata&&diff(i.scadenza)<=14).forEach(i=>L.push({date:i.scadenza,txt:`Fattura ${i.num} – ${cName(i.clientId)} (${eur(i.importo)})`,kind:'Fattura',sub:'Incasso'}));
+ DB.invoices.filter(i=>!i.pagata&&diff(i.scadenza)<=14).forEach(i=>L.push({date:i.scadenza,txt:`Fattura ${i.num} – ${aName(i.clientId)} (${eur(i.importo)})`,kind:'Fattura',sub:'Incasso'}));
  return L.sort((a,b)=>a.date.localeCompare(b.date));
 }
-const dlRow=x=>`<div class="row"><div class="d">${fIt(x.date).slice(0,5)}</div><div class="x">${esc(x.txt)}<small>${x.kind} · ${x.sub}</small></div><span class="tag ${urg(x.date)}">${when(x.date)}</span></div>`;
+const evColor=e=>calScope==='mine'?TYPECOL[e.type]:U(e.owner)?.col;
+const calEvents=()=>DB.events.filter(e=>calScope==='mine'?e.owner===me:((e.shared||e.owner===me)&&!hiddenU.has(e.owner)));
+const nextEv=p=>DB.events.filter(e=>e.praticaId===p.id&&diff(e.date)>=0).sort((a,b)=>(a.date+a.time).localeCompare(b.date+b.time))[0];
 
+/* ============ LA GIORNATA ============ */
 function vDash(){
- const dl=upcomingDeadlines();const ev=visibleEvents('tutte').filter(e=>e.date===WD);const h=new Date().getHours();const saluto=h<13?'Buongiorno':h<18?'Buon pomeriggio':'Buonasera';
+ const dl=upcomingDeadlines();const ev=DB.events.filter(e=>e.date===WD&&(e.owner===me)).sort((a,b)=>(a.time||'00').localeCompare(b.time||'00'));
  const td=DB.todos.filter(t=>t.owner===me&&!t.done);
- const unpaid=DB.invoices.filter(i=>!i.pagata);const late=unpaid.filter(i=>diff(i.scadenza)<0);
- return`<p class="eyebrow">La giornata</p><h2>${saluto}, <em>${esc((n=>n[0]+' '+n[n.length-1])(uName(me).split(' ')))}</em>.</h2><p class="sub">Il quadro dei suoi impegni, dei termini in scadenza e delle attività da completare.</p>
- ${CLOSED?`<div class="notice"><b>${fLong(iso(T0))[0].toUpperCase()+fLong(iso(T0)).slice(1)}</b><span>Lo studio è chiuso. Di seguito quanto La attende ${diff(WD)===1?'domani, ':''}<b style="font-size:inherit;font-family:inherit;font-weight:600">${fLong(WD)}</b>.</span></div>`:''}
+ const late=DB.invoices.filter(i=>!i.pagata&&diff(i.scadenza)<0);
+ const myP=DB.pratiche.filter(p=>p.stato!=='Chiusa'&&p.team.includes(me));
+ const h=new Date().getHours();const saluto=h<13?'Buongiorno':h<18?'Buon pomeriggio':'Buonasera';
+ const nm=uName(me).split(' ');
+ return`<p class="eyebrow">La giornata</p><h2>${saluto}, <em>${esc(nm[0]+' '+nm[nm.length-1])}</em>.</h2><p class="sub">Il quadro dei suoi impegni, dei termini in scadenza e delle pratiche che segue.</p>
+ ${CLOSED?`<div class="notice"><b>${cap(fLong(TODAY))}</b><span>Lo studio è chiuso. Di seguito quanto La attende ${diff(WD)===1?'domani, ':''}<strong>${fLong(WD)}</strong>.</span></div>`:''}
  <div class="grid g4" style="margin-bottom:34px">
-  <div class="card kpi"><span>${CLOSED?"Impegni · "+GIORNI[dd(WD).getDay()]:"Impegni di oggi"}</span><b data-v="${ev.length}">${ev.length}</b></div>
-  <div class="card kpi"><span>Termini entro 3 giorni</span><b data-v="${dl.filter(x=>diff(x.date)<=3&&x.kind!=='Fattura').length}">${dl.filter(x=>diff(x.date)<=3&&x.kind!=='Fattura').length}</b></div>
-  <div class="card kpi"><span>Attività aperte</span><b data-v="${td.length}">${td.length}</b></div>
-  <div class="card kpi ${late.length?'alert':''}"><span>Parcelle insolute (${late.length})</span><b class="num" data-v="${late.reduce((s,i)=>s+i.importo,0)}" data-e>${eur(late.reduce((s,i)=>s+i.importo,0))}</b></div></div>
+  <div class="card kpi"><span>${CLOSED?'Impegni · '+GIORNI[dd(WD).getDay()]:'Impegni di oggi'}</span><b data-v="${ev.length}">${ev.length}</b></div>
+  <div class="card kpi"><span>Termini entro 3 giorni</span><b data-v="${dl.filter(x=>diff(x.date)<=3&&x.kind!=='Fattura').length}">0</b></div>
+  <div class="card kpi"><span>Pratiche che segue</span><b data-v="${myP.length}">${myP.length}</b></div>
+  <div class="card kpi ${late.length?'alert':''}"><span>Parcelle insolute (${late.length})</span><b data-v="${late.reduce((s,i)=>s+i.importo,0)}" data-e>${eur(late.reduce((s,i)=>s+i.importo,0))}</b></div></div>
  <div class="grid g2">
-  <div class="card"><h3>Agenda <span class="tag">${CLOSED?fLong(WD):"oggi"}</span></h3>${ev.length?ev.map(e=>`<div class="row"><div class="d">${e.time||'—'}</div><div class="x">${esc(e.title)}<small>${e.type} · ${e.shared?'Studio':'Riservato'} · ${esc(uName(e.owner))}</small></div></div>`).join(''):'<div class="empty">Nessun impegno oggi.</div>'}</div>
-  <div class="card"><h3>Scadenze imminenti <span class="tag">14 giorni</span></h3>${dl.length?dl.map(dlRow).join(''):'<div class="empty">Nessuna scadenza.</div>'}</div>
+  <div class="card"><h3>La mia agenda <span class="tag">${CLOSED?fLong(WD):'oggi'}</span></h3>${ev.length?ev.map(e=>`<div class="row lk" onclick="showEvent('${e.id}')" style="cursor:pointer"><div class="d">${e.time||'—'}</div><div class="x">${esc(e.title)}<small>${e.type}${e.praticaId?' · RG '+esc(PR(e.praticaId)?.rg):''}${e.shared?'':' · riservato'}</small></div><span class="tag" style="background:color-mix(in srgb,${TYPECOL[e.type]} 14%,transparent);color:${TYPECOL[e.type]}">${e.type}</span></div>`).join(''):'<div class="empty">Nessun impegno in agenda.</div>'}
+   <div style="margin-top:16px"><button class="s" onclick="go('agenda')">Apri l’agenda ${ic('arrow')}</button></div></div>
+  <div class="card"><h3>Scadenze imminenti <span class="tag">14 giorni</span></h3>${dl.length?dl.map(x=>`<div class="row" ${x.ev?`onclick="showEvent('${x.ev}')" style="cursor:pointer"`:''}><div class="d">${fIt(x.date).slice(0,5)}</div><div class="x">${esc(x.txt)}<small>${x.kind} · ${x.sub}</small></div><span class="tag ${urg(x.date)}">${when(x.date)}</span></div>`).join(''):'<div class="empty">Nessuna scadenza.</div>'}</div>
+  <div class="card"><h3>Le mie pratiche <span class="tag">${myP.length} attive</span></h3>${myP.map(p=>{const n=nextEv(p);return`<div class="lrow2" onclick="openPratica('${p.id}')"><div class="x"><b style="font-weight:500">${esc(pTitle(p))}</b><small>RG ${esc(p.rg)} · ${esc(p.tribunale)}${n?` · prossimo: ${fIt(n.date).slice(0,5)} ${esc(n.type.toLowerCase())}`:''}</small></div><span class="go">${ic('arrow')}</span></div>`}).join('')||'<div class="empty">Nessuna pratica assegnata.</div>'}</div>
   <div class="card"><h3>Le mie attività</h3>${td.length?td.sort((a,b)=>(a.due||'9').localeCompare(b.due||'9')).map(todoRow).join(''):'<div class="empty">Nessuna attività in sospeso.</div>'}</div></div>`;
 }
-const todoRow=t=>`<div class="row"><input type="checkbox" style="width:auto;margin-top:4px" ${t.done?'checked':''} onchange="togTodo('${t.id}')"><div class="x ${t.done?'done':''}">${esc(t.text)}<small>${esc(uName(t.owner))}</small></div>${t.due?`<span class="tag ${t.done?'':urg(t.due)}">${fIt(t.due).slice(0,5)}</span>`:''}<button class="ic" title="Modifica" onclick="editTodo('${t.id}')">${ic('edit')}</button></div>`;
+const todoRow=t=>`<div class="row"><input type="checkbox" ${t.done?'checked':''} onchange="togTodo('${t.id}')"><div class="x ${t.done?'done':''}">${esc(t.text)}<small>${esc(uName(t.owner))}${t.praticaId?` · <a onclick="openPratica('${t.praticaId}')" style="cursor:pointer">RG ${esc(PR(t.praticaId)?.rg)}</a>`:''}</small></div>${t.due?`<span class="tag ${t.done?'':urg(t.due)}">${fIt(t.due).slice(0,5)}</span>`:''}<button class="ic" onclick="editTodo('${t.id}')">${ic('edit')}</button></div>`;
 window.togTodo=id=>{const t=DB.todos.find(x=>x.id===id);t.done=!t.done;save();render()};
-window.editTodo=id=>{const t=id?DB.todos.find(x=>x.id===id):null;openForm(t?'Modifica to-do':'Nuovo to-do',[{k:'text',l:'Attività',req:1},{k:'due',l:'Scadenza',t:'date',work:1},{k:'owner',l:'Assegnato a',t:'select',opts:optUsers,def:me}],t,o=>{if(t)Object.assign(t,o);else DB.todos.push({id:uid(),done:false,...o})},t&&(()=>DB.todos=DB.todos.filter(x=>x!==t)))};
+window.editTodo=(id,pre)=>{const t=id?DB.todos.find(x=>x.id===id):null;openForm(t?'Attività':'Nuova attività',[{k:'text',l:'Attività',req:1},{k:'due',l:'Scadenza',t:'date',work:1,half:1},{k:'owner',l:'Assegnata a',t:'select',opts:optUsers(),def:me,half:1},{k:'praticaId',l:'Pratica',t:'select',opts:optPrat()}],t||pre,o=>{if(t)Object.assign(t,o);else DB.todos.push({id:uid(),done:false,...o})},t&&(()=>DB.todos=DB.todos.filter(x=>x!==t)))};
 
+/* ============ AGENDA (stile Google Calendar) ============ */
+const H0=8,H1=20,PX=52;
+function calTitle(){const d=dd(calDate);
+ if(calView==='month')return cap(MESI[d.getMonth()])+' '+d.getFullYear();
+ if(calView==='day')return cap(fLong(calDate))+' '+d.getFullYear();
+ const m=monday(d),f=addD(4,m);return m.getMonth()===f.getMonth()?`${cap(MESI[m.getMonth()])} ${m.getFullYear()}`:`${cap(MESI[m.getMonth()].slice(0,3))} – ${cap(MESI[f.getMonth()].slice(0,3))} ${f.getFullYear()}`}
+function miniCal(){const f=dd(miniM),st=monday(f);const wk=monday(dd(calDate));let h='';
+ for(let i=0;i<42;i++){const d=addD(i,st),s=iso(d);const cls=[d.getMonth()!==f.getMonth()?'o':'',!isWork(d)?'we':'',s===TODAY?'td':'',(calView==='week'&&d>=wk&&d<addD(5,wk))||(calView==='day'&&s===calDate)?'sel':''].join(' ');
+  h+=`<a class="${cls}" onclick="calPick('${s}')">${d.getDate()}</a>`}
+ return`<div class="mini"><div class="mini-h"><b>${cap(MESI[f.getMonth()])} ${f.getFullYear()}</b><span><button onclick="miniMove(-1)">${ic('left')}</button><button onclick="miniMove(1)">${ic('right')}</button></span></div><div class="mini-g">${['L','M','M','G','V','S','D'].map(x=>`<span>${x}</span>`).join('')}${h}</div></div>`}
+window.miniMove=n=>{const d=dd(miniM);d.setMonth(d.getMonth()+n);miniM=iso(d);render()};
+window.calPick=s=>{calDate=iso(nextWork(dd(s)));if(calDate!==s)toast(`${cap(fLong(s))}: studio chiuso. Mostro ${fLong(calDate)}.`);miniM=calDate.slice(0,8)+'01';render()};
+window.calMove=n=>{const d=dd(calDate);if(calView==='day'){d.setDate(d.getDate()+n);calDate=iso(n>0?nextWork(d):prevWork(d))}else if(calView==='week'){calDate=iso(addD(7*n,monday(d)))}else{d.setDate(1);d.setMonth(d.getMonth()+n);calDate=iso(nextWork(d))}miniM=calDate.slice(0,8)+'01';render()};
+window.calToday=()=>{calDate=WD;miniM=WD.slice(0,8)+'01';render()};
+window.togU=id=>{hiddenU.has(id)?hiddenU.delete(id):hiddenU.add(id);render()};
+function lay(list){const out=[];let cl=[],lanes=[],cEnd=-1;const flush=()=>{cl.forEach(x=>x.n=lanes.length);cl=[];lanes=[]};
+ list.map(e=>{const[h,m]=e.time.split(':').map(Number);const s=h*60+m;return{e,s,en:s+(+e.dur||60)}}).sort((a,b)=>a.s-b.s).forEach(x=>{if(x.s>=cEnd&&cl.length)flush();let i=lanes.findIndex(t=>t<=x.s);if(i<0){i=lanes.length;lanes.push(0)}lanes[i]=x.en;x.l=i;cl.push(x);out.push(x);cEnd=Math.max(cEnd,x.en)});flush();return out}
+const chip=(e,solid=true)=>`<div class="chip ${solid?'':'t'}" style="--c:${evColor(e)}" onclick="event.stopPropagation();showEvent('${e.id}')">${e.time&&!solid?`<b>${e.time}</b> `:''}${esc(e.title)}</div>`;
+function timeGrid(days){const E=calEvents();const cols=`64px repeat(${days.length},minmax(0,1fr))`;const now=new Date(),nm=now.getHours()*60+now.getMinutes();
+ return`<div class="tg-head" style="grid-template-columns:${cols}"><div></div>${days.map(d=>`<div class="tg-day ${d===TODAY?'today':''}"><span>${GS[dd(d).getDay()]}</span><b onclick="calDate='${d}';calView='day';render()">${dd(d).getDate()}</b></div>`).join('')}</div>
+ <div class="tg-all" style="grid-template-columns:${cols}"><div class="lbl">Giornata</div>${days.map(d=>`<div>${E.filter(e=>e.date===d&&!e.time).map(e=>chip(e)).join('')}</div>`).join('')}</div>
+ <div class="tg-body" id="tgb" style="grid-template-columns:${cols}"><div class="tg-hours">${Array.from({length:H1-H0},(_,i)=>`<div style="height:${PX}px">${i?`<span>${p2(H0+i)}:00</span>`:''}</div>`).join('')}</div>
+ ${days.map(d=>`<div class="tg-col" style="height:${(H1-H0)*PX}px" onclick="slotClick(event,'${d}')">${lay(E.filter(e=>e.date===d&&e.time)).map(x=>{const top=Math.max(0,(x.s/60-H0)*PX),ht=Math.max(24,(x.en-x.s)/60*PX-3);const e=x.e;
+   return`<div class="ev ${e.shared?'':'priv'}" style="--c:${evColor(e)};top:${top}px;height:${ht}px;left:calc(${x.l/x.n*100}% + 3px);width:calc(${100/x.n}% - 6px)" onclick="event.stopPropagation();showEvent('${e.id}')"><b>${esc(e.title)}</b><small>${e.time}${ht>40?' – '+(()=>{const m=x.en;return p2(Math.floor(m/60))+':'+p2(m%60)})():''}${calScope==='studio'?' · '+esc(uName(e.owner).split(' ').pop()):''}</small>${ht>64&&e.praticaId?`<small>RG ${esc(PR(e.praticaId)?.rg)}</small>`:''}</div>`}).join('')}
+  ${d===TODAY&&nm>=H0*60&&nm<H1*60?`<div class="now" style="top:${(nm/60-H0)*PX}px"></div>`:''}</div>`).join('')}</div>`}
+function monthGrid(){const d=dd(calDate),f=new Date(d.getFullYear(),d.getMonth(),1),f2=new Date(f),st=(()=>{while(f2.getDay()%6===0)f2.setDate(f2.getDate()+1);return monday(f2)})(),E=calEvents();let cells='';
+ for(let w=0;w<6;w++){const ws=addD(w*7,st);if(w>0&&ws.getMonth()!==f.getMonth()&&ws>f)break;
+  for(let i=0;i<5;i++){const x=addD(w*7+i,st),s=iso(x);const L=E.filter(e=>e.date===s).sort((a,b)=>(a.time||'00').localeCompare(b.time||'00'));const fest=!isWork(x);
+   cells+=`<div class="mc ${x.getMonth()!==f.getMonth()?'out':''} ${s===TODAY?'today':''}" onclick="calDate='${fest?iso(nextWork(x)):s}';calView='day';render()" ${fest?'style="background:var(--paper2)"':''}><div class="n">${x.getDate()}</div>${fest?'<div class="more">Festivo</div>':''}${L.slice(0,3).map(e=>chip(e,!e.time)).join('')}${L.length>3?`<div class="more">+${L.length-3} altri</div>`:''}</div>`}}
+ return`<div class="mg-h">${['Lun','Mar','Mer','Gio','Ven'].map(x=>`<div>${x}</div>`).join('')}</div><div class="mg">${cells}</div>`}
+window.slotClick=(ev,d)=>{const r=ev.currentTarget.getBoundingClientRect();const m=Math.floor((ev.clientY-r.top)/PX*2)*30+H0*60;editEvent(null,{date:d,time:p2(Math.floor(m/60))+':'+p2(m%60),dur:60,owner:me,shared:true,type:'Appuntamento'})};
 function vAgenda(){
- const list=visibleEvents(agMode).filter(e=>diff(e.date)>=-1);const by={};list.forEach(e=>(by[e.date]=by[e.date]||[]).push(e));
- return`<p class="eyebrow">Calendario</p><h2>L’<em>agenda</em></h2><p class="sub">L’agenda condivisa dello studio e quella riservata di ${esc(uName(me))}.</p>
- <div class="bar"><div class="seg">${['tutte','condivisa','personale'].map(m=>`<button class="${agMode===m?'on':''}" onclick="agMode='${m}';render()">${m[0].toUpperCase()+m.slice(1)}</button>`).join('')}</div><span class="sp"></span><button class="p" onclick="editEvent()">${ic('plus')} Evento</button></div>
- <div class="card">${Object.keys(by).sort().map(d=>`<div class="day ${diff(d)===0?'today':''}"><b>${fLong(d)}</b><span>${when(d)}</span></div>${by[d].map(e=>`<div class="row"><div class="d">${e.time||'—'}</div><div class="x">${esc(e.title)}<small>${e.clientId?esc(cName(e.clientId))+' · ':''}${esc(uName(e.owner))}${e.note?' · '+esc(e.note):''}</small></div><span class="tag ${e.type==='Scadenza'?urg(e.date)||'t-warn':''}">${e.type}</span><span class="tag">${e.shared?'Studio':'Riservato'}</span><button class="ic" title="Modifica" onclick="editEvent('${e.id}')">${ic('edit')}</button></div>`).join('')}`).join('')||'<div class="empty">Nessun evento.</div>'}</div>`;
+ const days=calView==='day'?[calDate]:[0,1,2,3,4].map(i=>iso(addD(i,monday(dd(calDate)))));
+ const side=calScope==='mine'?`<h4>Legenda</h4>${Object.entries(TYPECOL).map(([t,c])=>`<div class="calu" style="--c:${c}"><i></i>${t}</div>`).join('')}<div class="calu" style="--c:var(--mut);margin-top:6px"><i style="background:repeating-linear-gradient(135deg,var(--line) 0 3px,var(--card) 3px 5px)"></i>Riservato</div>`
+  :`<h4>Agende dello studio</h4>${USERS.map(u=>`<label class="calu" style="--c:${u.col}"><input type="checkbox" ${hiddenU.has(u.id)?'':'checked'} onchange="togU('${u.id}')"> ${esc(u.nome)}${u.id===me?' <small style="color:var(--mut)">(io)</small>':''}</label>`).join('')}`;
+ return`<p class="eyebrow">Calendario</p><h2>${calScope==='mine'?'La mia <em>agenda</em>':'Agenda <em>di studio</em>'}</h2><div style="height:30px"></div>
+ <div class="cal"><aside class="cal-side"><button class="create" onclick="editEvent(null,{date:calDate,owner:me,shared:true})">${ic('plus')} Crea</button>${miniCal()}${side}</aside>
+ <section class="cal-main"><div class="cal-bar"><button class="rb" onclick="calToday()">Oggi</button><button class="ar" onclick="calMove(-1)">${ic('left')}</button><button class="ar" onclick="calMove(1)">${ic('right')}</button><h3 class="cal-title">${calTitle()}</h3><span class="sp"></span>
+  <div class="scope"><button class="${calScope==='mine'?'on':''}" onclick="calScope='mine';render()">La mia agenda</button><button class="${calScope==='studio'?'on':''}" onclick="calScope='studio';render()">Agenda di studio</button></div>
+  <select onchange="calView=this.value;render()">${[['day','Giorno'],['week','Settimana'],['month','Mese']].map(([v,l])=>`<option value="${v}" ${calView===v?'selected':''}>${l}</option>`).join('')}</select></div>
+  ${calView==='month'?monthGrid():timeGrid(days)}</section></div>`;
 }
-window.editEvent=id=>{const e=id?DB.events.find(x=>x.id===id):null;openForm(e?'Modifica evento':'Nuovo evento',[{k:'title',l:'Titolo',req:1},{k:'type',l:'Tipo',t:'select',opts:['Udienza','Scadenza','Appuntamento','Riunione']},{k:'date',l:'Data',t:'date',req:1,def:WD,work:1},{k:'time',l:'Ora',t:'time'},{k:'clientId',l:'Cliente',t:'select',opts:optClients(1)},{k:'owner',l:'Responsabile',t:'select',opts:optUsers,def:me},{k:'shared',l:'Visibile a tutto lo studio',t:'check',def:true},{k:'note',l:'Note',t:'area'}],e,o=>{if(e)Object.assign(e,o);else DB.events.push({id:uid(),...o})},e&&(()=>DB.events=DB.events.filter(x=>x!==e)))};
+window.showEvent=id=>{const e=DB.events.find(x=>x.id===id);if(!e)return;const p=PR(e.praticaId);const d=$('#dlg');const c=TYPECOL[e.type];
+ const end=e.time?(()=>{const[h,m]=e.time.split(':').map(Number),x=h*60+m+(+e.dur||60);return p2(Math.floor(x/60))+':'+p2(x%60)})():'';
+ d.innerHTML=`<div class="evp-h" style="--c:${c}"><i></i><div><p class="eyebrow" style="margin-bottom:6px">${e.type}</p><h3>${esc(e.title)}</h3></div></div>
+ <div class="evp-r">${ic('cal')}<span>${cap(fLong(e.date))}${e.time?`, ${e.time} – ${end}`:' · tutta la giornata'}</span></div>
+ ${p?`<div class="evp-r">${ic('folder')}<span>RG ${esc(p.rg)} · ${esc(pTitle(p))}<br><small style="color:var(--mut)">${esc(p.tribunale)}</small></span></div>`:''}
+ <div class="evp-r">${ic('user')}<span>${esc(uName(e.owner))}</span></div>
+ <div class="evp-r">${ic('lock')}<span>${e.shared?'Visibile a tutto lo studio':'Riservato'}</span></div>
+ ${e.note?`<div class="evp-r">${ic('note')}<span>${esc(e.note)}</span></div>`:''}
+ <div class="bar" style="margin:24px 0 0">${p?`<button class="p" data-x="pr">Apri la pratica ${ic('arrow')}</button>`:''}<button data-x="ed">${ic('edit')} Modifica</button><span class="sp"></span><button data-x="cl">Chiudi</button></div>`;
+ d.onclose=null;d.querySelectorAll('[data-x]').forEach(b=>b.addEventListener('click',()=>{const a=b.dataset.x;d.close();if(a==='pr')openPratica(p.id);if(a==='ed')editEvent(id)}));d.showModal()};
+window.editEvent=(id,pre)=>{const e=id?DB.events.find(x=>x.id===id):null;openForm(e?'Evento':'Nuovo evento',[{k:'title',l:'Titolo',req:1},{k:'type',l:'Tipo',t:'select',opts:['Udienza','Scadenza','Appuntamento','Riunione'],half:1},{k:'owner',l:'Agenda di',t:'select',opts:optUsers(),def:me,half:1},{k:'date',l:'Data',t:'date',req:1,def:WD,work:1,half:1},{k:'time',l:'Ora (vuoto = tutta la giornata)',t:'time',half:1},{k:'dur',l:'Durata',t:'select',int:1,opts:[[30,'30 minuti'],[45,'45 minuti'],[60,'1 ora'],[90,'1 ora e 30'],[120,'2 ore'],[180,'3 ore']],def:60},{k:'praticaId',l:'Pratica collegata',t:'select',opts:optPrat()},{k:'shared',l:'Visibilità',t:'check',cl:'Visibile a tutto lo studio',def:true},{k:'note',l:'Note',t:'area'}],e||pre,o=>{if(e)Object.assign(e,o);else DB.events.push({id:uid(),...o});toast('Evento salvato in agenda.')},e&&(()=>DB.events=DB.events.filter(x=>x!==e)))};
 
+/* ============ PRATICHE ============ */
+function vPratiche(){
+ if(praticaSel&&PR(praticaSel))return vDossier(PR(praticaSel));
+ const L=DB.pratiche.filter(p=>(prFilter==='Tutte'||p.stato===prFilter)&&(!prMine||p.team.includes(me))&&(!q||[p.rg,p.tribunale,p.oggetto,aName(p.clientId),aName(p.controparteId),p.giudice].join(' ').toLowerCase().includes(q.toLowerCase())));
+ return`<p class="eyebrow">Contenzioso</p><h2>Le <em>pratiche</em></h2><p class="sub">Ogni fascicolo con il suo stato, le parti, i colleghi coinvolti e la cronologia degli atti.</p>
+ <div class="bar"><div class="seg">${['In corso','Sospesa','Chiusa','Tutte'].map(m=>`<button class="${prFilter===m?'on':''}" onclick="prFilter='${m}';render()">${m==='Sospesa'?'Sospese':m==='Chiusa'?'Chiuse':m}</button>`).join('')}</div>
+  <label style="display:flex;gap:8px;align-items:center;font-size:13px;color:var(--mut);margin-left:14px;cursor:pointer"><input type="checkbox" ${prMine?'checked':''} onchange="prMine=this.checked;render()"> Solo le mie</label>
+  <span class="sp"></span><div class="search">${ic('search')}<input placeholder="Cerca RG, parte, giudice…" value="${esc(q)}" oninput="q=this.value;render(true)" id="qin"></div><button class="p" onclick="editPratica()">${ic('plus')} Nuova pratica</button></div>
+ <div class="prs">${L.map(p=>{const n=nextEv(p);return`<div class="card pr" onclick="openPratica('${p.id}')">
+  <div class="pr-top"><span class="rgb">RG ${esc(p.rg)}</span><span class="tag ${p.stato==='In corso'?'t-ok':p.stato==='Sospesa'?'t-warn':''}">${esc(p.stato)}</span></div>
+  <div class="pr-body"><h3>${esc(aName(p.clientId))} <em>c/</em> ${esc(aName(p.controparteId))}</h3><p class="pr-obj">${esc(p.oggetto)}</p><div class="pr-meta">${esc(p.tribunale)} · ${esc(p.sezione)}</div>
+  <div class="phase"><div style="width:${(p.fase+1)/FASI.length*100}%"></div></div><span class="phase-l">${FASI[p.fase]}</span></div>
+  <div class="pr-foot"><div class="avs">${p.team.map(u=>avU(u)).join('')}</div><span>${n?`${ic('cal')} ${fIt(n.date).slice(0,5)} · ${esc(n.type)}`:'Nessun evento in programma'}</span></div></div>`}).join('')||'<div class="empty">Nessuna pratica.</div>'}</div>`;
+}
+const contactsMini=(o)=>`<div class="mct">${o.tel?`<div>${ic('phone')}<a href="tel:${esc(o.tel.replace(/\s/g,''))}">${esc(o.tel)}</a></div>`:''}${o.email?`<div>${ic('mail')}<a href="mailto:${esc(o.email)}">${esc(o.email)}</a></div>`:''}${o.pec?`<div>${ic('pec')}<a href="mailto:${esc(o.pec)}" title="PEC">${esc(o.pec)}</a></div>`:''}</div>`;
+function vDossier(p){
+ const cl=AN(p.clientId)||{},cp=AN(p.controparteId);
+ const ev=DB.events.filter(e=>e.praticaId===p.id&&(e.shared||e.owner===me)).sort((a,b)=>(a.date+(a.time||'')).localeCompare(b.date+(b.time||'')));
+ const fut=ev.filter(e=>diff(e.date)>=0),past=ev.filter(e=>diff(e.date)<0).reverse();
+ const tl=e=>{const d=dd(e.date);return`<div class="tl-item ${diff(e.date)<0?'past':''}" onclick="showEvent('${e.id}')"><div class="tl-d"><b>${d.getDate()}</b><span>${MESI[d.getMonth()].slice(0,3)}</span></div><div class="x">${esc(e.title)}<small>${e.time?e.time+' · ':''}${esc(uName(e.owner))}${e.note?' · '+esc(e.note):''}</small></div><span class="tag" style="background:color-mix(in srgb,${TYPECOL[e.type]} 14%,transparent);color:${TYPECOL[e.type]}">${e.type}</span>${diff(e.date)>=0?`<span class="tag ${e.type==='Scadenza'?urg(e.date):''}">${when(e.date)}</span>`:''}</div>`};
+ const td=DB.todos.filter(t=>t.praticaId===p.id);
+ const hrs=DB.hours.filter(h=>h.pratica===p.id);const hTot=hrs.reduce((s,h)=>s+h.ore,0);
+ const inv=DB.invoices.filter(i=>i.praticaId===p.id);
+ return`<a class="back" onclick="praticaSel=null;render(false,true)">${ic('left')} Tutte le pratiche</a>
+ <p class="eyebrow">RG ${esc(p.rg)} · ${esc(p.tribunale)}</p><h2>${esc(cl.nome)} <em>c/</em> ${esc(cp?.nome||'—')}</h2><p class="sub">${esc(p.oggetto)}</p>
+ <div class="bar"><span class="tag ${p.stato==='In corso'?'t-ok':p.stato==='Sospesa'?'t-warn':''}">${esc(p.stato)}</span><span class="tag">Responsabile: ${esc(uName(p.resp))}</span><span class="sp"></span>
+  <button onclick="editEvent(null,{praticaId:'${p.id}',owner:me,shared:true,date:WD})">${ic('cal')} Evento</button><button onclick="editTodo(null,{praticaId:'${p.id}',owner:me})">${ic('check')} Attività</button><button onclick="editOre(null,{pratica:'${p.id}'})">${ic('clock')} Ore</button><button class="p" onclick="editPratica('${p.id}')">${ic('edit')} Modifica pratica</button></div>
+ <div class="card steps">${FASI.map((f,i)=>`<div class="st ${i<p.fase?'ok':i===p.fase?'cur':''}" onclick="setFase('${p.id}',${i})" title="Imposta fase"><i></i><span>${f}</span></div>`).join('')}</div>
+ <div class="dos"><div class="dos-main">
+  <div class="card"><h3>Udienze, termini ed eventi <span class="tag">${ev.length}</span></h3>${fut.length?`<div class="tl-sub">In programma</div>${fut.map(tl).join('')}`:''}${past.length?`<div class="tl-sub">Cronologia</div>${past.map(tl).join('')}`:''}${ev.length?'':'<div class="empty">Nessun evento collegato.</div>'}</div>
+  <div class="card"><h3>Attività <span class="tag">${td.filter(t=>!t.done).length} aperte</span></h3>${td.map(todoRow).join('')||'<div class="empty">Nessuna attività.</div>'}</div>
+  <div class="card"><h3>Atti e documenti <button class="s" onclick="toast('Caricamento documenti disponibile nella versione completa.')">${ic('plus')} Carica</button></h3>${(p.docs||[]).map(([n,dt])=>`<div class="doc"><div class="fi">PDF</div><div class="x">${esc(n)}<small>Depositato il ${fIt(dt)}</small></div></div>`).join('')||'<div class="empty">Nessun documento.</div>'}</div>
+  <div class="card"><h3>Note</h3><p style="margin:0;color:var(--ink2);font:italic 19px/1.5 var(--serif)">${esc(p.note||'—')}</p></div>
+ </div><aside class="dos-side">
+  <div class="card"><h3>Procedimento</h3><dl class="kv"><dt>Ufficio</dt><dd>${esc(p.tribunale)}</dd><dt>Sezione</dt><dd>${esc(p.sezione)}</dd><dt>Giudice</dt><dd>${esc(p.giudice||'—')}</dd><dt>N. RG</dt><dd class="rg">${esc(p.rg)}</dd><dt>Valore</dt><dd>${eur(p.valore)}</dd><dt>Apertura</dt><dd>${fIt(p.apertura)}</dd><dt>Fase</dt><dd>${FASI[p.fase]}</dd></dl></div>
+  <div class="card"><h3>Le parti</h3>
+   <div class="party"><span class="rl">Nostro assistito</span><a class="nm" onclick="openAnag('${cl.id}')">${esc(cl.nome)}</a>${contactsMini(cl)}</div>
+   ${cp?`<div class="party"><span class="rl">Controparte</span><a class="nm" onclick="openAnag('${cp.id}')">${esc(cp.nome)}</a>${contactsMini(cp)}</div>`:''}
+   ${p.avvNome?`<div class="party"><span class="rl">Difensore di controparte</span><span class="nm">${esc(p.avvNome)}</span>${contactsMini({tel:p.avvTel,email:p.avvMail,pec:p.avvPec})}</div>`:''}</div>
+  <div class="card"><h3>Colleghi coinvolti</h3>${p.team.map(u=>{const h=hrs.filter(x=>x.user===u).reduce((s,x)=>s+x.ore,0);return`<div class="who2">${avU(u,'sm')}<div><b>${esc(uName(u))}</b><small>${u===p.resp?'Responsabile della pratica':U(u).ruolo}</small></div><div class="r">${h.toLocaleString('it-IT')} h</div></div>`}).join('')}</div>
+  <div class="card"><h3>Economia</h3><div class="stat3"><div><span>Ore</span><b>${hTot.toLocaleString('it-IT')}</b></div><div><span>Fatturato</span><b>${eur(inv.reduce((s,i)=>s+i.importo,0)).replace(',00','')}</b></div><div><span>Da incassare</span><b style="color:${inv.some(i=>!i.pagata&&diff(i.scadenza)<0)?'var(--bord)':'inherit'}">${eur(inv.filter(i=>!i.pagata).reduce((s,i)=>s+i.importo,0)).replace(',00','')}</b></div></div></div>
+ </aside></div>`;
+}
+window.setFase=(id,i)=>{const p=PR(id);p.fase=i;if(i===FASI.length-1)p.stato='Chiusa';else if(p.stato==='Chiusa')p.stato='In corso';save();render();toast(`Fase aggiornata: ${FASI[i]}.`)};
+window.openPratica=id=>{page='pratiche';praticaSel=id;q='';render(false,true);scrollTo(0,0)};
+window.editPratica=id=>{const p=id?PR(id):null;openForm(p?'Pratica':'Nuova pratica',[
+ {k:'clientId',l:'Cliente',t:'select',opts:optA('Cliente'),half:1},{k:'controparteId',l:'Controparte',t:'select',opts:optA('Controparte',1),half:1},
+ {k:'rg',l:'Numero RG',req:1,half:1},{k:'valore',l:'Valore (€)',t:'number',half:1},
+ {k:'tribunale',l:'Ufficio giudiziario',req:1,half:1},{k:'sezione',l:'Sezione',half:1},
+ {k:'giudice',l:'Giudice'},{k:'oggetto',l:'Oggetto',req:1},
+ {k:'stato',l:'Stato',t:'select',opts:['In corso','Sospesa','Chiusa'],half:1},{k:'fase',l:'Fase',t:'select',int:1,opts:FASI.map((f,i)=>[i,f]),half:1},
+ {k:'resp',l:'Responsabile',t:'select',opts:optUsers(),def:me},{k:'team',l:'Colleghi coinvolti',t:'multi',opts:optUsers(),def:[me]},
+ {k:'avvNome',l:'Difensore di controparte',half:1},{k:'avvTel',l:'Telefono difensore',half:1},{k:'avvMail',l:'E-mail difensore',half:1},{k:'avvPec',l:'PEC difensore',half:1},
+ {k:'note',l:'Note',t:'area'}],p,o=>{if(!o.team.includes(o.resp))o.team.unshift(o.resp);if(p)Object.assign(p,o);else{const n={id:uid(),apertura:WD,docs:[],...o};DB.pratiche.push(n);praticaSel=n.id;page='pratiche'}},p&&(()=>{DB.pratiche=DB.pratiche.filter(x=>x!==p);praticaSel=null}))};
+
+/* ============ REGISTRO CLIENTI / ANAGRAFICHE ============ */
+const TABS=[['Cliente','Clienti'],['Ente','Enti e uffici'],['Controparte','Controparti']];
+function anSub(a){if(a.tipo==='Cliente'){const P=DB.pratiche.filter(p=>p.clientId===a.id);return P.length?P.map(p=>`RG ${p.rg} · ${p.tribunale.replace('Tribunale di','Trib.')}`).join(' — '):'Nessuna pratica'}
+ if(a.tipo==='Controparte'){const P=DB.pratiche.filter(p=>p.controparteId===a.id);return P.length?'In RG '+P.map(p=>p.rg).join(', '):a.forma}return a.forma}
+function vAnag(){
+ const all=DB.anag.filter(a=>a.tipo===anTab);
+ const L=all.filter(a=>!q||[a.nome,a.email,a.pec,a.tel,a.cf,anSub(a)].join(' ').toLowerCase().includes(q.toLowerCase())).sort((a,b)=>a.nome.localeCompare(b.nome));
+ if(!anSel||!L.some(a=>a.id===anSel))anSel=L[0]?.id;const a=AN(anSel);
+ return`<p class="eyebrow">Anagrafiche</p><h2>Registro <em>clienti</em></h2><p class="sub">Clienti, uffici giudiziari, enti e controparti: selezioni un nominativo per consultarne recapiti e pratiche.</p>
+ <div class="tabs">${TABS.map(([t,l])=>`<button class="${anTab===t?'on':''}" onclick="anTab='${t}';anSel=null;q='';render()">${l}<small>${DB.anag.filter(x=>x.tipo===t).length}</small></button>`).join('')}<span class="sp" style="flex:1"></span><button style="font:inherit;font-size:12px;letter-spacing:.08em;color:var(--ink);padding:10px 18px;border:1px solid var(--line);align-self:center" onclick="editAnag(null)">${ic('plus')} Nuovo</button></div>
+ <div class="md"><div class="card md-list"><div class="search">${ic('search')}<input placeholder="Cerca nome, RG, PEC…" value="${esc(q)}" oninput="q=this.value;render(true)" id="qin"></div>
+  ${L.map(x=>`<div class="md-item ${x.id===anSel?'on':''}" onclick="anSel='${x.id}';render()">${avA(x)}<div style="min-width:0"><b>${esc(x.nome)}</b><small>${esc(anSub(x))}</small></div></div>`).join('')||'<div class="empty" style="padding:14px 22px">Nessun risultato.</div>'}</div>
+ <div class="card md-detail" id="mdd">${a?anDetail(a):'<div class="empty">Selezioni un nominativo.</div>'}</div></div>`;
+}
+function anDetail(a){
+ const ct=(k,lab,v,href)=>v?`<div class="ctc">${ic(k)}<div><span class="lab">${lab}</span>${href?`<a href="${href}">${esc(v)}</a>`:`<span class="v">${esc(v)}</span>`}</div><button title="Copia" onclick="copyTxt('${esc(v).replace(/'/g,'&#39;')}')">${ic('copy')}</button></div>`:'';
+ const P=a.tipo==='Cliente'?DB.pratiche.filter(p=>p.clientId===a.id):a.tipo==='Controparte'?DB.pratiche.filter(p=>p.controparteId===a.id):DB.pratiche.filter(p=>a.nome.startsWith(p.tribunale)||p.tribunale.startsWith(a.nome.split(' – ')[0]));
+ const inv=DB.invoices.filter(i=>i.clientId===a.id);
+ return`<div class="dh">${avA(a,'lg')}<div style="flex:1"><h3>${esc(a.nome)}</h3><span class="tag">${esc(a.tipo)}</span> <span class="tag">${esc(a.forma)}</span></div><button onclick="editAnag('${a.id}')">${ic('edit')} Modifica</button></div>
+ <div class="sec-t">Recapiti</div>
+ <div class="ct">${ct('phone','Telefono',a.tel,a.tel?'tel:'+a.tel.replace(/\s/g,''):'')}${ct('mail','E-mail',a.email,a.email?'mailto:'+a.email:'')}${ct('pec','PEC',a.pec,a.pec?'mailto:'+a.pec:'')}${ct('pin','Indirizzo',a.indirizzo)}${ct('id',a.forma==='Persona fisica'?'Codice fiscale':'C.F. / P. IVA',a.cf)}</div>
+ ${a.referenti?.length?`<div class="sec-t">Referenti</div>${a.referenti.map(r=>`<div class="who2"><div class="av sm contro">${ini(r.nome)}</div><div><b>${esc(r.nome)}</b><small>${esc(r.ruolo)}</small></div><div class="r">${r.tel?`<a href="tel:${esc(r.tel.replace(/\s/g,''))}">${esc(r.tel)}</a><br>`:''}${r.email?`<a href="mailto:${esc(r.email)}">${esc(r.email)}</a>`:''}</div></div>`).join('')}`:''}
+ ${a.note?`<div class="sec-t">Note</div><p style="margin:0;color:var(--ink2);font:italic 18px/1.5 var(--serif)">${esc(a.note)}</p>`:''}
+ <div class="sec-t">${a.tipo==='Ente'?'Pratiche presso questo ufficio':'Pratiche'} <span>${P.length}</span></div>
+ ${P.map(p=>`<div class="lrow2" onclick="openPratica('${p.id}')"><span class="rg" style="min-width:96px">${esc(p.rg)}</span><div class="x">${esc(pTitle(p))}<small>${esc(p.tribunale)} · ${esc(p.oggetto)}</small></div><span class="tag ${p.stato==='In corso'?'t-ok':''}">${esc(p.stato)}</span><span class="go">${ic('arrow')}</span></div>`).join('')||'<div class="empty">Nessuna pratica collegata.</div>'}
+ ${a.tipo==='Cliente'&&inv.length?`<div class="sec-t">Fatturazione <span>${eur(inv.filter(i=>!i.pagata).reduce((s,i)=>s+i.importo,0))} da incassare</span></div>${inv.map(i=>`<div class="lrow2" onclick="go('fatture')"><span class="rg" style="min-width:96px">${esc(i.num)}</span><div class="x">${esc(i.desc)}<small>Scadenza ${fIt(i.scadenza)}</small></div><span>${eur(i.importo)}</span><span class="tag ${i.pagata?'t-ok':urg(i.scadenza)}">${i.pagata?'Pagata':diff(i.scadenza)<0?'Scaduta':'Aperta'}</span></div>`).join('')}`:''}`;
+}
+window.copyTxt=t=>{const ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();let ok=false;try{ok=document.execCommand('copy')}catch{}ta.remove();try{navigator.clipboard?.writeText(t)}catch{}toast(ok?'Copiato negli appunti.':t)};
+window.openAnag=id=>{const a=AN(id);if(!a)return;page='anag';anTab=a.tipo;anSel=id;q='';render(false,true);scrollTo(0,0)};
+window.editAnag=id=>{const a=id?AN(id):null;openForm(a?'Anagrafica':'Nuova anagrafica',[{k:'tipo',l:'Categoria',t:'select',opts:['Cliente','Ente','Controparte'],def:anTab,half:1},{k:'forma',l:'Forma',t:'select',opts:['Persona fisica','Società','Condominio','Compagnia assicurativa','Ufficio giudiziario','Ufficio notifiche','Pubblica amministrazione','Ordine professionale','Altro'],half:1},{k:'nome',l:'Nome / Ragione sociale',req:1},{k:'tel',l:'Telefono',t:'tel',half:1},{k:'email',l:'E-mail',t:'email',half:1},{k:'pec',l:'PEC',t:'email',half:1},{k:'cf',l:'C.F. / P. IVA',half:1},{k:'indirizzo',l:'Indirizzo'},{k:'note',l:'Note',t:'area'}],a,o=>{if(a)Object.assign(a,o);else{const n={id:uid(),referenti:[],...o};DB.anag.push(n);anTab=n.tipo;anSel=n.id}},a&&(()=>{DB.anag=DB.anag.filter(x=>x!==a);anSel=null}))};
+
+/* ============ ATTIVITÀ ============ */
 function vTodo(){
  const mine=DB.todos.filter(t=>t.owner===me),others=DB.todos.filter(t=>t.owner!==me&&!t.done);
  const s=a=>a.sort((x,y)=>x.done-y.done||(x.due||'9').localeCompare(y.due||'9'));
  return`<p class="eyebrow">Organizzazione</p><h2>Le <em>attività</em></h2><p class="sub">Promemoria personali e incarichi assegnati, ordinati per scadenza.</p><div class="bar"><span class="sp"></span><button class="p" onclick="editTodo()">${ic('plus')} Nuova attività</button></div>
- <div class="grid g2"><div class="card"><h3>I miei</h3>${s(mine).map(todoRow).join('')||'<div class="empty">Nessun to-do.</div>'}</div>
- <div class="card"><h3>Colleghi (aperti)</h3>${s(others).map(todoRow).join('')||'<div class="empty">—</div>'}</div></div>`;
+ <div class="grid g2"><div class="card"><h3>Le mie</h3>${s(mine).map(todoRow).join('')||'<div class="empty">Nessuna attività.</div>'}</div>
+ <div class="card"><h3>Dei colleghi</h3>${s(others).map(todoRow).join('')||'<div class="empty">—</div>'}</div></div>`;
 }
 
+/* ============ SCADENZARIO ============ */
 function vFatture(){
  const all=DB.invoices.slice().sort((a,b)=>a.scadenza.localeCompare(b.scadenza));
  const st=i=>i.pagata?'Pagata':diff(i.scadenza)<0?'Scaduta':'Da incassare';
  const f=all.filter(i=>pagoFilter==='tutte'||(pagoFilter==='aperte'?!i.pagata:pagoFilter==='scadute'?st(i)==='Scaduta':i.pagata));
  const sum=a=>a.reduce((s,i)=>s+i.importo,0);
  return`<p class="eyebrow">Amministrazione</p><h2>Scadenzario <em>fatture</em></h2><p class="sub">Parcelle emesse, termini di pagamento e posizioni da sollecitare.</p>
- <div class="grid g4" style="margin-bottom:34px">${[['Da incassare',sum(all.filter(i=>!i.pagata)),''],['Insolute',sum(all.filter(i=>st(i)==='Scaduta')),'alert'],['In scadenza · 7 giorni',sum(all.filter(i=>!i.pagata&&diff(i.scadenza)>=0&&diff(i.scadenza)<=7)),''],['Incassate',sum(all.filter(i=>i.pagata)),'good']].map(([l,v,c])=>`<div class="card kpi ${c}"><span>${l}</span><b class="num" data-v="${v}" data-e>${eur(v)}</b></div>`).join('')}</div>
- <div class="bar"><div class="seg">${['tutte','aperte','scadute','pagate'].map(m=>`<button class="${pagoFilter===m?'on':''}" onclick="pagoFilter='${m}';render()">${m[0].toUpperCase()+m.slice(1)}</button>`).join('')}</div><span class="sp"></span><button class="p" onclick="editInv()">${ic('plus')} Fattura</button></div>
- <div class="card tbl"><table><tr><th>N.</th><th>Cliente</th><th>Descrizione</th><th>Emessa</th><th>Scadenza</th><th class="r">Importo</th><th>Stato</th><th></th></tr>
- ${f.map(i=>`<tr><td class="rg">${esc(i.num)}</td><td>${esc(cName(i.clientId))}</td><td>${esc(i.desc)}</td><td>${fIt(i.emissione)}</td><td>${fIt(i.scadenza)}${i.pagata?'':`<small style="color:var(--mut);display:block">${when(i.scadenza)}</small>`}</td><td class="r">${eur(i.importo)}</td><td><span class="tag ${i.pagata?'t-ok':urg(i.scadenza)}">${st(i)}</span></td><td style="white-space:nowrap">${i.pagata?'':`<button class="s" onclick="payInv('${i.id}')">${ic('check')} Incassata</button> `}<button class="ic" title="Modifica" onclick="editInv('${i.id}')">${ic('edit')}</button></td></tr>`).join('')||'<tr><td colspan=8 class="empty">Nessuna fattura.</td></tr>'}</table></div>`;
+ <div class="grid g4" style="margin-bottom:34px">${[['Da incassare',sum(all.filter(i=>!i.pagata)),''],['Insolute',sum(all.filter(i=>st(i)==='Scaduta')),'alert'],['In scadenza · 7 giorni',sum(all.filter(i=>!i.pagata&&diff(i.scadenza)>=0&&diff(i.scadenza)<=7)),''],['Incassate',sum(all.filter(i=>i.pagata)),'good']].map(([l,v,c])=>`<div class="card kpi ${c}"><span>${l}</span><b data-v="${v}" data-e>${eur(v)}</b></div>`).join('')}</div>
+ <div class="bar"><div class="seg">${['tutte','aperte','scadute','pagate'].map(m=>`<button class="${pagoFilter===m?'on':''}" onclick="pagoFilter='${m}';render()">${cap(m)}</button>`).join('')}</div><span class="sp"></span><button class="p" onclick="editInv()">${ic('plus')} Fattura</button></div>
+ <div class="card tbl"><table><tr><th>N.</th><th>Cliente</th><th>Pratica</th><th>Descrizione</th><th>Scadenza</th><th class="r">Importo</th><th>Stato</th><th></th></tr>
+ ${f.map(i=>`<tr><td class="rg">${esc(i.num)}</td><td><a onclick="openAnag('${i.clientId}')" style="cursor:pointer">${esc(aName(i.clientId))}</a></td><td>${i.praticaId?`<a onclick="openPratica('${i.praticaId}')" style="cursor:pointer">RG ${esc(PR(i.praticaId)?.rg)}</a>`:'—'}</td><td>${esc(i.desc)}<small>Emessa il ${fIt(i.emissione)}</small></td><td>${fIt(i.scadenza)}${i.pagata?'':`<small>${when(i.scadenza)}</small>`}</td><td class="r">${eur(i.importo)}</td><td><span class="tag ${i.pagata?'t-ok':urg(i.scadenza)}">${st(i)}</span></td><td style="white-space:nowrap">${i.pagata?'':`<button class="s" onclick="payInv('${i.id}')">${ic('check')} Incassata</button> `}<button class="ic" onclick="editInv('${i.id}')">${ic('edit')}</button></td></tr>`).join('')||'<tr><td colspan=8 class="empty">Nessuna fattura.</td></tr>'}</table></div>`;
 }
-window.payInv=id=>{DB.invoices.find(i=>i.id===id).pagata=true;save();render()};
-window.editInv=id=>{const i=id?DB.invoices.find(x=>x.id===id):null;openForm(i?'Modifica fattura':'Nuova fattura',[{k:'num',l:'Numero',req:1,def:`${DB.invoices.length+12}/2026`},{k:'clientId',l:'Cliente',t:'select',opts:optClients()},{k:'desc',l:'Descrizione'},{k:'importo',l:'Importo (€)',t:'number',step:'0.01',req:1},{k:'emissione',l:'Data emissione',t:'date',def:WD},{k:'scadenza',l:'Scadenza pagamento',t:'date',def:fixWork(isoOff(30)),req:1,work:1},{k:'pagata',l:'Pagata',t:'check'}],i,o=>{if(i)Object.assign(i,o);else DB.invoices.push({id:uid(),...o})},i&&(()=>DB.invoices=DB.invoices.filter(x=>x!==i)))};
+window.payInv=id=>{DB.invoices.find(i=>i.id===id).pagata=true;save();render();toast('Fattura segnata come incassata.')};
+window.editInv=id=>{const i=id?DB.invoices.find(x=>x.id===id):null;openForm(i?'Fattura':'Nuova fattura',[{k:'num',l:'Numero',req:1,def:`${DB.invoices.length+10}/2026`,half:1},{k:'importo',l:'Importo (€)',t:'number',step:'0.01',req:1,half:1},{k:'clientId',l:'Cliente',t:'select',opts:optA('Cliente')},{k:'praticaId',l:'Pratica',t:'select',opts:optPrat()},{k:'desc',l:'Descrizione'},{k:'emissione',l:'Emissione',t:'date',def:WD,half:1},{k:'scadenza',l:'Scadenza pagamento',t:'date',def:fixWork(isoOff(30)),req:1,work:1,half:1},{k:'pagata',l:'Stato',t:'check',cl:'Già incassata'}],i,o=>{if(i)Object.assign(i,o);else DB.invoices.push({id:uid(),...o})},i&&(()=>DB.invoices=DB.invoices.filter(x=>x!==i)))};
 
-function vRegistro(){
- const rows=DB.pratiche.map(p=>({p,c:DB.clients.find(c=>c.id===p.clientId)})).filter(({p,c})=>!q||[c?.nome,p.rg,p.tribunale,p.oggetto,p.controparte].join(' ').toLowerCase().includes(q.toLowerCase()))
-  .sort((a,b)=>(a.c?.nome||'').localeCompare(b.c?.nome||''));
- const noP=DB.clients.filter(c=>!DB.pratiche.some(p=>p.clientId===c.id));
- return`<p class="eyebrow">Contenzioso</p><h2>Registro <em>clienti</em></h2><p class="sub">Per ciascun assistito, il numero di Ruolo Generale e l’ufficio giudiziario competente.</p>
- <div class="bar"><div class="search">${ic('search')}<input placeholder="Cerca cliente, RG, tribunale…" value="${esc(q)}" oninput="q=this.value;render(true)" id="qin"></div><span class="sp"></span><button onclick="editClient()">${ic('plus')} Cliente</button><button class="p" onclick="editPratica()">${ic('plus')} Pratica / RG</button></div>
- <div class="card tbl"><table><tr><th>Cliente</th><th>N. RG</th><th>Tribunale competente</th><th>Sezione</th><th>Oggetto</th><th>Controparte</th><th>Stato</th><th></th></tr>
- ${rows.map(({p,c})=>`<tr><td><b>${esc(c?.nome)}</b><small style="display:block;color:var(--mut)">${esc(c?.cf||'')}</small></td><td class="rg">${esc(p.rg)}</td><td>${esc(p.tribunale)}</td><td>${esc(p.sezione)}</td><td>${esc(p.oggetto)}</td><td>${esc(p.controparte)}</td><td><span class="tag ${p.stato==='Chiusa'?'':'t-ok'}">${esc(p.stato)}</span></td><td style="white-space:nowrap"><button class="ic" title="Modifica" onclick="editPratica('${p.id}')">${ic('edit')}</button> <button class="s" onclick="editClient('${c?.id}')">Cliente</button></td></tr>`).join('')}
- ${noP.map(c=>`<tr><td><b>${esc(c.nome)}</b></td><td colspan=6 style="color:var(--mut)">Nessuna pratica registrata</td><td><button class="s" onclick="editClient('${c.id}')">Cliente</button></td></tr>`).join('')}
- </table></div>`;
-}
-window.editClient=id=>{const c=id?DB.clients.find(x=>x.id===id):null;openForm(c?'Modifica cliente':'Nuovo cliente',[{k:'nome',l:'Nome / Ragione sociale',req:1},{k:'tipo',l:'Tipo',t:'select',opts:['Persona fisica','Società']},{k:'cf',l:'C.F. / P.IVA'}],c,o=>{if(c)Object.assign(c,o);else DB.clients.push({id:uid(),...o})},c&&(()=>{DB.clients=DB.clients.filter(x=>x!==c);DB.pratiche=DB.pratiche.filter(p=>p.clientId!==c.id)}))};
-window.editPratica=id=>{const p=id?DB.pratiche.find(x=>x.id===id):null;openForm(p?'Modifica pratica':'Nuova pratica',[{k:'clientId',l:'Cliente',t:'select',opts:optClients()},{k:'rg',l:'Numero RG (es. 1234/2026)',req:1},{k:'tribunale',l:'Tribunale / Ufficio giudiziario',req:1},{k:'sezione',l:'Sezione'},{k:'oggetto',l:'Oggetto'},{k:'controparte',l:'Controparte'},{k:'stato',l:'Stato',t:'select',opts:['In corso','Sospesa','Chiusa']}],p,o=>{if(p)Object.assign(p,o);else DB.pratiche.push({id:uid(),...o})},p&&(()=>DB.pratiche=DB.pratiche.filter(x=>x!==p)))};
-
-function vRubrica(){
- const cats=['Tutti','Cliente','Ente','Altro'];
- const L=DB.contacts.filter(k=>(rubCat==='Tutti'||k.cat===rubCat)&&(!q||[k.nome,k.email,k.pec,k.tel,k.note].join(' ').toLowerCase().includes(q.toLowerCase()))).sort((a,b)=>a.nome.localeCompare(b.nome));
- return`<p class="eyebrow">Contatti</p><h2>La <em>rubrica</em></h2><p class="sub">Recapiti di assistiti, uffici giudiziari ed enti: telefono, e-mail e PEC.</p>
- <div class="bar"><div class="search">${ic('search')}<input placeholder="Cerca per nome, e-mail, PEC…" value="${esc(q)}" oninput="q=this.value;render(true)" id="qin"></div><div class="seg">${cats.map(c=>`<button class="${rubCat===c?'on':''}" onclick="rubCat='${c}';render()">${c}</button>`).join('')}</div><span class="sp"></span><button class="p" onclick="editContact()">${ic('plus')} Contatto</button></div>
- <div class="card tbl"><table><tr><th>Nome</th><th>Categoria</th><th>Telefono</th><th>E-mail</th><th>PEC</th><th>Note</th><th></th></tr>
- ${L.map(k=>`<tr><td><b>${esc(k.nome)}</b></td><td><span class="tag">${esc(k.cat)}</span></td><td>${k.tel?`<a href="tel:${esc(k.tel.replace(/\s/g,''))}">${esc(k.tel)}</a>`:''}</td><td>${k.email?`<a href="mailto:${esc(k.email)}">${esc(k.email)}</a>`:''}</td><td>${k.pec?`<a href="mailto:${esc(k.pec)}">${esc(k.pec)}</a>`:'<span style="color:var(--mut)">—</span>'}</td><td>${esc(k.note)}</td><td><button class="ic" title="Modifica" onclick="editContact('${k.id}')">${ic('edit')}</button></td></tr>`).join('')||'<tr><td colspan=7 class="empty">Nessun contatto.</td></tr>'}</table></div>`;
-}
-window.editContact=id=>{const k=id?DB.contacts.find(x=>x.id===id):null;openForm(k?'Modifica contatto':'Nuovo contatto',[{k:'nome',l:'Nome',req:1},{k:'cat',l:'Categoria',t:'select',opts:['Cliente','Ente','Altro']},{k:'tel',l:'Telefono',t:'tel'},{k:'email',l:'E-mail',t:'email'},{k:'pec',l:'PEC',t:'email'},{k:'note',l:'Note',t:'area'}],k,o=>{if(k)Object.assign(k,o);else DB.contacts.push({id:uid(),...o})},k&&(()=>DB.contacts=DB.contacts.filter(x=>x!==k)))};
-
+/* ============ ORE ============ */
 function vOre(){
- const mon=CLOSED&&T0.getDay()%6===0?addD(-((T0.getDay()+6)%7)):addD(-((T0.getDay()+6)%7));const wk=iso(mon),wkEnd=iso(addD(4,mon)),ym=iso(T0).slice(0,7);
+ const mon=monday(prevWork(T0));const wk=iso(mon),wkEnd=iso(addD(4,mon)),ym=TODAY.slice(0,7);
  const sumU=(u,f)=>DB.hours.filter(h=>h.user===u&&f(h)).reduce((s,h)=>s+h.ore,0);
- const mine=DB.hours.filter(h=>h.user===me).sort((a,b)=>b.date.localeCompare(a.date));
  const isBoss=me==='u1'||me==='u3';
- const list=(isBoss?DB.hours:mine).slice().sort((a,b)=>b.date.localeCompare(a.date)).slice(0,40);
+ const list=(isBoss?DB.hours:DB.hours.filter(h=>h.user===me)).slice().sort((a,b)=>b.date.localeCompare(a.date)).slice(0,40);
  return`<p class="eyebrow">Personale</p><h2>Ore <em>collaboratori</em></h2><p class="sub">Settimana ${fIt(wk)} – ${fIt(wkEnd)} · lunedì–venerdì · monte ore contrattuale 40 h</p>
  <div class="bar"><span class="sp"></span><button class="p" onclick="editOre()">${ic('plus')} Registra ore</button></div>
- <div class="card tbl" style="margin-bottom:22px"><h3>Riepilogo</h3><table><tr><th>Collaboratore</th><th>Ruolo</th><th class="r">Ore settimana</th><th style="width:200px">Avanzamento</th><th class="r">Ore mese</th></tr>
- ${USERS.map(u=>{const w=sumU(u.id,h=>h.date>=wk&&h.date<=wkEnd);const pc=Math.min(100,w/40*100);return`<tr><td><b>${esc(u.nome)}</b></td><td>${u.ruolo}</td><td class="r">${w.toLocaleString('it-IT')} h</td><td><div class="prog"><div style="width:${pc}%;${w>40?'background:var(--bord)':''}"></div></div></td><td class="r">${sumU(u.id,h=>h.date.startsWith(ym)).toLocaleString('it-IT')} h</td></tr>`}).join('')}</table></div>
+ <div class="card tbl" style="margin-bottom:24px"><h3>Riepilogo</h3><table><tr><th>Collaboratore</th><th>Ruolo</th><th class="r">Settimana</th><th style="width:220px">Avanzamento</th><th class="r">Mese</th></tr>
+ ${USERS.map(u=>{const w=sumU(u.id,h=>h.date>=wk&&h.date<=wkEnd);const pc=Math.min(100,w/40*100);return`<tr><td><div style="display:flex;gap:12px;align-items:center">${avU(u.id)}<b>${esc(u.nome)}</b></div></td><td>${u.ruolo}</td><td class="r">${w.toLocaleString('it-IT')} h</td><td><div class="prog"><div style="width:${pc}%;${w>40?'background:var(--bord)':''}"></div></div></td><td class="r">${sumU(u.id,h=>h.date.startsWith(ym)).toLocaleString('it-IT')} h</td></tr>`}).join('')}</table></div>
  <div class="card tbl"><h3>${isBoss?'Tutte le registrazioni':'Le mie registrazioni'}</h3><table><tr><th>Data</th><th>Collaboratore</th><th>Pratica</th><th>Attività</th><th class="r">Ore</th><th></th></tr>
- ${list.map(h=>`<tr><td>${fIt(h.date)}</td><td>${esc(uName(h.user))}</td><td>${esc(h.pratica?pLabel(h.pratica):'Attività generale')}</td><td>${esc(h.desc)}</td><td class="r">${h.ore}</td><td><button class="ic" title="Modifica" onclick="editOre('${h.id}')">${ic('edit')}</button></td></tr>`).join('')}</table></div>`;
+ ${list.map(h=>`<tr><td>${fIt(h.date)}</td><td>${esc(uName(h.user))}</td><td>${h.pratica?`<a onclick="openPratica('${h.pratica}')" style="cursor:pointer">${esc(pLabel(h.pratica))}</a>`:'Attività generale'}</td><td>${esc(h.desc)}</td><td class="r">${h.ore}</td><td><button class="ic" onclick="editOre('${h.id}')">${ic('edit')}</button></td></tr>`).join('')}</table></div>`;
 }
-window.editOre=id=>{const h=id?DB.hours.find(x=>x.id===id):null;openForm(h?'Modifica ore':'Registra ore',[{k:'user',l:'Collaboratore',t:'select',opts:optUsers,def:me},{k:'date',l:'Data',t:'date',def:WD,req:1,work:1},{k:'ore',l:'Ore',t:'number',step:'0.25',req:1,def:1},{k:'pratica',l:'Pratica',t:'select',opts:optPrat},{k:'desc',l:'Attività'}],h,o=>{if(h)Object.assign(h,o);else DB.hours.push({id:uid(),...o})},h&&(()=>DB.hours=DB.hours.filter(x=>x!==h)))};
+window.editOre=(id,pre)=>{const h=id?DB.hours.find(x=>x.id===id):null;openForm(h?'Ore lavorate':'Registra ore',[{k:'user',l:'Collaboratore',t:'select',opts:optUsers(),def:me,half:1},{k:'date',l:'Data',t:'date',def:iso(prevWork(T0)),req:1,work:1,half:1},{k:'ore',l:'Ore',t:'number',step:'0.25',req:1,def:1},{k:'pratica',l:'Pratica',t:'select',opts:optPrat()},{k:'desc',l:'Attività svolta'}],h||pre,o=>{if(h)Object.assign(h,o);else DB.hours.push({id:uid(),...o})},h&&(()=>DB.hours=DB.hours.filter(x=>x!==h)))};
 
 /* ============ render ============ */
-const VIEWS={dash:vDash,agenda:vAgenda,todo:vTodo,fatture:vFatture,registro:vRegistro,rubrica:vRubrica,ore:vOre};
+const VIEWS={dash:vDash,agenda:vAgenda,pratiche:vPratiche,anag:vAnag,todo:vTodo,fatture:vFatture,ore:vOre};
 function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('on');clearTimeout(e._t);e._t=setTimeout(()=>e.classList.remove('on'),4200)}
 function countUp(){document.querySelectorAll('#main [data-v]').forEach(b=>{const v=+b.dataset.v,e=b.hasAttribute('data-e'),t0=performance.now(),D=1300;const f=t=>{const k=Math.min(1,(t-t0)/D),x=v*(1-Math.pow(1-k,4));b.textContent=e?eur(x):Math.round(x);if(k<1)requestAnimationFrame(f)};requestAnimationFrame(f)})}
 function render(keepFocus,anim){if(!me)return;
  const late=DB.invoices.filter(i=>!i.pagata&&diff(i.scadenza)<0).length;
- const urgent=upcomingDeadlines().filter(x=>diff(x.date)<=1&&x.kind!=='Fattura').length;
- const U=USERS.find(u=>u.id===me);
+ const urgent=upcomingDeadlines().filter(x=>diff(x.date)<=diff(WD)+1&&x.kind!=='Fattura').length;
+ const Us=U(me);const tgb=$('#tgb');const sc=tgb?tgb.scrollTop:null;
  $('#nav').innerHTML=`<div class="brand"><div class="mono glint">R&amp;A</div><div><b>Rossi &amp; Associati</b><small>Studio Legale</small></div></div><div class="sec">Indice</div><div class="links">${PAGES.map(([k,l],i)=>`<a class="${page===k?'on':''}" onclick="go('${k}')"><em>0${i+1}</em><span>${l}</span>${k==='dash'&&urgent?`<span class="n">${urgent}</span>`:''}${k==='fatture'&&late?`<span class="n">${late}</span>`:''}</a>`).join('')}</div>
- <div class="who"><div class="av">${U.ini}</div><div><b>${esc(U.nome)}</b><small>${esc(U.ruolo)}</small></div><button title="Esci" onclick="logout()"><svg class="i" viewBox="0 0 24 24"><path d="M15 4h4v16h-4M10 8l-4 4 4 4M6 12h10"/></svg></button></div>`;
- const M=$('#main');M.innerHTML=`<div class="top-meta"><span>${fLong(iso(T0))} ${T0.getFullYear()}</span><span class="live ${CLOSED?'off':''}"><i></i>${CLOSED?'Studio chiuso':'Studio aperto'}</span></div>`+VIEWS[page]();
+ <div class="who"><div class="av" style="background:${Us.col};color:#fff">${ini(Us.nome)}</div><div><b>${esc(Us.nome)}</b><small>${esc(Us.ruolo)}</small></div><button title="Esci" onclick="logout()"><svg class="i" viewBox="0 0 24 24"><path d="M15 4h4v16h-4M10 8l-4 4 4 4M6 12h10"/></svg></button></div>`;
+ const M=$('#main');M.innerHTML=`<div class="top-meta"><span>${fLong(TODAY)} ${T0.getFullYear()}</span><span class="live ${CLOSED?'off':''}"><i></i>${CLOSED?'Studio chiuso':'Studio aperto'}</span></div>`+VIEWS[page]();
+ const nb=$('#tgb');if(nb)nb.scrollTop=sc??(8-H0)*PX-6;
  if(anim){M.classList.remove('enter');void M.offsetWidth;M.classList.add('enter');countUp()}
  if(keepFocus){const i=$('#qin');if(i){i.focus();i.setSelectionRange(i.value.length,i.value.length)}}
 }
-window.go=k=>{page=k;q='';render(false,true);scrollTo(0,0)};
+window.go=k=>{page=k;q='';if(k==='pratiche')praticaSel=null;render(false,true);scrollTo(0,0)};
 window.logout=()=>{try{localStorage.removeItem(KEY+'-sess')}catch{};location.reload()};
 let logging=false;
 function doLogin(){if(logging)return;const mail=$('#lmail').value.trim().toLowerCase(),loc=mail.split('@')[0],u=mail?USERS.find(u=>loc===u.mail||loc===u.mail.replace('.','')||loc===u.mail.split('.')[1]):USERS[0];
@@ -463,57 +760,57 @@ $('#lbtn').addEventListener('click',doLogin);
 ['#lmail','#lpwd'].forEach(id=>$(id).addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();doLogin()}}));
 function enterApp(){render(false,true);$('#login').classList.add('out');setTimeout(()=>{$('#login').style.display='none'},1300)}
 
-/* ============ BOT (parser linguaggio naturale italiano) ============ */
+/* ============ SEGRETERIA DIGITALE ============ */
 const msgs=$('#msgs');
 function say(t,u,html){const d=document.createElement('div');d.className='m'+(u?' u':'');html?d.innerHTML=t:d.textContent=t;msgs.appendChild(d);msgs.scrollTop=1e9;return d}
 function parseCmd(raw){
  let s=' '+raw.toLowerCase()+' ',cut=[];const take=m=>{if(m)cut.push(m[0]);return m};
- let date=null,time='';
- let m;
+ let date=null,time='',m;
  if(take(m=s.match(/\bdopodomani\b/)))date=isoOff(2);
  else if(take(m=s.match(/\bdomani\b/)))date=isoOff(1);
  else if(take(m=s.match(/\boggi\b/)))date=isoOff(0);
  else if(take(m=s.match(/\btra (\d+) (giorn[oi]|settiman[ae]|mesi|mese)\b/))){const n=+m[1],u=m[2][0];date=iso(u==='g'?addD(n):u==='s'?addD(n*7):(()=>{const d=new Date(T0);d.setMonth(d.getMonth()+n);return d})())}
  else if(take(m=s.match(/\b(\d{1,2})\/(\d{1,2})(?:\/(\d{2,4}))?\b/))){let y=m[3]?+m[3]:T0.getFullYear();if(y<100)y+=2000;let d=new Date(y,m[2]-1,+m[1]);if(!m[3]&&d<T0)d.setFullYear(y+1);date=iso(d)}
  else if(take(m=s.match(new RegExp(`\\b(\\d{1,2}) (${MESI.join('|')})(?: (\\d{4}))?\\b`)))){let y=m[3]?+m[3]:T0.getFullYear();let d=new Date(y,MESI.indexOf(m[2]),+m[1]);if(!m[3]&&d<T0)d.setFullYear(y+1);date=iso(d)}
- else if(take(m=s.match(/\b(lunedi|lunedì|martedi|martedì|mercoledi|mercoledì|giovedi|giovedì|venerdi|venerdì|sabato|domenica)(?![a-zà-ù])(?: prossimo)?/))){const w=GIORNI.findIndex(g=>g.normalize('NFD').replace(/\p{M}/g,'')===m[1].normalize('NFD').replace(/\p{M}/g,''));let n=(w-T0.getDay()+7)%7||7;date=iso(addD(n))}
+ else if(take(m=s.match(/\b(lunedi|lunedì|martedi|martedì|mercoledi|mercoledì|giovedi|giovedì|venerdi|venerdì|sabato|domenica)(?![a-zà-ù])(?: prossimo)?/))){const w=GIORNI.findIndex(g=>g.normalize('NFD').replace(/\p{M}/gu,'')===m[1].normalize('NFD').replace(/\p{M}/gu,''));let n=(w-T0.getDay()+7)%7||7;date=iso(addD(n))}
  else if(take(m=s.match(/\bprossima settimana\b/)))date=iso(addD(7));
  if(take(m=s.match(/\b(?:alle|ore|h)\s*(\d{1,2})(?:[:.](\d{2}))?\b/))||take(m=s.match(/\b(\d{1,2}):(\d{2})\b/)))time=`${p2(m[1])}:${m[2]||'00'}`;
- const personal=!!take(s.match(/\b(personale|privato|privata|mio|mia)\b/));
+ const personal=!!take(s.match(/\b(personale|privato|privata|riservato|riservata)\b/));
  let type='Appuntamento',todo=false;
  if(/udienza/.test(s))type='Udienza';else if(/scadenza|termine|deposit/.test(s))type='Scadenza';else if(/riunione/.test(s))type='Riunione';
  if(/ricordami|promemoria|to-?do|da fare|devo /.test(s))todo=true;
- const cl=DB.clients.find(c=>{const n=c.nome.toLowerCase();return s.includes(n)||n.split(/\s+/).some(w=>w.length>3&&!['s.r.l.','s.p.a.','costruzioni','logistica'].includes(w)&&s.includes(' '+w))});
- const rg=(s.match(/\brg\s*(?:n\.?\s*)?(\d+\/\d{2,4})/)||[])[1];
+ const rgm=(s.match(/\brg\s*(?:n\.?\s*)?(\d+\/\d{2,4})/)||[])[1];
+ let pr=rgm?DB.pratiche.find(p=>p.rg===rgm):null;
+ const cl=pr?AN(pr.clientId):DB.anag.filter(a=>a.tipo==='Cliente').find(c=>{const n=c.nome.toLowerCase();return s.includes(n)||n.split(/\s+/).some(w=>w.length>3&&!['s.r.l.','s.p.a.','costruzioni','logistica'].includes(w)&&s.includes(' '+w))});
+ if(!pr&&cl)pr=DB.pratiche.find(p=>p.clientId===cl.id&&p.stato!=='Chiusa');
  let title=raw;cut.forEach(c=>{title=title.replace(new RegExp(c.trim().replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'i'),'')});
  title=title.replace(/^\s*(crea|aggiungi|inserisci|fissa|metti|segna)(\s+(un|una|l'|lo|la))?\s*(evento|appuntamento|promemoria)?\s*/i,'').replace(/^\s*(ricordami|ricorda)\s*(di|che)?\s*/i,'').replace(/\s+(il|in data|per il|alle|di|a|per)\s*$/i,'').replace(/\s{2,}/g,' ').trim();
- title=title.charAt(0).toUpperCase()+title.slice(1);
- return{title,date,time,type,todo,personal,client:cl,rg};
+ return{title:cap(title),date,time,type,todo,personal,client:cl,pratica:pr};
 }
 let pending=null;
 function handle(text){
  say(text,true);const l=text.toLowerCase();
- if(/cosa scade|scadenz[ae].*(settimana|prossim|imminent)|^scadenze|cosa ho|agenda/.test(l)&&!/\d{1,2}\/\d|^(crea|aggiungi|inserisci|fissa)/.test(l)&&!parseCmd(text).date){
+ if(/cosa scade|scadenz[ae].*(settimana|prossim|imminent)|^scadenze|cosa ho/.test(l)&&!parseCmd(text).title.match(/\w{4,}/)||/^cosa (scade|ho)/.test(l)){
   const lim=/oggi/.test(l)?0:/settimana/.test(l)?7:14;
   const L=upcomingDeadlines().filter(x=>diff(x.date)<=lim);
   return say(L.length?`Prossimi ${lim===0?'impegni di oggi':lim+' giorni'}:\n`+L.map(x=>`• ${fIt(x.date).slice(0,5)} – ${x.txt} (${when(x.date)})`).join('\n'):'Nessuna scadenza nel periodo indicato.');}
- if(/fatture (scadute|da incassare|aperte)/.test(l)){const L=DB.invoices.filter(i=>!i.pagata&&(l.includes('scadute')?diff(i.scadenza)<0:true));return say(L.length?L.map(i=>`• ${i.num} ${cName(i.clientId)} – ${eur(i.importo)} (scad. ${fIt(i.scadenza)})`).join('\n'):'Nessuna fattura.')}
+ if(/fatture (scadute|da incassare|aperte)/.test(l)){const L=DB.invoices.filter(i=>!i.pagata&&(l.includes('scadute')?diff(i.scadenza)<0:true));return say(L.length?L.map(i=>`• ${i.num} ${aName(i.clientId)} – ${eur(i.importo)} (scad. ${fIt(i.scadenza)})`).join('\n'):'Nessuna fattura.')}
  const r=parseCmd(text);
- if(!r.date&&!r.todo)return say('Non ho trovato una data. Prova con «domani», «lunedì», «15/12» o «tra 3 giorni».');
- if(!r.title)return say('Mi manca un titolo per l’evento.');
- let nt='';if(r.date&&!isWork(dd(r.date))){const nd=fixWork(r.date);nt=`<span class="nt">${fLong(r.date)[0].toUpperCase()+fLong(r.date).slice(1)} non è un giorno lavorativo: ${r.type==='Scadenza'&&!r.todo?'il termine è prorogato di diritto al primo giorno feriale (art. 155 c.p.c.)':'ho spostato l’impegno al primo giorno lavorativo'}.</span>`;r.date=nd}
- pending=r;const kind=r.todo?'Attività personale':`${r.type} · ${r.personal?'agenda riservata':'agenda di studio'}`;
- const el=say(`Desidera che registri quanto segue?<dl><dt>Oggetto</dt><dd>${esc(r.title)}</dd><dt>Tipo</dt><dd>${kind}</dd><dt>Data</dt><dd>${r.date?fLong(r.date)+(r.time?', ore '+r.time:''):'senza scadenza'}</dd>${r.client?`<dt>Cliente</dt><dd>${esc(r.client.nome)}</dd>`:''}${r.rg?`<dt>RG</dt><dd>${esc(r.rg)}</dd>`:''}</dl>${nt}${nt?'<br>':''}<button class="s p" id="okb">Conferma</button> <button class="s" id="nob">Annulla</button>`,false,true);
+ if(!r.date&&!r.todo)return say('Non ho trovato una data. Provi con «domani», «lunedì», «15/12» o «tra 3 giorni».');
+ if(!r.title)return say('Mi manca l’oggetto dell’impegno.');
+ let nt='';if(r.date&&!isWork(dd(r.date))){const nd=fixWork(r.date);nt=`<span class="nt">${cap(fLong(r.date))} non è un giorno lavorativo: ${r.type==='Scadenza'&&!r.todo?'il termine è prorogato di diritto al primo giorno feriale (art. 155 c.p.c.)':'ho spostato l’impegno al primo giorno lavorativo'}.</span>`;r.date=nd}
+ pending=r;const kind=r.todo?'Attività personale':`${r.type} · ${r.personal?'agenda riservata':'visibile allo studio'}`;
+ const el=say(`Desidera che registri quanto segue?<dl><dt>Oggetto</dt><dd>${esc(r.title)}</dd><dt>Tipo</dt><dd>${kind}</dd><dt>Data</dt><dd>${r.date?fLong(r.date)+(r.time?', ore '+r.time:''):'senza scadenza'}</dd>${r.client?`<dt>Cliente</dt><dd>${esc(r.client.nome)}</dd>`:''}${r.pratica?`<dt>Pratica</dt><dd>RG ${esc(r.pratica.rg)}</dd>`:''}</dl>${nt}${nt?'<br>':''}<button class="s p" id="okb">Conferma</button> <button class="s" id="nob">Annulla</button>`,false,true);
  el.querySelector('#okb').onclick=()=>{const x=pending;if(!x)return;
-  if(x.todo)DB.todos.push({id:uid(),text:x.title,owner:me,due:x.date||'',done:false});
-  else DB.events.push({id:uid(),title:x.title,date:x.date,time:x.time,type:x.type,owner:me,shared:!x.personal,clientId:x.client?.id||'',note:x.rg?'RG '+x.rg:''});
-  pending=null;save();render();el.querySelector('#okb').parentNode.querySelectorAll('button').forEach(b=>b.remove());say('Registrato. Lo trova in '+(x.todo?'Attività':'Agenda')+'.')};
+  if(x.todo)DB.todos.push({id:uid(),text:x.title,owner:me,due:x.date||'',done:false,praticaId:x.pratica?.id||''});
+  else DB.events.push({id:uid(),title:x.title,date:x.date,time:x.time,dur:60,type:x.type,owner:me,shared:!x.personal,praticaId:x.pratica?.id||'',note:''});
+  pending=null;save();render();el.querySelectorAll('button').forEach(b=>b.remove());say('Registrato. Lo trova in '+(x.todo?'Attività':'Agenda')+(x.pratica?' e nel fascicolo della pratica':'')+'.')};
  el.querySelector('#nob').onclick=()=>{pending=null;el.querySelectorAll('button').forEach(b=>b.remove());say('Annullato.')};
 }
-$('#botbtn').onclick=()=>{$('#bot').classList.toggle('open');if(!msgs.children.length)say((new Date().getHours()<18?'Buongiorno':'Buonasera')+'. Mi indichi pure l’impegno da annotare, ad esempio:\n«udienza Ferrari domani alle 10»\n«scadenza memoria Esposito il 15/12»\n«ricordami di chiamare Conti venerdì»');$('#botin').focus()};
+$('#botbtn').onclick=()=>{$('#bot').classList.toggle('open');if(!msgs.children.length)say((new Date().getHours()<18?'Buongiorno':'Buonasera')+'. Mi indichi pure l’impegno da annotare, ad esempio:\n«udienza Ferrari martedì alle 10»\n«scadenza memoria Esposito il 15/12»\n«ricordami di chiamare Conti venerdì»');$('#botin').focus()};
 const botSend=()=>{const v=$('#botin').value.trim();if(v){$('#botin').value='';handle(v)}};
 $('#botsend').addEventListener('click',botSend);$('#botin').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();botSend()}});
-if(me){$('#login').style.display='none';render(false,true)}
+if(me&&U(me)){$('#login').style.display='none';render(false,true)}else me=null;
 </script>
 </body>
 </html>
