@@ -3,58 +3,95 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Studio Legale – Gestionale (POC)</title>
+<title>Rossi &amp; Associati</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#f4f5f7;--card:#fff;--ink:#1b2430;--mut:#6b7585;--line:#e3e6eb;--pri:#1f3a5f;--pri2:#2d5a94;--ok:#1e8e5a;--warn:#c98a00;--bad:#c62f3b;--okbg:#e4f5ec;--warnbg:#fff3d6;--badbg:#fde7e9;--blue:#e6eef9}
-@media(prefers-color-scheme:dark){:root{--bg:#141a22;--card:#1d2530;--ink:#e8ecf1;--mut:#97a1b0;--line:#2c3644;--pri:#6ea0e0;--pri2:#8db6ee;--okbg:#14382a;--warnbg:#3c3010;--badbg:#431a1f;--blue:#1f2e45}}
-*{box-sizing:border-box}body{margin:0;font:14px/1.45 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--ink);display:flex;min-height:100vh}
-nav{width:215px;background:#14233a;color:#cfd8e6;padding:16px 10px;position:sticky;top:0;height:100vh;flex-shrink:0;display:flex;flex-direction:column;gap:2px}
-nav h1{font-size:15px;color:#fff;margin:0 8px 14px;line-height:1.2}nav h1 small{display:block;font-weight:400;color:#8fa1ba;font-size:11px}
-nav a{display:flex;justify-content:space-between;padding:8px 10px;border-radius:7px;color:inherit;text-decoration:none;cursor:pointer}
-nav a:hover{background:#1f3350}nav a.on{background:#2d5a94;color:#fff}nav .n{background:var(--bad);color:#fff;border-radius:9px;font-size:11px;padding:0 6px}
-nav .me{margin-top:auto;padding:8px}nav .me label{font-size:11px;color:#8fa1ba}nav select{width:100%;margin-top:3px}
-main{flex:1;padding:22px;min-width:0;max-width:1200px}
-h2{margin:0 0 4px;font-size:21px}.sub{color:var(--mut);margin:0 0 16px}
-.grid{display:grid;gap:14px}.g2{grid-template-columns:repeat(auto-fit,minmax(340px,1fr))}.g4{grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}
-.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px}
-.card h3{margin:0 0 10px;font-size:14px;display:flex;justify-content:space-between;align-items:center}
-.kpi b{font-size:24px;display:block}.kpi span{color:var(--mut);font-size:12px}
+:root{--paper:#f6f2ea;--card:#fffdf8;--ink:#1d2331;--mut:#7a7366;--line:#e7dfcf;--line2:#efe9dd;--navy:#15213a;--navy2:#22335a;--gold:#a8864a;--gold2:#c9a96a;--bord:#7c2633;--ok:#3e6a50;--warn:#9a6b17;--bad:#8f2a35;--okbg:#eaf1ec;--warnbg:#f8f0de;--badbg:#f6e7e8;--pill:#f1ece2;--serif:'Cormorant Garamond',Garamond,'Times New Roman',serif;--sans:Inter,system-ui,-apple-system,'Segoe UI',sans-serif}
+@media(prefers-color-scheme:dark){:root{--paper:#11161f;--card:#181f2b;--ink:#ece6da;--mut:#a39b8c;--line:#2b3343;--line2:#232b39;--navy:#0b1220;--navy2:#1b2740;--gold:#c9a96a;--gold2:#dcc28b;--okbg:#18291f;--warnbg:#2e2614;--badbg:#311a1d;--pill:#232b39;--ok:#7fb393;--warn:#d9b062;--bad:#e08a92}}
+*{box-sizing:border-box}h2,h3,.kpi b,.row .d,.rg,.day b,dialog h3{font-variant-numeric:lining-nums}
+body{margin:0;font:14px/1.55 var(--sans);background:var(--paper);color:var(--ink);display:flex;min-height:100vh;-webkit-font-smoothing:antialiased}
+svg.i{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+/* sidebar */
+nav{width:248px;background:var(--navy);color:#c9cfdb;padding:28px 18px 18px;position:sticky;top:0;height:100vh;flex-shrink:0;display:flex;flex-direction:column;gap:2px}
+.brand{display:flex;gap:12px;align-items:center;margin:0 6px 30px;padding-bottom:22px;border-bottom:1px solid #ffffff14}
+.mono{width:46px;height:46px;font-size:15px!important;border:1px solid var(--gold2);color:var(--gold2);display:grid;place-items:center;font-family:var(--serif);font-weight:600;letter-spacing:0;border-radius:50%}
+.brand b{display:block;font:600 19px/1.1 var(--serif);color:#f3ede1;letter-spacing:.01em}.brand small{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold2)}
+nav .sec{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#7d879b;margin:4px 12px 8px}
+nav a{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:4px;color:inherit;text-decoration:none;cursor:pointer;font-size:13.5px;border-left:2px solid transparent;transition:background .15s,color .15s}
+nav a:hover{background:#ffffff0a;color:#fff}nav a.on{background:#ffffff0f;color:#fff;border-left-color:var(--gold2)}nav a.on svg{color:var(--gold2)}
+nav a .n{margin-left:auto;background:var(--gold);color:var(--navy);border-radius:10px;font-size:10.5px;font-weight:600;padding:1px 7px}
+nav .me{margin-top:auto;padding:16px 8px 0;border-top:1px solid #ffffff14}nav .me label{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#7d879b}
+nav select{width:100%;margin-top:6px;background:#ffffff0d;border:1px solid #ffffff1f;color:#f3ede1;border-radius:4px;padding:8px}nav select option{color:#111}
+/* main */
+main{flex:1;padding:44px 52px;min-width:0;max-width:1240px}
+.eyebrow{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin:0 0 6px;font-weight:500}
+h2{margin:0;font:600 36px/1.1 var(--serif);letter-spacing:.005em}
+.sub{color:var(--mut);margin:8px 0 30px;font-size:14px}
+.rule{height:1px;background:linear-gradient(90deg,var(--gold) 0 56px,var(--line) 56px);margin:0 0 30px}
+.grid{display:grid;gap:22px}.g2{grid-template-columns:repeat(auto-fit,minmax(360px,1fr))}.g4{grid-template-columns:repeat(auto-fit,minmax(190px,1fr))}
+.card{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:22px 24px;box-shadow:0 1px 2px #15213a08}
+.card h3 .tag{font:500 11px var(--sans)}.card h3{margin:0 0 14px;font:600 20px/1.2 var(--serif);display:flex;justify-content:space-between;align-items:center;gap:10px}
+.kpi{padding:20px 22px;position:relative}.kpi span{color:var(--mut);font-size:11px;letter-spacing:.14em;text-transform:uppercase}
+.kpi b{font:500 28px/1.2 var(--sans);letter-spacing:-.01em;font-variant-numeric:tabular-nums;display:block;margin-top:8px}.kpi.alert b{color:var(--bord)}.kpi.good b{color:var(--ok)}
+.kpi:before{content:"";position:absolute;left:0;top:20px;bottom:20px;width:2px;background:var(--gold);opacity:.7}
+/* controlli */
 button,select,input,textarea{font:inherit;color:inherit}
-button{border:1px solid var(--line);background:var(--card);padding:6px 11px;border-radius:7px;cursor:pointer}
-button:hover{border-color:var(--pri2)}button.p{background:var(--pri2);color:#fff;border-color:var(--pri2)}button.s{padding:2px 8px;font-size:12px}button.d{color:var(--bad)}
-input,select,textarea{border:1px solid var(--line);background:var(--card);border-radius:7px;padding:6px 8px;width:100%}
-table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:8px 8px;border-bottom:1px solid var(--line);vertical-align:top}
-th{font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--mut);font-weight:600}td.r,th.r{text-align:right}
-.tbl{overflow-x:auto}.bar{display:flex;gap:8px;align-items:center;margin-bottom:12px;flex-wrap:wrap}.bar .sp{flex:1}
-.tag{display:inline-block;padding:1px 8px;border-radius:9px;font-size:11px;font-weight:600;background:var(--blue);color:var(--pri)}
+button{border:1px solid var(--line);background:var(--card);padding:8px 16px;border-radius:4px;cursor:pointer;display:inline-flex;align-items:center;gap:7px;font-size:13px;transition:all .15s}
+button:hover{border-color:var(--gold);color:var(--ink)}
+button.p{background:var(--navy);color:#f5efe3;border-color:var(--navy)}button.p:hover{background:var(--navy2);border-color:var(--gold)}
+@media(prefers-color-scheme:dark){button.p{background:var(--gold);color:#111;border-color:var(--gold)}button.p:hover{background:var(--gold2)}}
+button.s{padding:4px 10px;font-size:12px}button.ic{padding:5px 7px;border-color:transparent;background:transparent;color:var(--mut)}button.ic:hover{color:var(--gold);border-color:var(--line)}
+button.d{color:var(--bad)}
+input,select,textarea{border:1px solid var(--line);background:var(--card);border-radius:4px;padding:9px 11px;width:100%;outline:none;transition:border .15s}
+input:focus,select:focus,textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px #a8864a1f}
+input[type=checkbox]{accent-color:var(--navy);width:16px;height:16px}
+.search{position:relative;max-width:300px;flex:1}.search svg{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--mut)}.search input{padding-left:34px}
+/* tabelle */
+.tbl{overflow-x:auto;padding:6px 0}.tbl h3{padding:16px 24px 0}
+table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:13px 16px;border-bottom:1px solid var(--line2);vertical-align:top}
+th{font-size:10.5px;text-transform:uppercase;letter-spacing:.14em;color:var(--mut);font-weight:500;border-bottom:1px solid var(--line)}
+tr:last-child td{border-bottom:0}tbody tr,table tr{transition:background .12s}table tr:hover td{background:#a8864a08}
+td.r,th.r{text-align:right}td:first-child,th:first-child{padding-left:24px}td:last-child,th:last-child{padding-right:20px}
+td small{display:block;color:var(--mut);font-size:12px}
+.rg{font-weight:600;font-variant-numeric:tabular-nums;color:var(--navy)}@media(prefers-color-scheme:dark){.rg{color:var(--gold2)}}
+.bar{display:flex;gap:10px;align-items:center;margin-bottom:18px;flex-wrap:wrap}.bar .sp{flex:1}
+.tag{display:inline-block;padding:2px 10px;border-radius:20px;font-size:11px;font-weight:500;background:var(--pill);color:var(--mut);white-space:nowrap;letter-spacing:.02em}
 .t-bad{background:var(--badbg);color:var(--bad)}.t-warn{background:var(--warnbg);color:var(--warn)}.t-ok{background:var(--okbg);color:var(--ok)}
-.row{display:flex;gap:10px;align-items:flex-start;padding:7px 0;border-bottom:1px solid var(--line)}.row:last-child{border:0}
-.row .d{min-width:62px;font-weight:600}.row .x{flex:1}.row small{color:var(--mut);display:block}
-.seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}.seg button{border:0;border-radius:0}.seg button.on{background:var(--pri2);color:#fff}
-.day{font-weight:700;margin:14px 0 4px;color:var(--pri)}.day.today{color:var(--bad)}
+.row{display:flex;gap:14px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line2)}.row:last-child{border:0}
+.row .d{min-width:52px;font:600 13px var(--sans);color:var(--gold);font-variant-numeric:tabular-nums}.row .x{flex:1;min-width:0}.row small{color:var(--mut);display:block;font-size:12px;margin-top:1px}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:4px;overflow:hidden;background:var(--card)}.seg button{border:0;border-radius:0;padding:8px 15px;border-right:1px solid var(--line)}.seg button:last-child{border-right:0}
+.seg button.on{background:var(--navy);color:#f5efe3}@media(prefers-color-scheme:dark){.seg button.on{background:var(--gold);color:#111}}
+.day{display:flex;align-items:baseline;gap:12px;margin:22px 0 2px;padding-bottom:8px;border-bottom:1px solid var(--line)}.day:first-child{margin-top:0}
+.day b{font:600 21px var(--serif);display:inline-block}.day b::first-letter{text-transform:uppercase}.day span{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}.day.today b{color:var(--bord)}
 .done{text-decoration:line-through;color:var(--mut)}
-dialog{border:1px solid var(--line);border-radius:12px;background:var(--card);color:var(--ink);width:min(480px,94vw);padding:18px}
-dialog::backdrop{background:#0008}dialog label{display:block;margin:8px 0 2px;font-size:12px;color:var(--mut)}
-#botbtn{position:fixed;right:18px;bottom:18px;border-radius:24px;padding:11px 18px;box-shadow:0 4px 14px #0004;z-index:5}
-#bot{position:fixed;right:18px;bottom:70px;width:min(380px,94vw);height:min(520px,70vh);display:none;flex-direction:column;z-index:5;padding:0;box-shadow:0 8px 28px #0005}
-#bot.open{display:flex}#bot header{padding:11px 14px;background:var(--pri2);color:#fff;border-radius:10px 10px 0 0;font-weight:600}
-#msgs{flex:1;overflow:auto;padding:10px;display:flex;flex-direction:column;gap:8px}
-.m{max-width:88%;padding:7px 10px;border-radius:10px;background:var(--bg);white-space:pre-wrap}.m.u{align-self:flex-end;background:var(--pri2);color:#fff}
-#bot form{display:flex;gap:6px;padding:8px;border-top:1px solid var(--line)}
-.hint{font-size:11px;color:var(--mut);padding:0 10px 6px}
-.empty{color:var(--mut);padding:10px 0}
-@media(max-width:760px){body{flex-direction:column}nav{width:100%;height:auto;position:static;flex-direction:row;flex-wrap:wrap}nav h1{width:100%}nav .me{width:100%;margin:0}main{padding:14px}}
+.prog{background:var(--line2);border-radius:2px;height:5px}.prog div{height:5px;border-radius:2px;background:var(--gold)}
+dialog{border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--ink);width:min(500px,94vw);padding:30px 32px;box-shadow:0 24px 60px #0003}
+dialog::backdrop{background:#15213a99;backdrop-filter:blur(2px)}dialog h3{font:600 26px var(--serif);margin:0 0 4px}
+dialog label{display:block;margin:14px 0 5px;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
+/* assistente */
+#botbtn{position:fixed;right:28px;bottom:28px;border-radius:30px;padding:13px 22px;box-shadow:0 10px 30px #15213a40;z-index:5;border:1px solid var(--gold);font-size:13px;letter-spacing:.04em}
+#bot{position:fixed;right:28px;bottom:88px;width:min(400px,94vw);height:min(560px,72vh);display:none;flex-direction:column;z-index:5;padding:0;box-shadow:0 24px 60px #15213a40;overflow:hidden}
+#bot.open{display:flex}#bot header{padding:18px 22px;background:var(--navy);color:#f3ede1;border-bottom:1px solid var(--gold)}
+#bot header b{font:600 20px var(--serif);display:block}#bot header small{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold2)}
+#msgs{flex:1;overflow:auto;padding:18px;display:flex;flex-direction:column;gap:10px;background:var(--paper)}
+.m{max-width:88%;padding:10px 14px;border-radius:4px 14px 14px 14px;background:var(--card);border:1px solid var(--line);white-space:pre-wrap;font-size:13.5px}
+.m.u{align-self:flex-end;background:var(--navy);color:#f5efe3;border-color:var(--navy);border-radius:14px 4px 14px 14px}
+.m dl{display:grid;grid-template-columns:auto 1fr;gap:3px 12px;margin:8px 0 10px}.m dt{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);padding-top:2px}.m dd{margin:0}
+#bot form{display:flex;gap:8px;padding:12px 14px;border-top:1px solid var(--line);background:var(--card)}
+.hint{font-size:11.5px;color:var(--mut);padding:10px 16px;border-top:1px solid var(--line);background:var(--card);font-style:italic}
+.empty{color:var(--mut);padding:14px 0;font-style:italic}
+@media(max-width:820px){body{flex-direction:column}nav{width:100%;height:auto;position:static;padding:16px}.brand{margin-bottom:12px;padding-bottom:12px}nav .sec{display:none}nav .links{display:flex;flex-wrap:wrap;gap:2px}nav a{padding:7px 10px}nav .me{margin-top:10px}main{padding:26px 16px}h2{font-size:30px}#botbtn{right:16px;bottom:16px}#bot{right:3vw;bottom:76px}}
 </style>
 </head>
 <body>
 <nav id="nav"></nav>
 <main id="main"></main>
-<button id="botbtn" class="p">🤖 Assistente</button>
+<button id="botbtn" class="p"><svg class="i" viewBox="0 0 24 24"><path d="M3 21l3-1 12-12-2-2L4 18z"/><path d="M14 6l4 4M17 3l4 4"/></svg> Segreteria digitale</button>
 <section id="bot" class="card">
-  <header>Assistente agenda</header>
+  <header><small>Assistente</small><b>Segreteria digitale</b></header>
   <div id="msgs"></div>
-  <div class="hint">Es.: «udienza Rossi domani alle 10» · «scadenza memoria il 15/12» · «ricordami di chiamare Bianchi venerdì» · «cosa scade questa settimana»</div>
-  <form id="botform"><input id="botin" placeholder="Scrivi un comando…" autocomplete="off"><button class="p">Invia</button></form>
+  <form id="botform"><input id="botin" placeholder="Detti un impegno o una scadenza…" autocomplete="off"><button class="p">Invia</button></form>
 </section>
 <dialog id="dlg"></dialog>
 
@@ -78,6 +115,8 @@ const uid=()=>Math.random().toString(36).slice(2,9);
 function when(s){const n=diff(s);return n<0?`scaduta da ${-n}g`:n===0?'oggi':n===1?'domani':`tra ${n}g`}
 function urg(s){const n=diff(s);return n<=0?'t-bad':n<=3?'t-warn':'';}
 
+const ICO={dash:'<path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/>',agenda:'<rect x="3" y="5" width="18" height="16" rx="1"/><path d="M3 10h18M8 3v4M16 3v4"/>',todo:'<path d="M9 11l3 3 8-8"/><path d="M20 12v7a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h11"/>',fatture:'<path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 13h7M9 17h5"/>',registro:'<path d="M12 3v18M5 7h14M7 7l-3 7a3 3 0 0 0 6 0zM17 7l-3 7a3 3 0 0 0 6 0zM8 21h8"/>',rubrica:'<rect x="4" y="3" width="16" height="18" rx="1"/><circle cx="12" cy="10" r="3"/><path d="M7 18c1-2.5 3-3.5 5-3.5s4 1 5 3.5"/>',ore:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',edit:'<path d="M4 20h4L19 9l-4-4L4 16z"/>',search:'<circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/>',plus:'<path d="M12 5v14M5 12h14"/>',pen:'<path d="M3 21l3-1 12-12-2-2L4 18z"/><path d="M14 6l4 4M17 3l4 4"/>',check:'<path d="M5 12l5 5L20 7"/>'};
+const ic=k=>`<svg class="i" viewBox="0 0 24 24">${ICO[k]}</svg>`;
 /* ============ dati (localStorage) ============ */
 const KEY='gestionale-avv-poc-v1';
 const USERS=[{id:'u1',nome:'Avv. Marco Rossi',ruolo:'Titolare'},{id:'u2',nome:'Avv. Giulia Bianchi',ruolo:'Associata'},{id:'u3',nome:'Dott.ssa Elena Verdi',ruolo:'Segreteria'},{id:'u4',nome:'Dott. Luca Neri',ruolo:'Praticante'}];
@@ -162,15 +201,15 @@ const optPrat=[['','— nessuna —'],...DB.pratiche.map(p=>[p.id,pLabel(p.id)])
 
 /* ============ viste ============ */
 let page='dash',agMode='tutte',pagoFilter='tutte',rubCat='Tutti',q='';
-const PAGES=[['dash','🏠 Oggi'],['agenda','📅 Agenda'],['todo','✅ To-do'],['fatture','💶 Scadenzario fatture'],['registro','📚 Registro clienti / RG'],['rubrica','📇 Rubrica'],['ore','⏱ Ore dipendenti']];
+const PAGES=[['dash','La giornata'],['agenda','Agenda'],['todo','Attività'],['registro','Registro clienti e RG'],['rubrica','Rubrica'],['fatture','Scadenzario fatture'],['ore','Ore collaboratori']];
 
 function visibleEvents(mode){
  return DB.events.filter(e=>mode==='condivisa'?e.shared:mode==='personale'?e.owner===me:(e.shared||e.owner===me)).sort((a,b)=>(a.date+(a.time||'99')).localeCompare(b.date+(b.time||'99')));
 }
 function upcomingDeadlines(){
  const L=[];
- DB.events.filter(e=>(e.shared||e.owner===me)&&['Scadenza','Udienza'].includes(e.type)&&diff(e.date)<=14&&diff(e.date)>=0).forEach(e=>L.push({date:e.date,txt:e.title,kind:e.type,sub:e.shared?'Studio':'Personale'}));
- DB.todos.filter(t=>t.owner===me&&!t.done&&t.due&&diff(t.due)<=14).forEach(t=>L.push({date:t.due,txt:t.text,kind:'To-do',sub:'Personale'}));
+ DB.events.filter(e=>(e.shared||e.owner===me)&&['Scadenza','Udienza'].includes(e.type)&&diff(e.date)<=14&&diff(e.date)>=0).forEach(e=>L.push({date:e.date,txt:e.title,kind:e.type,sub:e.shared?'Studio':'Riservato'}));
+ DB.todos.filter(t=>t.owner===me&&!t.done&&t.due&&diff(t.due)<=14).forEach(t=>L.push({date:t.due,txt:t.text,kind:'To-do',sub:'Riservato'}));
  DB.invoices.filter(i=>!i.pagata&&diff(i.scadenza)<=14).forEach(i=>L.push({date:i.scadenza,txt:`Fattura ${i.num} – ${cName(i.clientId)} (${eur(i.importo)})`,kind:'Fattura',sub:'Incasso'}));
  return L.sort((a,b)=>a.date.localeCompare(b.date));
 }
@@ -180,33 +219,33 @@ function vDash(){
  const dl=upcomingDeadlines();const ev=visibleEvents('tutte').filter(e=>e.date===isoOff(0));
  const td=DB.todos.filter(t=>t.owner===me&&!t.done);
  const unpaid=DB.invoices.filter(i=>!i.pagata);const late=unpaid.filter(i=>diff(i.scadenza)<0);
- return`<h2>Buongiorno, ${esc(uName(me))}</h2><p class="sub">${fLong(isoOff(0))} · riepilogo della tua giornata</p>
- <div class="grid g4" style="margin-bottom:14px">
-  <div class="card kpi"><b>${ev.length}</b><span>impegni oggi</span></div>
-  <div class="card kpi"><b>${dl.filter(x=>diff(x.date)<=3&&x.kind!=='Fattura').length}</b><span>scadenze entro 3 giorni</span></div>
-  <div class="card kpi"><b>${td.length}</b><span>to-do aperti</span></div>
-  <div class="card kpi"><b style="color:${late.length?'var(--bad)':'inherit'}">${eur(late.reduce((s,i)=>s+i.importo,0))}</b><span>fatture scadute (${late.length})</span></div></div>
+ return`<p class="eyebrow">${fLong(isoOff(0))}</p><h2>Buongiorno, ${esc(uName(me))}</h2><p class="sub">Ecco il quadro della giornata: impegni, termini in scadenza e attività da completare.</p>
+ <div class="grid g4" style="margin-bottom:22px">
+  <div class="card kpi"><span>Impegni di oggi</span><b>${ev.length}</b></div>
+  <div class="card kpi"><span>Termini entro 3 giorni</span><b>${dl.filter(x=>diff(x.date)<=3&&x.kind!=='Fattura').length}</b></div>
+  <div class="card kpi"><span>Attività aperte</span><b>${td.length}</b></div>
+  <div class="card kpi ${late.length?'alert':''}"><span>Parcelle insolute (${late.length})</span><b>${eur(late.reduce((s,i)=>s+i.importo,0))}</b></div></div>
  <div class="grid g2">
-  <div class="card"><h3>Agenda di oggi</h3>${ev.length?ev.map(e=>`<div class="row"><div class="d">${e.time||'tutto il g.'}</div><div class="x">${esc(e.title)}<small>${e.type} · ${e.shared?'Studio':'Personale'} · ${esc(uName(e.owner))}</small></div></div>`).join(''):'<div class="empty">Nessun impegno oggi.</div>'}</div>
-  <div class="card"><h3>⚠ Scadenze imminenti (14 gg)</h3>${dl.length?dl.map(dlRow).join(''):'<div class="empty">Nessuna scadenza.</div>'}</div>
-  <div class="card"><h3>I miei to-do</h3>${td.length?td.sort((a,b)=>(a.due||'9').localeCompare(b.due||'9')).map(todoRow).join(''):'<div class="empty">Tutto fatto 🎉</div>'}</div></div>`;
+  <div class="card"><h3>Agenda di oggi</h3>${ev.length?ev.map(e=>`<div class="row"><div class="d">${e.time||'—'}</div><div class="x">${esc(e.title)}<small>${e.type} · ${e.shared?'Studio':'Riservato'} · ${esc(uName(e.owner))}</small></div></div>`).join(''):'<div class="empty">Nessun impegno oggi.</div>'}</div>
+  <div class="card"><h3>Scadenze imminenti <span class="tag">14 giorni</span></h3>${dl.length?dl.map(dlRow).join(''):'<div class="empty">Nessuna scadenza.</div>'}</div>
+  <div class="card"><h3>Le mie attività</h3>${td.length?td.sort((a,b)=>(a.due||'9').localeCompare(b.due||'9')).map(todoRow).join(''):'<div class="empty">Nessuna attività in sospeso.</div>'}</div></div>`;
 }
-const todoRow=t=>`<div class="row"><input type="checkbox" style="width:auto;margin-top:4px" ${t.done?'checked':''} onchange="togTodo('${t.id}')"><div class="x ${t.done?'done':''}">${esc(t.text)}<small>${esc(uName(t.owner))}</small></div>${t.due?`<span class="tag ${t.done?'':urg(t.due)}">${fIt(t.due).slice(0,5)}</span>`:''}<button class="s" onclick="editTodo('${t.id}')">✎</button></div>`;
+const todoRow=t=>`<div class="row"><input type="checkbox" style="width:auto;margin-top:4px" ${t.done?'checked':''} onchange="togTodo('${t.id}')"><div class="x ${t.done?'done':''}">${esc(t.text)}<small>${esc(uName(t.owner))}</small></div>${t.due?`<span class="tag ${t.done?'':urg(t.due)}">${fIt(t.due).slice(0,5)}</span>`:''}<button class="ic" title="Modifica" onclick="editTodo('${t.id}')">${ic('edit')}</button></div>`;
 window.togTodo=id=>{const t=DB.todos.find(x=>x.id===id);t.done=!t.done;save();render()};
 window.editTodo=id=>{const t=id?DB.todos.find(x=>x.id===id):null;openForm(t?'Modifica to-do':'Nuovo to-do',[{k:'text',l:'Attività',req:1},{k:'due',l:'Scadenza',t:'date'},{k:'owner',l:'Assegnato a',t:'select',opts:optUsers,def:me}],t,o=>{if(t)Object.assign(t,o);else DB.todos.push({id:uid(),done:false,...o})},t&&(()=>DB.todos=DB.todos.filter(x=>x!==t)))};
 
 function vAgenda(){
  const list=visibleEvents(agMode).filter(e=>diff(e.date)>=-1);const by={};list.forEach(e=>(by[e.date]=by[e.date]||[]).push(e));
- return`<h2>Agenda</h2><p class="sub">Agenda condivisa dello studio e agenda personale di ${esc(uName(me))}</p>
- <div class="bar"><div class="seg">${['tutte','condivisa','personale'].map(m=>`<button class="${agMode===m?'on':''}" onclick="agMode='${m}';render()">${m[0].toUpperCase()+m.slice(1)}</button>`).join('')}</div><span class="sp"></span><button class="p" onclick="editEvent()">+ Evento</button></div>
- <div class="card">${Object.keys(by).sort().map(d=>`<div class="day ${diff(d)===0?'today':''}">${fLong(d)} · ${when(d)}</div>${by[d].map(e=>`<div class="row"><div class="d">${e.time||'—'}</div><div class="x">${esc(e.title)}<small>${e.clientId?esc(cName(e.clientId))+' · ':''}${esc(uName(e.owner))}${e.note?' · '+esc(e.note):''}</small></div><span class="tag ${e.type==='Scadenza'?urg(e.date)||'t-warn':''}">${e.type}</span><span class="tag ${e.shared?'':'t-ok'}">${e.shared?'Studio':'Privato'}</span><button class="s" onclick="editEvent('${e.id}')">✎</button></div>`).join('')}`).join('')||'<div class="empty">Nessun evento.</div>'}</div>`;
+ return`<p class="eyebrow">Calendario</p><h2>Agenda</h2><p class="sub">L’agenda condivisa dello studio e quella riservata di ${esc(uName(me))}.</p>
+ <div class="bar"><div class="seg">${['tutte','condivisa','personale'].map(m=>`<button class="${agMode===m?'on':''}" onclick="agMode='${m}';render()">${m[0].toUpperCase()+m.slice(1)}</button>`).join('')}</div><span class="sp"></span><button class="p" onclick="editEvent()">${ic('plus')} Evento</button></div>
+ <div class="card">${Object.keys(by).sort().map(d=>`<div class="day ${diff(d)===0?'today':''}"><b>${fLong(d)}</b><span>${when(d)}</span></div>${by[d].map(e=>`<div class="row"><div class="d">${e.time||'—'}</div><div class="x">${esc(e.title)}<small>${e.clientId?esc(cName(e.clientId))+' · ':''}${esc(uName(e.owner))}${e.note?' · '+esc(e.note):''}</small></div><span class="tag ${e.type==='Scadenza'?urg(e.date)||'t-warn':''}">${e.type}</span><span class="tag">${e.shared?'Studio':'Riservato'}</span><button class="ic" title="Modifica" onclick="editEvent('${e.id}')">${ic('edit')}</button></div>`).join('')}`).join('')||'<div class="empty">Nessun evento.</div>'}</div>`;
 }
 window.editEvent=id=>{const e=id?DB.events.find(x=>x.id===id):null;openForm(e?'Modifica evento':'Nuovo evento',[{k:'title',l:'Titolo',req:1},{k:'type',l:'Tipo',t:'select',opts:['Udienza','Scadenza','Appuntamento','Riunione']},{k:'date',l:'Data',t:'date',req:1,def:isoOff(0)},{k:'time',l:'Ora',t:'time'},{k:'clientId',l:'Cliente',t:'select',opts:optClients(1)},{k:'owner',l:'Responsabile',t:'select',opts:optUsers,def:me},{k:'shared',l:'Visibile a tutto lo studio',t:'check',def:true},{k:'note',l:'Note',t:'area'}],e,o=>{if(e)Object.assign(e,o);else DB.events.push({id:uid(),...o})},e&&(()=>DB.events=DB.events.filter(x=>x!==e)))};
 
 function vTodo(){
  const mine=DB.todos.filter(t=>t.owner===me),others=DB.todos.filter(t=>t.owner!==me&&!t.done);
  const s=a=>a.sort((x,y)=>x.done-y.done||(x.due||'9').localeCompare(y.due||'9'));
- return`<h2>To-do</h2><p class="sub">Attività personali con scadenza</p><div class="bar"><span class="sp"></span><button class="p" onclick="editTodo()">+ To-do</button></div>
+ return`<p class="eyebrow">Organizzazione</p><h2>Attività</h2><p class="sub">Promemoria personali e incarichi assegnati, ordinati per scadenza.</p><div class="bar"><span class="sp"></span><button class="p" onclick="editTodo()">${ic('plus')} Nuova attività</button></div>
  <div class="grid g2"><div class="card"><h3>I miei</h3>${s(mine).map(todoRow).join('')||'<div class="empty">Nessun to-do.</div>'}</div>
  <div class="card"><h3>Colleghi (aperti)</h3>${s(others).map(todoRow).join('')||'<div class="empty">—</div>'}</div></div>`;
 }
@@ -216,11 +255,11 @@ function vFatture(){
  const st=i=>i.pagata?'Pagata':diff(i.scadenza)<0?'Scaduta':'Da incassare';
  const f=all.filter(i=>pagoFilter==='tutte'||(pagoFilter==='aperte'?!i.pagata:pagoFilter==='scadute'?st(i)==='Scaduta':i.pagata));
  const sum=a=>a.reduce((s,i)=>s+i.importo,0);
- return`<h2>Scadenzario fatture</h2><p class="sub">Fatture emesse, scadenze di incasso e solleciti</p>
- <div class="grid g4" style="margin-bottom:14px"><div class="card kpi"><b>${eur(sum(all.filter(i=>!i.pagata)))}</b><span>da incassare</span></div><div class="card kpi"><b style="color:var(--bad)">${eur(sum(all.filter(i=>st(i)==='Scaduta')))}</b><span>scadute</span></div><div class="card kpi"><b>${eur(sum(all.filter(i=>!i.pagata&&diff(i.scadenza)>=0&&diff(i.scadenza)<=7)))}</b><span>in scadenza (7 gg)</span></div><div class="card kpi"><b style="color:var(--ok)">${eur(sum(all.filter(i=>i.pagata)))}</b><span>incassate</span></div></div>
- <div class="bar"><div class="seg">${['tutte','aperte','scadute','pagate'].map(m=>`<button class="${pagoFilter===m?'on':''}" onclick="pagoFilter='${m}';render()">${m[0].toUpperCase()+m.slice(1)}</button>`).join('')}</div><span class="sp"></span><button class="p" onclick="editInv()">+ Fattura</button></div>
+ return`<p class="eyebrow">Amministrazione</p><h2>Scadenzario fatture</h2><p class="sub">Parcelle emesse, termini di pagamento e posizioni da sollecitare.</p>
+ <div class="grid g4" style="margin-bottom:22px"><div class="card kpi"><b>${eur(sum(all.filter(i=>!i.pagata)))}</b><span>da incassare</span></div><div class="card kpi"><b style="color:var(--bad)">${eur(sum(all.filter(i=>st(i)==='Scaduta')))}</b><span>scadute</span></div><div class="card kpi"><b>${eur(sum(all.filter(i=>!i.pagata&&diff(i.scadenza)>=0&&diff(i.scadenza)<=7)))}</b><span>in scadenza (7 gg)</span></div><div class="card kpi"><b style="color:var(--ok)">${eur(sum(all.filter(i=>i.pagata)))}</b><span>incassate</span></div></div>
+ <div class="bar"><div class="seg">${['tutte','aperte','scadute','pagate'].map(m=>`<button class="${pagoFilter===m?'on':''}" onclick="pagoFilter='${m}';render()">${m[0].toUpperCase()+m.slice(1)}</button>`).join('')}</div><span class="sp"></span><button class="p" onclick="editInv()">${ic('plus')} Fattura</button></div>
  <div class="card tbl"><table><tr><th>N.</th><th>Cliente</th><th>Descrizione</th><th>Emessa</th><th>Scadenza</th><th class="r">Importo</th><th>Stato</th><th></th></tr>
- ${f.map(i=>`<tr><td>${esc(i.num)}</td><td>${esc(cName(i.clientId))}</td><td>${esc(i.desc)}</td><td>${fIt(i.emissione)}</td><td>${fIt(i.scadenza)}${i.pagata?'':`<small style="color:var(--mut);display:block">${when(i.scadenza)}</small>`}</td><td class="r">${eur(i.importo)}</td><td><span class="tag ${i.pagata?'t-ok':urg(i.scadenza)}">${st(i)}</span></td><td style="white-space:nowrap">${i.pagata?'':`<button class="s" onclick="payInv('${i.id}')">✓ Pagata</button> `}<button class="s" onclick="editInv('${i.id}')">✎</button></td></tr>`).join('')||'<tr><td colspan=8 class="empty">Nessuna fattura.</td></tr>'}</table></div>`;
+ ${f.map(i=>`<tr><td class="rg">${esc(i.num)}</td><td>${esc(cName(i.clientId))}</td><td>${esc(i.desc)}</td><td>${fIt(i.emissione)}</td><td>${fIt(i.scadenza)}${i.pagata?'':`<small style="color:var(--mut);display:block">${when(i.scadenza)}</small>`}</td><td class="r">${eur(i.importo)}</td><td><span class="tag ${i.pagata?'t-ok':urg(i.scadenza)}">${st(i)}</span></td><td style="white-space:nowrap">${i.pagata?'':`<button class="s" onclick="payInv('${i.id}')">${ic('check')} Incassata</button> `}<button class="ic" title="Modifica" onclick="editInv('${i.id}')">${ic('edit')}</button></td></tr>`).join('')||'<tr><td colspan=8 class="empty">Nessuna fattura.</td></tr>'}</table></div>`;
 }
 window.payInv=id=>{DB.invoices.find(i=>i.id===id).pagata=true;save();render()};
 window.editInv=id=>{const i=id?DB.invoices.find(x=>x.id===id):null;openForm(i?'Modifica fattura':'Nuova fattura',[{k:'num',l:'Numero',req:1,def:`${DB.invoices.length+12}/2026`},{k:'clientId',l:'Cliente',t:'select',opts:optClients()},{k:'desc',l:'Descrizione'},{k:'importo',l:'Importo (€)',t:'number',step:'0.01',req:1},{k:'emissione',l:'Data emissione',t:'date',def:isoOff(0)},{k:'scadenza',l:'Scadenza pagamento',t:'date',def:isoOff(30),req:1},{k:'pagata',l:'Pagata',t:'check'}],i,o=>{if(i)Object.assign(i,o);else DB.invoices.push({id:uid(),...o})},i&&(()=>DB.invoices=DB.invoices.filter(x=>x!==i)))};
@@ -229,10 +268,10 @@ function vRegistro(){
  const rows=DB.pratiche.map(p=>({p,c:DB.clients.find(c=>c.id===p.clientId)})).filter(({p,c})=>!q||[c?.nome,p.rg,p.tribunale,p.oggetto,p.controparte].join(' ').toLowerCase().includes(q.toLowerCase()))
   .sort((a,b)=>(a.c?.nome||'').localeCompare(b.c?.nome||''));
  const noP=DB.clients.filter(c=>!DB.pratiche.some(p=>p.clientId===c.id));
- return`<h2>Registro clienti e numeri RG</h2><p class="sub">Per ogni cliente: numero di Ruolo Generale e tribunale di competenza</p>
- <div class="bar"><input style="max-width:280px" placeholder="Cerca cliente, RG, tribunale…" value="${esc(q)}" oninput="q=this.value;render(true)" id="qin"><span class="sp"></span><button onclick="editClient()">+ Cliente</button><button class="p" onclick="editPratica()">+ Pratica / RG</button></div>
+ return`<p class="eyebrow">Contenzioso</p><h2>Registro clienti</h2><p class="sub">Per ciascun assistito, il numero di Ruolo Generale e l’ufficio giudiziario competente.</p>
+ <div class="bar"><div class="search">${ic('search')}<input placeholder="Cerca cliente, RG, tribunale…" value="${esc(q)}" oninput="q=this.value;render(true)" id="qin"></div><span class="sp"></span><button onclick="editClient()">${ic('plus')} Cliente</button><button class="p" onclick="editPratica()">${ic('plus')} Pratica / RG</button></div>
  <div class="card tbl"><table><tr><th>Cliente</th><th>N. RG</th><th>Tribunale competente</th><th>Sezione</th><th>Oggetto</th><th>Controparte</th><th>Stato</th><th></th></tr>
- ${rows.map(({p,c})=>`<tr><td><b>${esc(c?.nome)}</b><small style="display:block;color:var(--mut)">${esc(c?.cf||'')}</small></td><td><b>${esc(p.rg)}</b></td><td>${esc(p.tribunale)}</td><td>${esc(p.sezione)}</td><td>${esc(p.oggetto)}</td><td>${esc(p.controparte)}</td><td><span class="tag ${p.stato==='Chiusa'?'':'t-ok'}">${esc(p.stato)}</span></td><td style="white-space:nowrap"><button class="s" onclick="editPratica('${p.id}')">✎</button> <button class="s" onclick="editClient('${c?.id}')">Cliente</button></td></tr>`).join('')}
+ ${rows.map(({p,c})=>`<tr><td><b>${esc(c?.nome)}</b><small style="display:block;color:var(--mut)">${esc(c?.cf||'')}</small></td><td class="rg">${esc(p.rg)}</td><td>${esc(p.tribunale)}</td><td>${esc(p.sezione)}</td><td>${esc(p.oggetto)}</td><td>${esc(p.controparte)}</td><td><span class="tag ${p.stato==='Chiusa'?'':'t-ok'}">${esc(p.stato)}</span></td><td style="white-space:nowrap"><button class="ic" title="Modifica" onclick="editPratica('${p.id}')">${ic('edit')}</button> <button class="s" onclick="editClient('${c?.id}')">Cliente</button></td></tr>`).join('')}
  ${noP.map(c=>`<tr><td><b>${esc(c.nome)}</b></td><td colspan=6 style="color:var(--mut)">Nessuna pratica registrata</td><td><button class="s" onclick="editClient('${c.id}')">Cliente</button></td></tr>`).join('')}
  </table></div>`;
 }
@@ -242,10 +281,10 @@ window.editPratica=id=>{const p=id?DB.pratiche.find(x=>x.id===id):null;openForm(
 function vRubrica(){
  const cats=['Tutti','Cliente','Ente','Altro'];
  const L=DB.contacts.filter(k=>(rubCat==='Tutti'||k.cat===rubCat)&&(!q||[k.nome,k.email,k.pec,k.tel,k.note].join(' ').toLowerCase().includes(q.toLowerCase()))).sort((a,b)=>a.nome.localeCompare(b.nome));
- return`<h2>Rubrica clienti ed enti</h2><p class="sub">Telefono, e-mail e PEC</p>
- <div class="bar"><input style="max-width:260px" placeholder="Cerca…" value="${esc(q)}" oninput="q=this.value;render(true)" id="qin"><div class="seg">${cats.map(c=>`<button class="${rubCat===c?'on':''}" onclick="rubCat='${c}';render()">${c}</button>`).join('')}</div><span class="sp"></span><button class="p" onclick="editContact()">+ Contatto</button></div>
+ return`<p class="eyebrow">Contatti</p><h2>Rubrica</h2><p class="sub">Recapiti di assistiti, uffici giudiziari ed enti: telefono, e-mail e PEC.</p>
+ <div class="bar"><div class="search">${ic('search')}<input placeholder="Cerca per nome, e-mail, PEC…" value="${esc(q)}" oninput="q=this.value;render(true)" id="qin"></div><div class="seg">${cats.map(c=>`<button class="${rubCat===c?'on':''}" onclick="rubCat='${c}';render()">${c}</button>`).join('')}</div><span class="sp"></span><button class="p" onclick="editContact()">${ic('plus')} Contatto</button></div>
  <div class="card tbl"><table><tr><th>Nome</th><th>Categoria</th><th>Telefono</th><th>E-mail</th><th>PEC</th><th>Note</th><th></th></tr>
- ${L.map(k=>`<tr><td><b>${esc(k.nome)}</b></td><td><span class="tag">${esc(k.cat)}</span></td><td>${k.tel?`<a href="tel:${esc(k.tel.replace(/\s/g,''))}">${esc(k.tel)}</a>`:''}</td><td>${k.email?`<a href="mailto:${esc(k.email)}">${esc(k.email)}</a>`:''}</td><td>${k.pec?`<a href="mailto:${esc(k.pec)}">${esc(k.pec)}</a>`:'<span style="color:var(--mut)">—</span>'}</td><td>${esc(k.note)}</td><td><button class="s" onclick="editContact('${k.id}')">✎</button></td></tr>`).join('')||'<tr><td colspan=7 class="empty">Nessun contatto.</td></tr>'}</table></div>`;
+ ${L.map(k=>`<tr><td><b>${esc(k.nome)}</b></td><td><span class="tag">${esc(k.cat)}</span></td><td>${k.tel?`<a href="tel:${esc(k.tel.replace(/\s/g,''))}">${esc(k.tel)}</a>`:''}</td><td>${k.email?`<a href="mailto:${esc(k.email)}">${esc(k.email)}</a>`:''}</td><td>${k.pec?`<a href="mailto:${esc(k.pec)}">${esc(k.pec)}</a>`:'<span style="color:var(--mut)">—</span>'}</td><td>${esc(k.note)}</td><td><button class="ic" title="Modifica" onclick="editContact('${k.id}')">${ic('edit')}</button></td></tr>`).join('')||'<tr><td colspan=7 class="empty">Nessun contatto.</td></tr>'}</table></div>`;
 }
 window.editContact=id=>{const k=id?DB.contacts.find(x=>x.id===id):null;openForm(k?'Modifica contatto':'Nuovo contatto',[{k:'nome',l:'Nome',req:1},{k:'cat',l:'Categoria',t:'select',opts:['Cliente','Ente','Altro']},{k:'tel',l:'Telefono',t:'tel'},{k:'email',l:'E-mail',t:'email'},{k:'pec',l:'PEC',t:'email'},{k:'note',l:'Note',t:'area'}],k,o=>{if(k)Object.assign(k,o);else DB.contacts.push({id:uid(),...o})},k&&(()=>DB.contacts=DB.contacts.filter(x=>x!==k)))};
 
@@ -255,12 +294,12 @@ function vOre(){
  const mine=DB.hours.filter(h=>h.user===me).sort((a,b)=>b.date.localeCompare(a.date));
  const isBoss=me==='u1'||me==='u3';
  const list=(isBoss?DB.hours:mine).slice().sort((a,b)=>b.date.localeCompare(a.date)).slice(0,40);
- return`<h2>Gestione ore dipendenti</h2><p class="sub">Settimana ${fIt(wk)} – ${fIt(wkEnd)} · monte ore contrattuale 40h/sett.</p>
- <div class="bar"><span class="sp"></span><button class="p" onclick="editOre()">+ Registra ore</button></div>
- <div class="card tbl" style="margin-bottom:14px"><h3>Riepilogo</h3><table><tr><th>Collaboratore</th><th>Ruolo</th><th class="r">Ore settimana</th><th style="width:200px">Avanzamento</th><th class="r">Ore mese</th></tr>
- ${USERS.map(u=>{const w=sumU(u.id,h=>h.date>=wk&&h.date<=wkEnd);const pc=Math.min(100,w/40*100);return`<tr><td><b>${esc(u.nome)}</b></td><td>${u.ruolo}</td><td class="r">${w.toLocaleString('it-IT')} h</td><td><div style="background:var(--line);border-radius:5px;height:8px"><div style="width:${pc}%;background:${w>40?'var(--warn)':'var(--pri2)'};height:8px;border-radius:5px"></div></div></td><td class="r">${sumU(u.id,h=>h.date.startsWith(ym)).toLocaleString('it-IT')} h</td></tr>`}).join('')}</table></div>
+ return`<p class="eyebrow">Personale</p><h2>Ore collaboratori</h2><p class="sub">Settimana ${fIt(wk)} – ${fIt(wkEnd)} · monte ore contrattuale 40h/sett.</p>
+ <div class="bar"><span class="sp"></span><button class="p" onclick="editOre()">${ic('plus')} Registra ore</button></div>
+ <div class="card tbl" style="margin-bottom:22px"><h3>Riepilogo</h3><table><tr><th>Collaboratore</th><th>Ruolo</th><th class="r">Ore settimana</th><th style="width:200px">Avanzamento</th><th class="r">Ore mese</th></tr>
+ ${USERS.map(u=>{const w=sumU(u.id,h=>h.date>=wk&&h.date<=wkEnd);const pc=Math.min(100,w/40*100);return`<tr><td><b>${esc(u.nome)}</b></td><td>${u.ruolo}</td><td class="r">${w.toLocaleString('it-IT')} h</td><td><div class="prog"><div style="width:${pc}%;${w>40?'background:var(--bord)':''}"></div></div></td><td class="r">${sumU(u.id,h=>h.date.startsWith(ym)).toLocaleString('it-IT')} h</td></tr>`}).join('')}</table></div>
  <div class="card tbl"><h3>${isBoss?'Tutte le registrazioni':'Le mie registrazioni'}</h3><table><tr><th>Data</th><th>Collaboratore</th><th>Pratica</th><th>Attività</th><th class="r">Ore</th><th></th></tr>
- ${list.map(h=>`<tr><td>${fIt(h.date)}</td><td>${esc(uName(h.user))}</td><td>${esc(h.pratica?pLabel(h.pratica):'Attività generale')}</td><td>${esc(h.desc)}</td><td class="r">${h.ore}</td><td><button class="s" onclick="editOre('${h.id}')">✎</button></td></tr>`).join('')}</table></div>`;
+ ${list.map(h=>`<tr><td>${fIt(h.date)}</td><td>${esc(uName(h.user))}</td><td>${esc(h.pratica?pLabel(h.pratica):'Attività generale')}</td><td>${esc(h.desc)}</td><td class="r">${h.ore}</td><td><button class="ic" title="Modifica" onclick="editOre('${h.id}')">${ic('edit')}</button></td></tr>`).join('')}</table></div>`;
 }
 window.editOre=id=>{const h=id?DB.hours.find(x=>x.id===id):null;openForm(h?'Modifica ore':'Registra ore',[{k:'user',l:'Collaboratore',t:'select',opts:optUsers,def:me},{k:'date',l:'Data',t:'date',def:isoOff(0),req:1},{k:'ore',l:'Ore',t:'number',step:'0.25',req:1,def:1},{k:'pratica',l:'Pratica',t:'select',opts:optPrat},{k:'desc',l:'Attività'}],h,o=>{if(h)Object.assign(h,o);else DB.hours.push({id:uid(),...o})},h&&(()=>DB.hours=DB.hours.filter(x=>x!==h)))};
 
@@ -269,7 +308,7 @@ const VIEWS={dash:vDash,agenda:vAgenda,todo:vTodo,fatture:vFatture,registro:vReg
 function render(keepFocus){
  const late=DB.invoices.filter(i=>!i.pagata&&diff(i.scadenza)<0).length;
  const urgent=upcomingDeadlines().filter(x=>diff(x.date)<=1&&x.kind!=='Fattura').length;
- $('#nav').innerHTML=`<h1>⚖ Studio Legale<small>Gestionale – proof of concept</small></h1>${PAGES.map(([k,l])=>`<a class="${page===k?'on':''}" onclick="go('${k}')">${l}${k==='dash'&&urgent?`<span class="n">${urgent}</span>`:''}${k==='fatture'&&late?`<span class="n">${late}</span>`:''}</a>`).join('')}
+ $('#nav').innerHTML=`<div class="brand"><div class="mono">R&amp;A</div><div><b>Rossi &amp; Associati</b><small>Studio Legale</small></div></div><div class="sec">Studio</div><div class="links">${PAGES.map(([k,l])=>`<a class="${page===k?'on':''}" onclick="go('${k}')">${ic(k)}<span>${l}</span>${k==='dash'&&urgent?`<span class="n">${urgent}</span>`:''}${k==='fatture'&&late?`<span class="n">${late}</span>`:''}</a>`).join('')}</div>
  <div class="me"><label>Utente attivo</label><select onchange="me=this.value;try{localStorage.setItem(KEY+'-me',me)}catch{};render()">${USERS.map(u=>`<option value="${u.id}" ${u.id===me?'selected':''}>${u.nome}</option>`).join('')}</select></div>`;
  $('#main').innerHTML=VIEWS[page]();
  if(keepFocus){const i=$('#qin');if(i){i.focus();i.setSelectionRange(i.value.length,i.value.length)}}
@@ -309,20 +348,20 @@ function handle(text){
  if(/cosa scade|scadenz[ae].*(settimana|prossim|imminent)|^scadenze|cosa ho|agenda/.test(l)&&!/\d{1,2}\/\d|^(crea|aggiungi|inserisci|fissa)/.test(l)&&!parseCmd(text).date){
   const lim=/oggi/.test(l)?0:/settimana/.test(l)?7:14;
   const L=upcomingDeadlines().filter(x=>diff(x.date)<=lim);
-  return say(L.length?`Prossimi ${lim===0?'impegni di oggi':lim+' giorni'}:\n`+L.map(x=>`• ${fIt(x.date).slice(0,5)} – ${x.txt} (${when(x.date)})`).join('\n'):'Nessuna scadenza nel periodo 👍');}
+  return say(L.length?`Prossimi ${lim===0?'impegni di oggi':lim+' giorni'}:\n`+L.map(x=>`• ${fIt(x.date).slice(0,5)} – ${x.txt} (${when(x.date)})`).join('\n'):'Nessuna scadenza nel periodo indicato.');}
  if(/fatture (scadute|da incassare|aperte)/.test(l)){const L=DB.invoices.filter(i=>!i.pagata&&(l.includes('scadute')?diff(i.scadenza)<0:true));return say(L.length?L.map(i=>`• ${i.num} ${cName(i.clientId)} – ${eur(i.importo)} (scad. ${fIt(i.scadenza)})`).join('\n'):'Nessuna fattura.')}
  const r=parseCmd(text);
  if(!r.date&&!r.todo)return say('Non ho trovato una data. Prova con «domani», «lunedì», «15/12» o «tra 3 giorni».');
  if(!r.title)return say('Mi manca un titolo per l’evento.');
- pending=r;const kind=r.todo?'To-do personale':`${r.type} ${r.personal?'(personale)':'(agenda condivisa)'}`;
- const el=say(`<b>Ho capito:</b><br>📌 ${esc(r.title)}<br>🗂 ${kind}<br>📅 ${r.date?fLong(r.date)+(r.time?' ore '+r.time:''):'senza scadenza'}${r.client?`<br>👤 ${esc(r.client.nome)}`:''}${r.rg?`<br>⚖ RG ${esc(r.rg)}`:''}<br><button class="s p" id="okb">Conferma</button> <button class="s" id="nob">Annulla</button>`,false,true);
+ pending=r;const kind=r.todo?'Attività personale':`${r.type} · ${r.personal?'agenda riservata':'agenda di studio'}`;
+ const el=say(`Desidera che registri quanto segue?<dl><dt>Oggetto</dt><dd>${esc(r.title)}</dd><dt>Tipo</dt><dd>${kind}</dd><dt>Data</dt><dd>${r.date?fLong(r.date)+(r.time?', ore '+r.time:''):'senza scadenza'}</dd>${r.client?`<dt>Cliente</dt><dd>${esc(r.client.nome)}</dd>`:''}${r.rg?`<dt>RG</dt><dd>${esc(r.rg)}</dd>`:''}</dl><button class="s p" id="okb">Conferma</button> <button class="s" id="nob">Annulla</button>`,false,true);
  el.querySelector('#okb').onclick=()=>{const x=pending;if(!x)return;
   if(x.todo)DB.todos.push({id:uid(),text:x.title,owner:me,due:x.date||'',done:false});
   else DB.events.push({id:uid(),title:x.title,date:x.date,time:x.time,type:x.type,owner:me,shared:!x.personal,clientId:x.client?.id||'',note:x.rg?'RG '+x.rg:''});
-  pending=null;save();render();el.querySelector('#okb').parentNode.querySelectorAll('button').forEach(b=>b.remove());say('✅ Fatto! Lo trovi in '+(x.todo?'To-do':'Agenda')+'.')};
+  pending=null;save();render();el.querySelector('#okb').parentNode.querySelectorAll('button').forEach(b=>b.remove());say('Registrato. Lo trova in '+(x.todo?'Attività':'Agenda')+'.')};
  el.querySelector('#nob').onclick=()=>{pending=null;el.querySelectorAll('button').forEach(b=>b.remove());say('Annullato.')};
 }
-$('#botbtn').onclick=()=>{$('#bot').classList.toggle('open');if(!msgs.children.length)say('Ciao! Dimmi cosa creare, ad esempio:\n«udienza Rossi domani alle 10»\n«scadenza memoria Ferrari il 15/12»\n«ricordami di chiamare Conti venerdì»');$('#botin').focus()};
+$('#botbtn').onclick=()=>{$('#bot').classList.toggle('open');if(!msgs.children.length)say('Buongiorno. Mi indichi pure l’impegno da annotare, ad esempio:\n«udienza Ferrari domani alle 10»\n«scadenza memoria Esposito il 15/12»\n«ricordami di chiamare Conti venerdì»');$('#botin').focus()};
 $('#botform').onsubmit=e=>{e.preventDefault();const v=$('#botin').value.trim();if(v){$('#botin').value='';handle(v)}};
 render();
 </script>
