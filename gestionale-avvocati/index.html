@@ -197,13 +197,13 @@ main.enter .g4>:nth-child(2),main.enter .g2>:nth-child(2){animation-delay:.08s}m
    <p>«La giustizia è la costante e perpetua volontà di attribuire a ciascuno il suo.»<br><span style="font-size:13px;letter-spacing:.2em;text-transform:uppercase;font-style:normal;font-family:var(--sans);color:var(--gold2)">Ulpiano</span></p></div>
   <div class="foot"><span>Studio Legale</span><span>Area riservata</span></div>
  </div>
- <div class="form"><form id="lform" autocomplete="on">
+ <div class="form"><form id="lform" autocomplete="on" onsubmit="return false">
   <p class="eyebrow">Area riservata</p><h2>Bentornato.</h2><p class="sub">Acceda con le credenziali dello studio.</p>
-  <div class="fld"><input id="lmail" type="email" placeholder=" " value="m.rossi@rossiassociati.it" required><label for="lmail">Indirizzo e-mail</label></div>
-  <div class="fld"><input id="lpwd" type="password" placeholder=" " value="studio2026" required><label for="lpwd">Password</label></div>
+  <div class="fld"><input id="lmail" type="text" inputmode="email" autocapitalize="off" spellcheck="false" placeholder=" " value="m.rossi@rossiassociati.it"><label for="lmail">Indirizzo e-mail</label></div>
+  <div class="fld"><input id="lpwd" type="password" placeholder=" " value="studio2026"><label for="lpwd">Password</label></div>
   <div class="lerr" id="lerr"></div>
   <div class="lrow"><label><input type="checkbox" checked> Ricorda questo dispositivo</label><a href="#" onclick="return false">Password dimenticata?</a></div>
-  <button class="p btn-xl" id="lbtn"><span>Entra nello studio</span><svg class="i" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+  <button type="button" class="p btn-xl" id="lbtn"><span>Entra nello studio</span><svg class="i" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
   <div class="demo"><b>Accesso dimostrativo</b> — qualsiasi password. Utenze: m.rossi · g.bianchi · e.verdi · l.neri @rossiassociati.it</div>
  </form></div>
 </div>
@@ -214,7 +214,7 @@ main.enter .g4>:nth-child(2),main.enter .g2>:nth-child(2){animation-delay:.08s}m
 <section id="bot" class="card">
   <header><small>Assistente</small><b>Segreteria digitale</b></header>
   <div id="msgs"></div>
-  <form id="botform"><input id="botin" placeholder="Detti un impegno o una scadenza…" autocomplete="off"><button class="p">Invia</button></form>
+  <form id="botform" onsubmit="return false"><input id="botin" placeholder="Detti un impegno o una scadenza…" autocomplete="off"><button type="button" class="p" id="botsend">Invia</button></form>
 </section>
 <dialog id="dlg"></dialog>
 
@@ -310,18 +310,23 @@ const pLabel=id=>{const p=DB.pratiche.find(x=>x.id===id);return p?`RG ${p.rg} �
 /* ============ form modale generica ============ */
 function openForm(title,fields,vals,onSave,onDelete){
  const d=$('#dlg');
- d.innerHTML=`<form method="dialog"><h3 style="margin:0 0 6px">${esc(title)}</h3>${fields.map(f=>{
+ d.innerHTML=`<form onsubmit="return false"><h3 style="margin:0 0 6px">${esc(title)}</h3>${fields.map(f=>{
   const v=vals?.[f.k]??f.def??'';let inp;
   if(f.t==='select')inp=`<select name="${f.k}">${f.opts.map(o=>{const[val,lab]=Array.isArray(o)?o:[o,o];return`<option value="${esc(val)}" ${val==v?'selected':''}>${esc(lab)}</option>`}).join('')}</select>`;
   else if(f.t==='check')inp=`<input type="checkbox" name="${f.k}" style="width:auto" ${v?'checked':''}>`;
   else if(f.t==='area')inp=`<textarea name="${f.k}" rows="2">${esc(v)}</textarea>`;
   else inp=`<input name="${f.k}" type="${f.t||'text'}" ${f.step?`step="${f.step}"`:''} value="${esc(v)}" ${f.req?'required':''}>`;
   return`<label>${esc(f.l)}</label>${inp}`}).join('')}
-  <div class="bar" style="margin:16px 0 0"><button class="p" value="ok">Salva</button><button value="x" formnovalidate>Annulla</button><span class="sp"></span>${onDelete?'<button class="d" value="del" formnovalidate>Elimina</button>':''}</div></form>`;
+  <div class="bar" style="margin:16px 0 0"><button type="button" class="p" data-a="ok">Salva</button><button type="button" data-a="x">Annulla</button><span class="sp"></span>${onDelete?'<button type="button" class="d" data-a="del">Elimina</button>':''}</div></form>`;
  d.onclose=()=>{
-  if(d.returnValue==='del'&&onDelete&&confirm('Eliminare definitivamente?')){onDelete();save();render();}
+  if(d.returnValue==='del'&&onDelete){onDelete();save();render();}
   else if(d.returnValue==='ok'){const o={};fields.forEach(f=>{const el=d.querySelector(`[name="${f.k}"]`);o[f.k]=f.t==='check'?el.checked:f.t==='number'?parseFloat(el.value||0):el.value;if(f.work&&o[f.k]&&!isWork(dd(o[f.k]))){const n=fixWork(o[f.k]);toast(`${fLong(o[f.k])[0].toUpperCase()+fLong(o[f.k]).slice(1)} non è un giorno lavorativo: data spostata a ${fLong(n)}.`);o[f.k]=n}});onSave(o);save();render();}
   d.returnValue='';};
+ d.querySelectorAll('[data-a]').forEach(b=>b.addEventListener('click',()=>{const a=b.dataset.a,fm=d.querySelector('form');
+  if(a==='ok'&&!fm.checkValidity()){fm.reportValidity();return}
+  if(a==='del'&&!b.dataset.sure){b.dataset.sure=1;b.textContent='Confermi l’eliminazione?';return}
+  d.close(a)}));
+ d.querySelector('form').addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.tagName==='INPUT'){e.preventDefault();d.querySelector('[data-a=ok]').click()}});
  d.showModal();
 }
 const optClients=(blank)=>[...(blank?[['','—']]:[]),...DB.clients.map(c=>[c.id,c.nome])];
@@ -449,10 +454,13 @@ function render(keepFocus,anim){if(!me)return;
 }
 window.go=k=>{page=k;q='';render(false,true);scrollTo(0,0)};
 window.logout=()=>{try{localStorage.removeItem(KEY+'-sess')}catch{};location.reload()};
-$('#lform').onsubmit=e=>{e.preventDefault();const mail=$('#lmail').value.trim().toLowerCase(),u=USERS.find(u=>mail===u.mail+'@rossiassociati.it');
+let logging=false;
+function doLogin(){if(logging)return;const mail=$('#lmail').value.trim().toLowerCase(),loc=mail.split('@')[0],u=mail?USERS.find(u=>loc===u.mail||loc===u.mail.replace('.','')||loc===u.mail.split('.')[1]):USERS[0];
  if(!u){$('#lerr').textContent='Utente non riconosciuto. Verifichi l’indirizzo e-mail.';return}
- $('#lerr').textContent='';const b=$('#lbtn');b.innerHTML='<span>Verifica in corso…</span><span class="spin"></span>';
- setTimeout(()=>{me=u.id;try{localStorage.setItem(KEY+'-sess',me)}catch{};enterApp()},900)};
+ logging=true;$('#lerr').textContent='';const b=$('#lbtn');b.innerHTML='<span>Verifica in corso…</span><span class="spin"></span>';
+ setTimeout(()=>{me=u.id;try{localStorage.setItem(KEY+'-sess',me)}catch{};enterApp()},900)}
+$('#lbtn').addEventListener('click',doLogin);
+['#lmail','#lpwd'].forEach(id=>$(id).addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();doLogin()}}));
 function enterApp(){render(false,true);$('#login').classList.add('out');setTimeout(()=>{$('#login').style.display='none'},1300)}
 
 /* ============ BOT (parser linguaggio naturale italiano) ============ */
@@ -503,7 +511,8 @@ function handle(text){
  el.querySelector('#nob').onclick=()=>{pending=null;el.querySelectorAll('button').forEach(b=>b.remove());say('Annullato.')};
 }
 $('#botbtn').onclick=()=>{$('#bot').classList.toggle('open');if(!msgs.children.length)say((new Date().getHours()<18?'Buongiorno':'Buonasera')+'. Mi indichi pure l’impegno da annotare, ad esempio:\n«udienza Ferrari domani alle 10»\n«scadenza memoria Esposito il 15/12»\n«ricordami di chiamare Conti venerdì»');$('#botin').focus()};
-$('#botform').onsubmit=e=>{e.preventDefault();const v=$('#botin').value.trim();if(v){$('#botin').value='';handle(v)}};
+const botSend=()=>{const v=$('#botin').value.trim();if(v){$('#botin').value='';handle(v)}};
+$('#botsend').addEventListener('click',botSend);$('#botin').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();botSend()}});
 if(me){$('#login').style.display='none';render(false,true)}
 </script>
 </body>
