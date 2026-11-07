@@ -271,6 +271,26 @@ main.enter .g4>:nth-child(2),main.enter .g2>:nth-child(2){animation-delay:.08s}m
 .lrow2:hover{padding-left:6px}.lrow2:last-child{border:0}.lrow2 .x{flex:1;min-width:0}.lrow2 small{display:block;color:var(--mut);font-size:11.5px}
 .lrow2 .go{color:var(--mut);transition:transform .3s var(--ease),color .3s}.lrow2:hover .go{transform:translateX(4px);color:var(--gold)}
 
+/* ===== spunta attività ===== */
+.ck{width:24px;height:24px;border-radius:50%;border:1.5px solid #cbbd9f!important;padding:0!important;display:grid!important;place-items:center;background:var(--card);flex-shrink:0;color:#fff;transition:background .35s var(--ease),border-color .35s,transform .2s}
+.ck svg{width:13px;height:13px;stroke-width:2.4;opacity:0;transform:scale(.3);transition:all .4s var(--ease)}
+.ck:hover{border-color:var(--gold)!important;transform:scale(1.08)}.ck:hover svg{opacity:.35;transform:none;color:var(--gold)}
+.ck.on{background:var(--gold);border-color:var(--gold)!important}.ck.on svg{opacity:1;transform:none;color:#fff}
+.trow:hover{padding-left:0}.trow .x{transition:color .4s}.trow.is-done .x{color:var(--mut)}
+.done{text-decoration:line-through;text-decoration-color:var(--gold);color:var(--mut)!important}
+.donebox{margin-top:14px;border-top:1px solid var(--line);padding-top:6px}
+.donebox summary{list-style:none;cursor:pointer;display:flex;gap:10px;align-items:center;padding:10px 0;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--mut)}
+.donebox summary::-webkit-details-marker{display:none}.donebox summary svg{transition:transform .35s var(--ease)}.donebox[open] summary svg{transform:rotate(90deg)}
+/* ===== tendine fascicolo ===== */
+.acc{padding:0;min-width:0;max-width:100%;overflow:hidden}.acc:hover{transform:none}.acc-b,.party,.mct{min-width:0}.mct a{display:block}
+.acc summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:14px;padding:22px 26px}
+.acc summary::-webkit-details-marker{display:none}
+.acc-t{flex:1;min-width:0}.acc-t h3{margin:0 0 4px!important}
+.acc .pv{display:block;font-size:12px;color:var(--mut);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.acc[open] .pv{opacity:0;height:0;transition:opacity .2s}
+.chev{width:32px;height:32px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;color:var(--mut);flex-shrink:0;transition:transform .45s var(--ease),border-color .3s,color .3s}
+.acc summary:hover .chev{border-color:var(--gold);color:var(--gold)}.acc[open] .chev{transform:rotate(90deg);border-color:var(--gold);color:var(--gold)}
+.acc-b{padding:0 26px 24px;animation:up .55s var(--ease) both}
 /* ===== pratiche ===== */
 .prs{display:grid;grid-template-columns:repeat(auto-fill,minmax(350px,1fr));gap:24px}
 .pr{cursor:pointer;display:flex;flex-direction:column}.pr:hover{transform:translateY(-3px)}
@@ -514,15 +534,16 @@ const optPrat=()=>[['','— nessuna pratica —'],...DB.pratiche.map(p=>[p.id,`R
 
 /* ============ stato ============ */
 let page='dash',q='',anTab='Cliente',anSel=null,prFilter='In corso',prMine=false,praticaSel=null,pagoFilter='tutte';
+const accOpen=new Set();window.accT=(k,o)=>{o?accOpen.add(k):accOpen.delete(k)};
 let calView='week',calScope='mine',calDate=WD,miniM=WD.slice(0,8)+'01';const hiddenU=new Set();
 const PAGES=[['dash','La giornata'],['agenda','Agenda'],['pratiche','Pratiche'],['anag','Registro clienti'],['todo','Attività'],['fatture','Scadenzario'],['ore','Ore collaboratori']];
 
 /* ============ dati derivati ============ */
-function upcomingDeadlines(){
+function upcomingDeadlines(inv=true){
  const L=[];
  DB.events.filter(e=>(e.shared||e.owner===me)&&['Scadenza','Udienza'].includes(e.type)&&diff(e.date)<=14&&diff(e.date)>=0).forEach(e=>L.push({date:e.date,txt:e.title,kind:e.type,sub:e.shared?'Studio':'Riservato',ev:e.id}));
  DB.todos.filter(t=>t.owner===me&&!t.done&&t.due&&diff(t.due)<=14).forEach(t=>L.push({date:t.due,txt:t.text,kind:'Attività',sub:'Riservata'}));
- DB.invoices.filter(i=>!i.pagata&&diff(i.scadenza)<=14).forEach(i=>L.push({date:i.scadenza,txt:`Fattura ${i.num} – ${aName(i.clientId)} (${eur(i.importo)})`,kind:'Fattura',sub:'Incasso'}));
+ if(inv)DB.invoices.filter(i=>!i.pagata&&diff(i.scadenza)<=14).forEach(i=>L.push({date:i.scadenza,txt:`Fattura ${i.num} – ${aName(i.clientId)} (${eur(i.importo)})`,kind:'Fattura',sub:'Incasso'}));
  return L.sort((a,b)=>a.date.localeCompare(b.date));
 }
 const evColor=e=>calScope==='mine'?TYPECOL[e.type]:U(e.owner)?.col;
@@ -531,9 +552,8 @@ const nextEv=p=>DB.events.filter(e=>e.praticaId===p.id&&diff(e.date)>=0).sort((a
 
 /* ============ LA GIORNATA ============ */
 function vDash(){
- const dl=upcomingDeadlines();const ev=DB.events.filter(e=>e.date===WD&&(e.owner===me)).sort((a,b)=>(a.time||'00').localeCompare(b.time||'00'));
+ const dl=upcomingDeadlines(false);const ev=DB.events.filter(e=>e.date===WD&&(e.owner===me)).sort((a,b)=>(a.time||'00').localeCompare(b.time||'00'));
  const td=DB.todos.filter(t=>t.owner===me&&!t.done);
- const late=DB.invoices.filter(i=>!i.pagata&&diff(i.scadenza)<0);
  const myP=DB.pratiche.filter(p=>p.stato!=='Chiusa'&&p.team.includes(me));
  const h=new Date().getHours();const saluto=h<13?'Buongiorno':h<18?'Buon pomeriggio':'Buonasera';
  const nm=uName(me).split(' ');
@@ -543,7 +563,7 @@ function vDash(){
   <div class="card kpi"><span>${CLOSED?'Impegni · '+GIORNI[dd(WD).getDay()]:'Impegni di oggi'}</span><b data-v="${ev.length}">${ev.length}</b></div>
   <div class="card kpi"><span>Termini entro 3 giorni</span><b data-v="${dl.filter(x=>diff(x.date)<=3&&x.kind!=='Fattura').length}">0</b></div>
   <div class="card kpi"><span>Pratiche che segue</span><b data-v="${myP.length}">${myP.length}</b></div>
-  <div class="card kpi ${late.length?'alert':''}"><span>Parcelle insolute (${late.length})</span><b data-v="${late.reduce((s,i)=>s+i.importo,0)}" data-e>${eur(late.reduce((s,i)=>s+i.importo,0))}</b></div></div>
+  <div class="card kpi"><span>Attività aperte</span><b data-v="${td.length}">${td.length}</b></div></div>
  <div class="grid g2">
   <div class="card"><h3>La mia agenda <span class="tag">${CLOSED?fLong(WD):'oggi'}</span></h3>${ev.length?ev.map(e=>`<div class="row lk" onclick="showEvent('${e.id}')" style="cursor:pointer"><div class="d">${e.time||'—'}</div><div class="x">${esc(e.title)}<small>${e.type}${e.praticaId?' · RG '+esc(PR(e.praticaId)?.rg):''}${e.shared?'':' · riservato'}</small></div><span class="tag" style="background:color-mix(in srgb,${TYPECOL[e.type]} 14%,transparent);color:${TYPECOL[e.type]}">${e.type}</span></div>`).join(''):'<div class="empty">Nessun impegno in agenda.</div>'}
    <div style="margin-top:16px"><button class="s" onclick="go('agenda')">Apri l’agenda ${ic('arrow')}</button></div></div>
@@ -551,8 +571,10 @@ function vDash(){
   <div class="card"><h3>Le mie pratiche <span class="tag">${myP.length} attive</span></h3>${myP.map(p=>{const n=nextEv(p);return`<div class="lrow2" onclick="openPratica('${p.id}')"><div class="x"><b style="font-weight:500">${esc(pTitle(p))}</b><small>RG ${esc(p.rg)} · ${esc(p.tribunale)}${n?` · prossimo: ${fIt(n.date).slice(0,5)} ${esc(n.type.toLowerCase())}`:''}</small></div><span class="go">${ic('arrow')}</span></div>`}).join('')||'<div class="empty">Nessuna pratica assegnata.</div>'}</div>
   <div class="card"><h3>Le mie attività</h3>${td.length?td.sort((a,b)=>(a.due||'9').localeCompare(b.due||'9')).map(todoRow).join(''):'<div class="empty">Nessuna attività in sospeso.</div>'}</div></div>`;
 }
-const todoRow=t=>`<div class="row"><input type="checkbox" ${t.done?'checked':''} onchange="togTodo('${t.id}')"><div class="x ${t.done?'done':''}">${esc(t.text)}<small>${esc(uName(t.owner))}${t.praticaId?` · <a onclick="openPratica('${t.praticaId}')" style="cursor:pointer">RG ${esc(PR(t.praticaId)?.rg)}</a>`:''}</small></div>${t.due?`<span class="tag ${t.done?'':urg(t.due)}">${fIt(t.due).slice(0,5)}</span>`:''}<button class="ic" onclick="editTodo('${t.id}')">${ic('edit')}</button></div>`;
-window.togTodo=id=>{const t=DB.todos.find(x=>x.id===id);t.done=!t.done;save();render()};
+const todoRow=t=>`<div class="row trow ${t.done?'is-done':''}"><button type="button" class="ck ${t.done?'on':''}" title="${t.done?'Segna da fare':'Segna come completata'}" onclick="togTodo('${t.id}',this)">${ic('check')}</button><div class="x ${t.done?'done':''}">${esc(t.text)}<small>${esc(uName(t.owner))}${t.praticaId?` · <a onclick="openPratica('${t.praticaId}')" style="cursor:pointer">RG ${esc(PR(t.praticaId)?.rg)}</a>`:''}</small></div>${t.due?`<span class="tag ${t.done?'':urg(t.due)}">${fIt(t.due).slice(0,5)}</span>`:''}<button class="ic" onclick="editTodo('${t.id}')">${ic('edit')}</button></div>`;
+window.togTodo=(id,el)=>{const t=DB.todos.find(x=>x.id===id);t.done=!t.done;save();
+ if(el){el.classList.toggle('on',t.done);const r=el.closest('.row');r.classList.toggle('is-done',t.done);r.querySelector('.x').classList.toggle('done',t.done)}
+ toast(t.done?'Attività completata.':'Attività riaperta.');setTimeout(()=>render(),700)};
 window.editTodo=(id,pre)=>{const t=id?DB.todos.find(x=>x.id===id):null;openForm(t?'Attività':'Nuova attività',[{k:'text',l:'Attività',req:1},{k:'due',l:'Scadenza',t:'date',work:1,half:1},{k:'owner',l:'Assegnata a',t:'select',opts:optUsers(),def:me,half:1},{k:'praticaId',l:'Pratica',t:'select',opts:optPrat()}],t||pre,o=>{if(t)Object.assign(t,o);else DB.todos.push({id:uid(),done:false,...o})},t&&(()=>DB.todos=DB.todos.filter(x=>x!==t)))};
 
 /* ============ AGENDA (stile Google Calendar) ============ */
@@ -632,6 +654,7 @@ function vDossier(p){
  const td=DB.todos.filter(t=>t.praticaId===p.id);
  const hrs=DB.hours.filter(h=>h.pratica===p.id);const hTot=hrs.reduce((s,h)=>s+h.ore,0);
  const inv=DB.invoices.filter(i=>i.praticaId===p.id);
+ const acc=(k,title,prev,body)=>`<details class="card acc" ${accOpen.has(k)?'open':''} ontoggle="accT('${k}',this.open)"><summary><div class="acc-t"><h3>${title}</h3><span class="pv">${prev}</span></div><span class="chev">${ic('right')}</span></summary><div class="acc-b">${body}</div></details>`;
  return`<a class="back" onclick="praticaSel=null;render(false,true)">${ic('left')} Tutte le pratiche</a>
  <p class="eyebrow">RG ${esc(p.rg)} · ${esc(p.tribunale)}</p><h2>${esc(cl.nome)} <em>c/</em> ${esc(cp?.nome||'—')}</h2><p class="sub">${esc(p.oggetto)}</p>
  <div class="bar"><span class="tag ${p.stato==='In corso'?'t-ok':p.stato==='Sospesa'?'t-warn':''}">${esc(p.stato)}</span><span class="tag">Responsabile: ${esc(uName(p.resp))}</span><span class="sp"></span>
@@ -643,13 +666,13 @@ function vDossier(p){
   <div class="card"><h3>Atti e documenti <button class="s" onclick="toast('Caricamento documenti disponibile nella versione completa.')">${ic('plus')} Carica</button></h3>${(p.docs||[]).map(([n,dt])=>`<div class="doc"><div class="fi">PDF</div><div class="x">${esc(n)}<small>Depositato il ${fIt(dt)}</small></div></div>`).join('')||'<div class="empty">Nessun documento.</div>'}</div>
   <div class="card"><h3>Note</h3><p style="margin:0;color:var(--ink2);font:italic 19px/1.5 var(--serif)">${esc(p.note||'—')}</p></div>
  </div><aside class="dos-side">
-  <div class="card"><h3>Procedimento</h3><dl class="kv"><dt>Ufficio</dt><dd>${esc(p.tribunale)}</dd><dt>Sezione</dt><dd>${esc(p.sezione)}</dd><dt>Giudice</dt><dd>${esc(p.giudice||'—')}</dd><dt>N. RG</dt><dd class="rg">${esc(p.rg)}</dd><dt>Valore</dt><dd>${eur(p.valore)}</dd><dt>Apertura</dt><dd>${fIt(p.apertura)}</dd><dt>Fase</dt><dd>${FASI[p.fase]}</dd></dl></div>
-  <div class="card"><h3>Le parti</h3>
+  ${acc('proc','Procedimento',`${esc(p.tribunale)} · ${esc(p.giudice||'')}`,`<dl class="kv"><dt>Ufficio</dt><dd>${esc(p.tribunale)}</dd><dt>Sezione</dt><dd>${esc(p.sezione)}</dd><dt>Giudice</dt><dd>${esc(p.giudice||'—')}</dd><dt>N. RG</dt><dd class="rg">${esc(p.rg)}</dd><dt>Valore</dt><dd>${eur(p.valore)}</dd><dt>Apertura</dt><dd>${fIt(p.apertura)}</dd><dt>Fase</dt><dd>${FASI[p.fase]}</dd></dl>`)}
+  ${acc('parti','Le parti',`${esc(cl.nome)} · ${esc(cp?.nome||'—')}${p.avvNome?' · '+esc(p.avvNome):''}`,`
    <div class="party"><span class="rl">Nostro assistito</span><a class="nm" onclick="openAnag('${cl.id}')">${esc(cl.nome)}</a>${contactsMini(cl)}</div>
    ${cp?`<div class="party"><span class="rl">Controparte</span><a class="nm" onclick="openAnag('${cp.id}')">${esc(cp.nome)}</a>${contactsMini(cp)}</div>`:''}
-   ${p.avvNome?`<div class="party"><span class="rl">Difensore di controparte</span><span class="nm">${esc(p.avvNome)}</span>${contactsMini({tel:p.avvTel,email:p.avvMail,pec:p.avvPec})}</div>`:''}</div>
-  <div class="card"><h3>Colleghi coinvolti</h3>${p.team.map(u=>{const h=hrs.filter(x=>x.user===u).reduce((s,x)=>s+x.ore,0);return`<div class="who2">${avU(u,'sm')}<div><b>${esc(uName(u))}</b><small>${u===p.resp?'Responsabile della pratica':U(u).ruolo}</small></div><div class="r">${h.toLocaleString('it-IT')} h</div></div>`}).join('')}</div>
-  <div class="card"><h3>Economia</h3><div class="stat3"><div><span>Ore</span><b>${hTot.toLocaleString('it-IT')}</b></div><div><span>Fatturato</span><b>${eur(inv.reduce((s,i)=>s+i.importo,0)).replace(',00','')}</b></div><div><span>Da incassare</span><b style="color:${inv.some(i=>!i.pagata&&diff(i.scadenza)<0)?'var(--bord)':'inherit'}">${eur(inv.filter(i=>!i.pagata).reduce((s,i)=>s+i.importo,0)).replace(',00','')}</b></div></div></div>
+   ${p.avvNome?`<div class="party"><span class="rl">Difensore di controparte</span><span class="nm">${esc(p.avvNome)}</span>${contactsMini({tel:p.avvTel,email:p.avvMail,pec:p.avvPec})}</div>`:''}`)}
+  ${acc('team','Colleghi coinvolti',`<span class="avs" style="display:inline-flex;vertical-align:middle">${p.team.map(u=>avU(u)).join('')}</span>`,p.team.map(u=>{const h=hrs.filter(x=>x.user===u).reduce((s,x)=>s+x.ore,0);return`<div class="who2">${avU(u,'sm')}<div><b>${esc(uName(u))}</b><small>${u===p.resp?'Responsabile della pratica':U(u).ruolo}</small></div><div class="r">${h.toLocaleString('it-IT')} h</div></div>`}).join(''))}
+  ${acc('eco','Economia',`${hTot.toLocaleString('it-IT')} ore · ${eur(inv.reduce((s,i)=>s+i.importo,0)).replace(',00','')} fatturati`,`<div class="stat3"><div><span>Ore</span><b>${hTot.toLocaleString('it-IT')}</b></div><div><span>Fatturato</span><b>${eur(inv.reduce((s,i)=>s+i.importo,0)).replace(',00','')}</b></div><div><span>Da incassare</span><b style="color:${inv.some(i=>!i.pagata&&diff(i.scadenza)<0)?'var(--bord)':'inherit'}">${eur(inv.filter(i=>!i.pagata).reduce((s,i)=>s+i.importo,0)).replace(',00','')}</b></div></div>`)}
  </aside></div>`;
 }
 window.setFase=(id,i)=>{const p=PR(id);p.fase=i;if(i===FASI.length-1)p.stato='Chiusa';else if(p.stato==='Chiusa')p.stato='In corso';save();render();toast(`Fase aggiornata: ${FASI[i]}.`)};
@@ -697,10 +720,11 @@ window.editAnag=id=>{const a=id?AN(id):null;openForm(a?'Anagrafica':'Nuova anagr
 
 /* ============ ATTIVITÀ ============ */
 function vTodo(){
- const mine=DB.todos.filter(t=>t.owner===me),others=DB.todos.filter(t=>t.owner!==me&&!t.done);
+ const mine=DB.todos.filter(t=>t.owner===me&&!t.done),mineD=DB.todos.filter(t=>t.owner===me&&t.done),others=DB.todos.filter(t=>t.owner!==me&&!t.done);
  const s=a=>a.sort((x,y)=>x.done-y.done||(x.due||'9').localeCompare(y.due||'9'));
  return`<p class="eyebrow">Organizzazione</p><h2>Le <em>attività</em></h2><p class="sub">Promemoria personali e incarichi assegnati, ordinati per scadenza.</p><div class="bar"><span class="sp"></span><button class="p" onclick="editTodo()">${ic('plus')} Nuova attività</button></div>
- <div class="grid g2"><div class="card"><h3>Le mie</h3>${s(mine).map(todoRow).join('')||'<div class="empty">Nessuna attività.</div>'}</div>
+ <div class="grid g2"><div class="card"><h3>Le mie <span class="tag">${mine.length} da fare</span></h3>${s(mine).map(todoRow).join('')||'<div class="empty">Nessuna attività in sospeso.</div>'}
+  ${mineD.length?`<details class="donebox" ${accOpen.has('done')?'open':''} ontoggle="accT('done',this.open)"><summary>${ic('right')} Completate <span class="tag">${mineD.length}</span></summary>${mineD.map(todoRow).join('')}</details>`:''}</div>
  <div class="card"><h3>Dei colleghi</h3>${s(others).map(todoRow).join('')||'<div class="empty">—</div>'}</div></div>`;
 }
 
