@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Studio Legale – Gestionale (POC)</title>
+<style>
+:root{--bg:#f4f5f7;--card:#fff;--ink:#1b2430;--mut:#6b7585;--line:#e3e6eb;--pri:#1f3a5f;--pri2:#2d5a94;--ok:#1e8e5a;--warn:#c98a00;--bad:#c62f3b;--okbg:#e4f5ec;--warnbg:#fff3d6;--badbg:#fde7e9;--blue:#e6eef9}
+@media(prefers-color-scheme:dark){:root{--bg:#141a22;--card:#1d2530;--ink:#e8ecf1;--mut:#97a1b0;--line:#2c3644;--pri:#6ea0e0;--pri2:#8db6ee;--okbg:#14382a;--warnbg:#3c3010;--badbg:#431a1f;--blue:#1f2e45}}
+*{box-sizing:border-box}body{margin:0;font:14px/1.45 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--ink);display:flex;min-height:100vh}
+nav{width:215px;background:#14233a;color:#cfd8e6;padding:16px 10px;position:sticky;top:0;height:100vh;flex-shrink:0;display:flex;flex-direction:column;gap:2px}
+nav h1{font-size:15px;color:#fff;margin:0 8px 14px;line-height:1.2}nav h1 small{display:block;font-weight:400;color:#8fa1ba;font-size:11px}
+nav a{display:flex;justify-content:space-between;padding:8px 10px;border-radius:7px;color:inherit;text-decoration:none;cursor:pointer}
+nav a:hover{background:#1f3350}nav a.on{background:#2d5a94;color:#fff}nav .n{background:var(--bad);color:#fff;border-radius:9px;font-size:11px;padding:0 6px}
+nav .me{margin-top:auto;padding:8px}nav .me label{font-size:11px;color:#8fa1ba}nav select{width:100%;margin-top:3px}
+main{flex:1;padding:22px;min-width:0;max-width:1200px}
+h2{margin:0 0 4px;font-size:21px}.sub{color:var(--mut);margin:0 0 16px}
+.grid{display:grid;gap:14px}.g2{grid-template-columns:repeat(auto-fit,minmax(340px,1fr))}.g4{grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px}
+.card h3{margin:0 0 10px;font-size:14px;display:flex;justify-content:space-between;align-items:center}
+.kpi b{font-size:24px;display:block}.kpi span{color:var(--mut);font-size:12px}
+button,select,input,textarea{font:inherit;color:inherit}
+button{border:1px solid var(--line);background:var(--card);padding:6px 11px;border-radius:7px;cursor:pointer}
+button:hover{border-color:var(--pri2)}button.p{background:var(--pri2);color:#fff;border-color:var(--pri2)}button.s{padding:2px 8px;font-size:12px}button.d{color:var(--bad)}
+input,select,textarea{border:1px solid var(--line);background:var(--card);border-radius:7px;padding:6px 8px;width:100%}
+table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:8px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--mut);font-weight:600}td.r,th.r{text-align:right}
+.tbl{overflow-x:auto}.bar{display:flex;gap:8px;align-items:center;margin-bottom:12px;flex-wrap:wrap}.bar .sp{flex:1}
+.tag{display:inline-block;padding:1px 8px;border-radius:9px;font-size:11px;font-weight:600;background:var(--blue);color:var(--pri)}
+.t-bad{background:var(--badbg);color:var(--bad)}.t-warn{background:var(--warnbg);color:var(--warn)}.t-ok{background:var(--okbg);color:var(--ok)}
+.row{display:flex;gap:10px;align-items:flex-start;padding:7px 0;border-bottom:1px solid var(--line)}.row:last-child{border:0}
+.row .d{min-width:62px;font-weight:600}.row .x{flex:1}.row small{color:var(--mut);display:block}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}.seg button{border:0;border-radius:0}.seg button.on{background:var(--pri2);color:#fff}
+.day{font-weight:700;margin:14px 0 4px;color:var(--pri)}.day.today{color:var(--bad)}
+.done{text-decoration:line-through;color:var(--mut)}
+dialog{border:1px solid var(--line);border-radius:12px;background:var(--card);color:var(--ink);width:min(480px,94vw);padding:18px}
+dialog::backdrop{background:#0008}dialog label{display:block;margin:8px 0 2px;font-size:12px;color:var(--mut)}
+#botbtn{position:fixed;right:18px;bottom:18px;border-radius:24px;padding:11px 18px;box-shadow:0 4px 14px #0004;z-index:5}
+#bot{position:fixed;right:18px;bottom:70px;width:min(380px,94vw);height:min(520px,70vh);display:none;flex-direction:column;z-index:5;padding:0;box-shadow:0 8px 28px #0005}
+#bot.open{display:flex}#bot header{padding:11px 14px;background:var(--pri2);color:#fff;border-radius:10px 10px 0 0;font-weight:600}
+#msgs{flex:1;overflow:auto;padding:10px;display:flex;flex-direction:column;gap:8px}
+.m{max-width:88%;padding:7px 10px;border-radius:10px;background:var(--bg);white-space:pre-wrap}.m.u{align-self:flex-end;background:var(--pri2);color:#fff}
+#bot form{display:flex;gap:6px;padding:8px;border-top:1px solid var(--line)}
+.hint{font-size:11px;color:var(--mut);padding:0 10px 6px}
+.empty{color:var(--mut);padding:10px 0}
+@media(max-width:760px){body{flex-direction:column}nav{width:100%;height:auto;position:static;flex-direction:row;flex-wrap:wrap}nav h1{width:100%}nav .me{width:100%;margin:0}main{padding:14px}}
+</style>
+</head>
+<body>
+<nav id="nav"></nav>
+<main id="main"></main>
+<button id="botbtn" class="p">🤖 Assistente</button>
+<section id="bot" class="card">
+  <header>Assistente agenda</header>
+  <div id="msgs"></div>
+  <div class="hint">Es.: «udienza Rossi domani alle 10» · «scadenza memoria il 15/12» · «ricordami di chiamare Bianchi venerdì» · «cosa scade questa settimana»</div>
+  <form id="botform"><input id="botin" placeholder="Scrivi un comando…" autocomplete="off"><button class="p">Invia</button></form>
+</section>
+<dialog id="dlg"></dialog>
+
+<script>
+/* ============ utilità ============ */
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const p2=n=>String(n).padStart(2,'0');
+const iso=d=>`${d.getFullYear()}-${p2(d.getMonth()+1)}-${p2(d.getDate())}`;
+const T0=(()=>{const d=new Date();d.setHours(0,0,0,0);return d})();
+const addD=(n,b=T0)=>{const d=new Date(b);d.setDate(d.getDate()+n);return d};
+const isoOff=n=>iso(addD(n));
+const dd=s=>s?new Date(s+'T00:00'):null;
+const diff=s=>Math.round((dd(s)-T0)/864e5);
+const GIORNI=['domenica','lunedì','martedì','mercoledì','giovedì','venerdì','sabato'];
+const MESI=['gennaio','febbraio','marzo','aprile','maggio','giugno','luglio','agosto','settembre','ottobre','novembre','dicembre'];
+const fIt=s=>{if(!s)return'';const d=dd(s);return `${p2(d.getDate())}/${p2(d.getMonth()+1)}/${d.getFullYear()}`};
+const fLong=s=>{const d=dd(s);return `${GIORNI[d.getDay()]} ${d.getDate()} ${MESI[d.getMonth()]}`};
+const eur=n=>Number(n||0).toLocaleString('it-IT',{style:'currency',currency:'EUR'});
+const uid=()=>Math.random().toString(36).slice(2,9);
+function when(s){const n=diff(s);return n<0?`scaduta da ${-n}g`:n===0?'oggi':n===1?'domani':`tra ${n}g`}
+function urg(s){const n=diff(s);return n<=0?'t-bad':n<=3?'t-warn':'';}
+
+/* ============ dati (localStorage) ============ */
+const KEY='gestionale-avv-poc-v1';
+const USERS=[{id:'u1',nome:'Avv. Marco Rossi',ruolo:'Titolare'},{id:'u2',nome:'Avv. Giulia Bianchi',ruolo:'Associata'},{id:'u3',nome:'Dott.ssa Elena Verdi',ruolo:'Segreteria'},{id:'u4',nome:'Dott. Luca Neri',ruolo:'Praticante'}];
+function seed(){
+ const C=[['c1','Mario Esposito','Persona fisica','RSPMRA70A01H501X'],['c2','Costruzioni Ferrari S.r.l.','Società','01234567890'],['c3','Anna Conti','Persona fisica','CNTNNA82C45F205Z'],['c4','Alfa Logistica S.p.A.','Società','09876543210'],['c5','Paolo Ricci','Persona fisica','RCCPLA65M10L219K']];
+ return{
+ clients:C.map(([id,nome,tipo,cf])=>({id,nome,tipo,cf})),
+ pratiche:[
+  {id:'p1',clientId:'c1',rg:'1234/2025',tribunale:'Tribunale di Roma',sezione:'II Civile',oggetto:'Risarcimento danni',controparte:'Condominio Via Appia',stato:'In corso'},
+  {id:'p2',clientId:'c2',rg:'876/2025',tribunale:'Tribunale di Milano',sezione:'Imprese',oggetto:'Recupero crediti',controparte:'Beta Edil S.r.l.',stato:'In corso'},
+  {id:'p3',clientId:'c2',rg:'2210/2024',tribunale:'Corte d’Appello di Milano',sezione:'I Civile',oggetto:'Appello contratto appalto',controparte:'Gamma S.p.A.',stato:'In corso'},
+  {id:'p4',clientId:'c3',rg:'554/2025',tribunale:'Tribunale di Torino',sezione:'Lavoro',oggetto:'Impugnazione licenziamento',controparte:'Omega Servizi S.r.l.',stato:'In corso'},
+  {id:'p5',clientId:'c4',rg:'3901/2023',tribunale:'Tribunale di Bologna',sezione:'III Civile',oggetto:'Opposizione a decreto ingiuntivo',controparte:'Delta Trasporti',stato:'Chiusa'},
+  {id:'p6',clientId:'c5',rg:'99/2026',tribunale:'Giudice di Pace di Napoli',sezione:'—',oggetto:'Sinistro stradale',controparte:'Unipol Assicurazioni',stato:'In corso'}],
+ contacts:[
+  {id:'k1',nome:'Mario Esposito',cat:'Cliente',tel:'+39 333 1234567',email:'mario.esposito@email.it',pec:'mario.esposito@pec.it',note:''},
+  {id:'k2',nome:'Costruzioni Ferrari S.r.l.',cat:'Cliente',tel:'+39 02 5551234',email:'amm@ferraricostruzioni.it',pec:'ferraricostruzioni@pec.it',note:'Ref.: ing. Ferrari'},
+  {id:'k3',nome:'Anna Conti',cat:'Cliente',tel:'+39 347 9876543',email:'anna.conti@email.it',pec:'',note:''},
+  {id:'k4',nome:'Alfa Logistica S.p.A.',cat:'Cliente',tel:'+39 051 777888',email:'legale@alfalogistica.it',pec:'alfalogistica@pec.it',note:''},
+  {id:'k5',nome:'Tribunale di Roma – Cancelleria Civile',cat:'Ente',tel:'+39 06 68831',email:'',pec:'prot.tribunale.roma@giustiziacert.it',note:'Palazzo di Giustizia, Piazzale Clodio'},
+  {id:'k6',nome:'Tribunale di Milano – Sez. Imprese',cat:'Ente',tel:'+39 02 54331',email:'',pec:'civile.tribunale.milano@giustiziacert.it',note:''},
+  {id:'k7',nome:'Agenzia delle Entrate – Roma',cat:'Ente',tel:'+39 06 5051',email:'',pec:'dp.roma@pce.agenziaentrate.it',note:''},
+  {id:'k8',nome:'Ordine Avvocati di Roma',cat:'Ente',tel:'+39 06 6830 1000',email:'info@ordineavvocatiroma.it',pec:'segreteria@pec.ordineavvocatiroma.org',note:''}],
+ events:[
+  {id:'e1',title:'Udienza Esposito c/ Condominio – RG 1234/2025',date:isoOff(0),time:'10:30',type:'Udienza',owner:'u1',shared:true,clientId:'c1',note:'Aula 14'},
+  {id:'e2',title:'Deposito memoria ex art. 183 – Ferrari',date:isoOff(2),time:'',type:'Scadenza',owner:'u2',shared:true,clientId:'c2',note:'Termine perentorio'},
+  {id:'e3',title:'Udienza Conti c/ Omega',date:isoOff(5),time:'09:30',type:'Udienza',owner:'u2',shared:true,clientId:'c3',note:''},
+  {id:'e4',title:'Riunione di studio settimanale',date:isoOff(1),time:'17:00',type:'Riunione',owner:'u1',shared:true,clientId:'',note:''},
+  {id:'e5',title:'Colloquio nuovo cliente Ricci',date:isoOff(1),time:'11:00',type:'Appuntamento',owner:'u1',shared:true,clientId:'c5',note:''},
+  {id:'e6',title:'Dentista',date:isoOff(3),time:'15:00',type:'Appuntamento',owner:'u1',shared:false,clientId:'',note:''},
+  {id:'e7',title:'Termine appello Alfa Logistica',date:isoOff(12),time:'',type:'Scadenza',owner:'u1',shared:true,clientId:'c4',note:''},
+  {id:'e8',title:'Scadenza F24 studio',date:isoOff(8),time:'',type:'Scadenza',owner:'u3',shared:true,clientId:'',note:''},
+  {id:'e9',title:'Udienza di precisazione conclusioni – Ferrari',date:isoOff(20),time:'11:00',type:'Udienza',owner:'u1',shared:true,clientId:'c2',note:''}],
+ todos:[
+  {id:'t1',text:'Preparare fascicolo udienza Esposito',owner:'u1',due:isoOff(0),done:false},
+  {id:'t2',text:'Redigere memoria Ferrari',owner:'u2',due:isoOff(1),done:false},
+  {id:'t3',text:'Notificare atto Conti',owner:'u4',due:isoOff(3),done:false},
+  {id:'t4',text:'Inviare parcella a Ricci',owner:'u3',due:isoOff(2),done:false},
+  {id:'t5',text:'Aggiornare registro RG',owner:'u3',due:isoOff(-1),done:false},
+  {id:'t6',text:'Rinnovo polizza RC professionale',owner:'u1',due:isoOff(9),done:false}],
+ invoices:[
+  {id:'i1',num:'12/2026',clientId:'c2',desc:'Acconto causa recupero crediti',importo:3500,emissione:isoOff(-40),scadenza:isoOff(-10),pagata:false},
+  {id:'i2',num:'13/2026',clientId:'c1',desc:'Onorari fase introduttiva',importo:1800,emissione:isoOff(-25),scadenza:isoOff(2),pagata:false},
+  {id:'i3',num:'14/2026',clientId:'c4',desc:'Saldo opposizione D.I.',importo:4200,emissione:isoOff(-20),scadenza:isoOff(6),pagata:false},
+  {id:'i4',num:'15/2026',clientId:'c3',desc:'Acconto lavoro',importo:1200,emissione:isoOff(-5),scadenza:isoOff(25),pagata:false},
+  {id:'i5',num:'11/2026',clientId:'c5',desc:'Consulenza stragiudiziale',importo:600,emissione:isoOff(-60),scadenza:isoOff(-30),pagata:true}],
+ hours:[
+  ...[0,1,2,3,4].flatMap(i=>{const d=addD(-i);if([0,6].includes(d.getDay()))return[];return[
+   {id:'h'+i+'a',user:'u1',date:iso(d),ore:6,pratica:'p1',desc:'Studio atti e udienza'},
+   {id:'h'+i+'b',user:'u2',date:iso(d),ore:7.5,pratica:i%2?'p2':'p4',desc:'Redazione atti'},
+   {id:'h'+i+'c',user:'u3',date:iso(d),ore:8,pratica:'',desc:'Segreteria / depositi telematici'},
+   {id:'h'+i+'d',user:'u4',date:iso(d),ore:i%2?6:8,pratica:'p3',desc:'Ricerche giurisprudenziali'}]})]
+ };}
+let DB;try{DB=JSON.parse(localStorage.getItem(KEY))}catch{}
+if(!DB||!DB.clients)DB=seed();
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(DB))}catch{}};
+let me=(()=>{try{return localStorage.getItem(KEY+'-me')}catch{}})()||'u1';
+const uName=id=>USERS.find(u=>u.id===id)?.nome||'—';
+const cName=id=>DB.clients.find(c=>c.id===id)?.nome||'';
+const pLabel=id=>{const p=DB.pratiche.find(x=>x.id===id);return p?`RG ${p.rg} – ${cName(p.clientId)}`:'—'};
+
+/* ============ form modale generica ============ */
+function openForm(title,fields,vals,onSave,onDelete){
+ const d=$('#dlg');
+ d.innerHTML=`<form method="dialog"><h3 style="margin:0 0 6px">${esc(title)}</h3>${fields.map(f=>{
+  const v=vals?.[f.k]??f.def??'';let inp;
+  if(f.t==='select')inp=`<select name="${f.k}">${f.opts.map(o=>{const[val,lab]=Array.isArray(o)?o:[o,o];return`<option value="${esc(val)}" ${val==v?'selected':''}>${esc(lab)}</option>`}).join('')}</select>`;
+  else if(f.t==='check')inp=`<input type="checkbox" name="${f.k}" style="width:auto" ${v?'checked':''}>`;
+  else if(f.t==='area')inp=`<textarea name="${f.k}" rows="2">${esc(v)}</textarea>`;
+  else inp=`<input name="${f.k}" type="${f.t||'text'}" ${f.step?`step="${f.step}"`:''} value="${esc(v)}" ${f.req?'required':''}>`;
+  return`<label>${esc(f.l)}</label>${inp}`}).join('')}
+  <div class="bar" style="margin:16px 0 0"><button class="p" value="ok">Salva</button><button value="x" formnovalidate>Annulla</button><span class="sp"></span>${onDelete?'<button class="d" value="del" formnovalidate>Elimina</button>':''}</div></form>`;
+ d.onclose=()=>{
+  if(d.returnValue==='del'&&onDelete&&confirm('Eliminare definitivamente?')){onDelete();save();render();}
+  else if(d.returnValue==='ok'){const o={};fields.forEach(f=>{const el=d.querySelector(`[name="${f.k}"]`);o[f.k]=f.t==='check'?el.checked:f.t==='number'?parseFloat(el.value||0):el.value});onSave(o);save();render();}
+  d.returnValue='';};
+ d.showModal();
+}
+const optClients=(blank)=>[...(blank?[['','—']]:[]),...DB.clients.map(c=>[c.id,c.nome])];
+const optUsers=USERS.map(u=>[u.id,u.nome]);
+const optPrat=[['','— nessuna —'],...DB.pratiche.map(p=>[p.id,pLabel(p.id)])];
+
+/* ============ viste ============ */
+let page='dash',agMode='tutte',pagoFilter='tutte',rubCat='Tutti',q='';
+const PAGES=[['dash','🏠 Oggi'],['agenda','📅 Agenda'],['todo','✅ To-do'],['fatture','💶 Scadenzario fatture'],['registro','📚 Registro clienti / RG'],['rubrica','📇 Rubrica'],['ore','⏱ Ore dipendenti']];
+
+function visibleEvents(mode){
+ return DB.events.filter(e=>mode==='condivisa'?e.shared:mode==='personale'?e.owner===me:(e.shared||e.owner===me)).sort((a,b)=>(a.date+(a.time||'99')).localeCompare(b.date+(b.time||'99')));
+}
+function upcomingDeadlines(){
+ const L=[];
+ DB.events.filter(e=>(e.shared||e.owner===me)&&['Scadenza','Udienza'].includes(e.type)&&diff(e.date)<=14&&diff(e.date)>=0).forEach(e=>L.push({date:e.date,txt:e.title,kind:e.type,sub:e.shared?'Studio':'Personale'}));
+ DB.todos.filter(t=>t.owner===me&&!t.done&&t.due&&diff(t.due)<=14).forEach(t=>L.push({date:t.due,txt:t.text,kind:'To-do',sub:'Personale'}));
+ DB.invoices.filter(i=>!i.pagata&&diff(i.scadenza)<=14).forEach(i=>L.push({date:i.scadenza,txt:`Fattura ${i.num} – ${cName(i.clientId)} (${eur(i.importo)})`,kind:'Fattura',sub:'Incasso'}));
+ return L.sort((a,b)=>a.date.localeCompare(b.date));
+}
+const dlRow=x=>`<div class="row"><div class="d">${fIt(x.date).slice(0,5)}</div><div class="x">${esc(x.txt)}<small>${x.kind} · ${x.sub}</small></div><span class="tag ${urg(x.date)}">${when(x.date)}</span></div>`;
+
+function vDash(){
+ const dl=upcomingDeadlines();const ev=visibleEvents('tutte').filter(e=>e.date===isoOff(0));
+ const td=DB.todos.filter(t=>t.owner===me&&!t.done);
+ const unpaid=DB.invoices.filter(i=>!i.pagata);const late=unpaid.filter(i=>diff(i.scadenza)<0);
+ return`<h2>Buongiorno, ${esc(uName(me))}</h2><p class="sub">${fLong(isoOff(0))} · riepilogo della tua giornata</p>
+ <div class="grid g4" style="margin-bottom:14px">
+  <div class="card kpi"><b>${ev.length}</b><span>impegni oggi</span></div>
+  <div class="card kpi"><b>${dl.filter(x=>diff(x.date)<=3&&x.kind!=='Fattura').length}</b><span>scadenze entro 3 giorni</span></div>
+  <div class="card kpi"><b>${td.length}</b><span>to-do aperti</span></div>
+  <div class="card kpi"><b style="color:${late.length?'var(--bad)':'inherit'}">${eur(late.reduce((s,i)=>s+i.importo,0))}</b><span>fatture scadute (${late.length})</span></div></div>
+ <div class="grid g2">
+  <div class="card"><h3>Agenda di oggi</h3>${ev.length?ev.map(e=>`<div class="row"><div class="d">${e.time||'tutto il g.'}</div><div class="x">${esc(e.title)}<small>${e.type} · ${e.shared?'Studio':'Personale'} · ${esc(uName(e.owner))}</small></div></div>`).join(''):'<div class="empty">Nessun impegno oggi.</div>'}</div>
+  <div class="card"><h3>⚠ Scadenze imminenti (14 gg)</h3>${dl.length?dl.map(dlRow).join(''):'<div class="empty">Nessuna scadenza.</div>'}</div>
+  <div class="card"><h3>I miei to-do</h3>${td.length?td.sort((a,b)=>(a.due||'9').localeCompare(b.due||'9')).map(todoRow).join(''):'<div class="empty">Tutto fatto 🎉</div>'}</div></div>`;
+}
+const todoRow=t=>`<div class="row"><input type="checkbox" style="width:auto;margin-top:4px" ${t.done?'checked':''} onchange="togTodo('${t.id}')"><div class="x ${t.done?'done':''}">${esc(t.text)}<small>${esc(uName(t.owner))}</small></div>${t.due?`<span class="tag ${t.done?'':urg(t.due)}">${fIt(t.due).slice(0,5)}</span>`:''}<button class="s" onclick="editTodo('${t.id}')">✎</button></div>`;
+window.togTodo=id=>{const t=DB.todos.find(x=>x.id===id);t.done=!t.done;save();render()};
+window.editTodo=id=>{const t=id?DB.todos.find(x=>x.id===id):null;openForm(t?'Modifica to-do':'Nuovo to-do',[{k:'text',l:'Attività',req:1},{k:'due',l:'Scadenza',t:'date'},{k:'owner',l:'Assegnato a',t:'select',opts:optUsers,def:me}],t,o=>{if(t)Object.assign(t,o);else DB.todos.push({id:uid(),done:false,...o})},t&&(()=>DB.todos=DB.todos.filter(x=>x!==t)))};
+
+function vAgenda(){
+ const list=visibleEvents(agMode).filter(e=>diff(e.date)>=-1);const by={};list.forEach(e=>(by[e.date]=by[e.date]||[]).push(e));
+ return`<h2>Agenda</h2><p class="sub">Agenda condivisa dello studio e agenda personale di ${esc(uName(me))}</p>
+ <div class="bar"><div class="seg">${['tutte','condivisa','personale'].map(m=>`<button class="${agMode===m?'on':''}" onclick="agMode='${m}';render()">${m[0].toUpperCase()+m.slice(1)}</button>`).join('')}</div><span class="sp"></span><button class="p" onclick="editEvent()">+ Evento</button></div>
+ <div class="card">${Object.keys(by).sort().map(d=>`<div class="day ${diff(d)===0?'today':''}">${fLong(d)} · ${when(d)}</div>${by[d].map(e=>`<div class="row"><div class="d">${e.time||'—'}</div><div class="x">${esc(e.title)}<small>${e.clientId?esc(cName(e.clientId))+' · ':''}${esc(uName(e.owner))}${e.note?' · '+esc(e.note):''}</small></div><span class="tag ${e.type==='Scadenza'?urg(e.date)||'t-warn':''}">${e.type}</span><span class="tag ${e.shared?'':'t-ok'}">${e.shared?'Studio':'Privato'}</span><button class="s" onclick="editEvent('${e.id}')">✎</button></div>`).join('')}`).join('')||'<div class="empty">Nessun evento.</div>'}</div>`;
+}
+window.editEvent=id=>{const e=id?DB.events.find(x=>x.id===id):null;openForm(e?'Modifica evento':'Nuovo evento',[{k:'title',l:'Titolo',req:1},{k:'type',l:'Tipo',t:'select',opts:['Udienza','Scadenza','Appuntamento','Riunione']},{k:'date',l:'Data',t:'date',req:1,def:isoOff(0)},{k:'time',l:'Ora',t:'time'},{k:'clientId',l:'Cliente',t:'select',opts:optClients(1)},{k:'owner',l:'Responsabile',t:'select',opts:optUsers,def:me},{k:'shared',l:'Visibile a tutto lo studio',t:'check',def:true},{k:'note',l:'Note',t:'area'}],e,o=>{if(e)Object.assign(e,o);else DB.events.push({id:uid(),...o})},e&&(()=>DB.events=DB.events.filter(x=>x!==e)))};
+
+function vTodo(){
+ const mine=DB.todos.filter(t=>t.owner===me),others=DB.todos.filter(t=>t.owner!==me&&!t.done);
+ const s=a=>a.sort((x,y)=>x.done-y.done||(x.due||'9').localeCompare(y.due||'9'));
+ return`<h2>To-do</h2><p class="sub">Attività personali con scadenza</p><div class="bar"><span class="sp"></span><button class="p" onclick="editTodo()">+ To-do</button></div>
+ <div class="grid g2"><div class="card"><h3>I miei</h3>${s(mine).map(todoRow).join('')||'<div class="empty">Nessun to-do.</div>'}</div>
+ <div class="card"><h3>Colleghi (aperti)</h3>${s(others).map(todoRow).join('')||'<div class="empty">—</div>'}</div></div>`;
+}
+
+function vFatture(){
+ const all=DB.invoices.slice().sort((a,b)=>a.scadenza.localeCompare(b.scadenza));
+ const st=i=>i.pagata?'Pagata':diff(i.scadenza)<0?'Scaduta':'Da incassare';
+ const f=all.filter(i=>pagoFilter==='tutte'||(pagoFilter==='aperte'?!i.pagata:pagoFilter==='scadute'?st(i)==='Scaduta':i.pagata));
+ const sum=a=>a.reduce((s,i)=>s+i.importo,0);
+ return`<h2>Scadenzario fatture</h2><p class="sub">Fatture emesse, scadenze di incasso e solleciti</p>
+ <div class="grid g4" style="margin-bottom:14px"><div class="card kpi"><b>${eur(sum(all.filter(i=>!i.pagata)))}</b><span>da incassare</span></div><div class="card kpi"><b style="color:var(--bad)">${eur(sum(all.filter(i=>st(i)==='Scaduta')))}</b><span>scadute</span></div><div class="card kpi"><b>${eur(sum(all.filter(i=>!i.pagata&&diff(i.scadenza)>=0&&diff(i.scadenza)<=7)))}</b><span>in scadenza (7 gg)</span></div><div class="card kpi"><b style="color:var(--ok)">${eur(sum(all.filter(i=>i.pagata)))}</b><span>incassate</span></div></div>
+ <div class="bar"><div class="seg">${['tutte','aperte','scadute','pagate'].map(m=>`<button class="${pagoFilter===m?'on':''}" onclick="pagoFilter='${m}';render()">${m[0].toUpperCase()+m.slice(1)}</button>`).join('')}</div><span class="sp"></span><button class="p" onclick="editInv()">+ Fattura</button></div>
+ <div class="card tbl"><table><tr><th>N.</th><th>Cliente</th><th>Descrizione</th><th>Emessa</th><th>Scadenza</th><th class="r">Importo</th><th>Stato</th><th></th></tr>
+ ${f.map(i=>`<tr><td>${esc(i.num)}</td><td>${esc(cName(i.clientId))}</td><td>${esc(i.desc)}</td><td>${fIt(i.emissione)}</td><td>${fIt(i.scadenza)}${i.pagata?'':`<small style="color:var(--mut);display:block">${when(i.scadenza)}</small>`}</td><td class="r">${eur(i.importo)}</td><td><span class="tag ${i.pagata?'t-ok':urg(i.scadenza)}">${st(i)}</span></td><td style="white-space:nowrap">${i.pagata?'':`<button class="s" onclick="payInv('${i.id}')">✓ Pagata</button> `}<button class="s" onclick="editInv('${i.id}')">✎</button></td></tr>`).join('')||'<tr><td colspan=8 class="empty">Nessuna fattura.</td></tr>'}</table></div>`;
+}
+window.payInv=id=>{DB.invoices.find(i=>i.id===id).pagata=true;save();render()};
+window.editInv=id=>{const i=id?DB.invoices.find(x=>x.id===id):null;openForm(i?'Modifica fattura':'Nuova fattura',[{k:'num',l:'Numero',req:1,def:`${DB.invoices.length+12}/2026`},{k:'clientId',l:'Cliente',t:'select',opts:optClients()},{k:'desc',l:'Descrizione'},{k:'importo',l:'Importo (€)',t:'number',step:'0.01',req:1},{k:'emissione',l:'Data emissione',t:'date',def:isoOff(0)},{k:'scadenza',l:'Scadenza pagamento',t:'date',def:isoOff(30),req:1},{k:'pagata',l:'Pagata',t:'check'}],i,o=>{if(i)Object.assign(i,o);else DB.invoices.push({id:uid(),...o})},i&&(()=>DB.invoices=DB.invoices.filter(x=>x!==i)))};
+
+function vRegistro(){
+ const rows=DB.pratiche.map(p=>({p,c:DB.clients.find(c=>c.id===p.clientId)})).filter(({p,c})=>!q||[c?.nome,p.rg,p.tribunale,p.oggetto,p.controparte].join(' ').toLowerCase().includes(q.toLowerCase()))
+  .sort((a,b)=>(a.c?.nome||'').localeCompare(b.c?.nome||''));
+ const noP=DB.clients.filter(c=>!DB.pratiche.some(p=>p.clientId===c.id));
+ return`<h2>Registro clienti e numeri RG</h2><p class="sub">Per ogni cliente: numero di Ruolo Generale e tribunale di competenza</p>
+ <div class="bar"><input style="max-width:280px" placeholder="Cerca cliente, RG, tribunale…" value="${esc(q)}" oninput="q=this.value;render(true)" id="qin"><span class="sp"></span><button onclick="editClient()">+ Cliente</button><button class="p" onclick="editPratica()">+ Pratica / RG</button></div>
+ <div class="card tbl"><table><tr><th>Cliente</th><th>N. RG</th><th>Tribunale competente</th><th>Sezione</th><th>Oggetto</th><th>Controparte</th><th>Stato</th><th></th></tr>
+ ${rows.map(({p,c})=>`<tr><td><b>${esc(c?.nome)}</b><small style="display:block;color:var(--mut)">${esc(c?.cf||'')}</small></td><td><b>${esc(p.rg)}</b></td><td>${esc(p.tribunale)}</td><td>${esc(p.sezione)}</td><td>${esc(p.oggetto)}</td><td>${esc(p.controparte)}</td><td><span class="tag ${p.stato==='Chiusa'?'':'t-ok'}">${esc(p.stato)}</span></td><td style="white-space:nowrap"><button class="s" onclick="editPratica('${p.id}')">✎</button> <button class="s" onclick="editClient('${c?.id}')">Cliente</button></td></tr>`).join('')}
+ ${noP.map(c=>`<tr><td><b>${esc(c.nome)}</b></td><td colspan=6 style="color:var(--mut)">Nessuna pratica registrata</td><td><button class="s" onclick="editClient('${c.id}')">Cliente</button></td></tr>`).join('')}
+ </table></div>`;
+}
+window.editClient=id=>{const c=id?DB.clients.find(x=>x.id===id):null;openForm(c?'Modifica cliente':'Nuovo cliente',[{k:'nome',l:'Nome / Ragione sociale',req:1},{k:'tipo',l:'Tipo',t:'select',opts:['Persona fisica','Società']},{k:'cf',l:'C.F. / P.IVA'}],c,o=>{if(c)Object.assign(c,o);else DB.clients.push({id:uid(),...o})},c&&(()=>{DB.clients=DB.clients.filter(x=>x!==c);DB.pratiche=DB.pratiche.filter(p=>p.clientId!==c.id)}))};
+window.editPratica=id=>{const p=id?DB.pratiche.find(x=>x.id===id):null;openForm(p?'Modifica pratica':'Nuova pratica',[{k:'clientId',l:'Cliente',t:'select',opts:optClients()},{k:'rg',l:'Numero RG (es. 1234/2026)',req:1},{k:'tribunale',l:'Tribunale / Ufficio giudiziario',req:1},{k:'sezione',l:'Sezione'},{k:'oggetto',l:'Oggetto'},{k:'controparte',l:'Controparte'},{k:'stato',l:'Stato',t:'select',opts:['In corso','Sospesa','Chiusa']}],p,o=>{if(p)Object.assign(p,o);else DB.pratiche.push({id:uid(),...o})},p&&(()=>DB.pratiche=DB.pratiche.filter(x=>x!==p)))};
+
+function vRubrica(){
+ const cats=['Tutti','Cliente','Ente','Altro'];
+ const L=DB.contacts.filter(k=>(rubCat==='Tutti'||k.cat===rubCat)&&(!q||[k.nome,k.email,k.pec,k.tel,k.note].join(' ').toLowerCase().includes(q.toLowerCase()))).sort((a,b)=>a.nome.localeCompare(b.nome));
+ return`<h2>Rubrica clienti ed enti</h2><p class="sub">Telefono, e-mail e PEC</p>
+ <div class="bar"><input style="max-width:260px" placeholder="Cerca…" value="${esc(q)}" oninput="q=this.value;render(true)" id="qin"><div class="seg">${cats.map(c=>`<button class="${rubCat===c?'on':''}" onclick="rubCat='${c}';render()">${c}</button>`).join('')}</div><span class="sp"></span><button class="p" onclick="editContact()">+ Contatto</button></div>
+ <div class="card tbl"><table><tr><th>Nome</th><th>Categoria</th><th>Telefono</th><th>E-mail</th><th>PEC</th><th>Note</th><th></th></tr>
+ ${L.map(k=>`<tr><td><b>${esc(k.nome)}</b></td><td><span class="tag">${esc(k.cat)}</span></td><td>${k.tel?`<a href="tel:${esc(k.tel.replace(/\s/g,''))}">${esc(k.tel)}</a>`:''}</td><td>${k.email?`<a href="mailto:${esc(k.email)}">${esc(k.email)}</a>`:''}</td><td>${k.pec?`<a href="mailto:${esc(k.pec)}">${esc(k.pec)}</a>`:'<span style="color:var(--mut)">—</span>'}</td><td>${esc(k.note)}</td><td><button class="s" onclick="editContact('${k.id}')">✎</button></td></tr>`).join('')||'<tr><td colspan=7 class="empty">Nessun contatto.</td></tr>'}</table></div>`;
+}
+window.editContact=id=>{const k=id?DB.contacts.find(x=>x.id===id):null;openForm(k?'Modifica contatto':'Nuovo contatto',[{k:'nome',l:'Nome',req:1},{k:'cat',l:'Categoria',t:'select',opts:['Cliente','Ente','Altro']},{k:'tel',l:'Telefono',t:'tel'},{k:'email',l:'E-mail',t:'email'},{k:'pec',l:'PEC',t:'email'},{k:'note',l:'Note',t:'area'}],k,o=>{if(k)Object.assign(k,o);else DB.contacts.push({id:uid(),...o})},k&&(()=>DB.contacts=DB.contacts.filter(x=>x!==k)))};
+
+function vOre(){
+ const mon=addD(-((T0.getDay()+6)%7));const wk=iso(mon),wkEnd=iso(addD(6,mon)),ym=iso(T0).slice(0,7);
+ const sumU=(u,f)=>DB.hours.filter(h=>h.user===u&&f(h)).reduce((s,h)=>s+h.ore,0);
+ const mine=DB.hours.filter(h=>h.user===me).sort((a,b)=>b.date.localeCompare(a.date));
+ const isBoss=me==='u1'||me==='u3';
+ const list=(isBoss?DB.hours:mine).slice().sort((a,b)=>b.date.localeCompare(a.date)).slice(0,40);
+ return`<h2>Gestione ore dipendenti</h2><p class="sub">Settimana ${fIt(wk)} – ${fIt(wkEnd)} · monte ore contrattuale 40h/sett.</p>
+ <div class="bar"><span class="sp"></span><button class="p" onclick="editOre()">+ Registra ore</button></div>
+ <div class="card tbl" style="margin-bottom:14px"><h3>Riepilogo</h3><table><tr><th>Collaboratore</th><th>Ruolo</th><th class="r">Ore settimana</th><th style="width:200px">Avanzamento</th><th class="r">Ore mese</th></tr>
+ ${USERS.map(u=>{const w=sumU(u.id,h=>h.date>=wk&&h.date<=wkEnd);const pc=Math.min(100,w/40*100);return`<tr><td><b>${esc(u.nome)}</b></td><td>${u.ruolo}</td><td class="r">${w.toLocaleString('it-IT')} h</td><td><div style="background:var(--line);border-radius:5px;height:8px"><div style="width:${pc}%;background:${w>40?'var(--warn)':'var(--pri2)'};height:8px;border-radius:5px"></div></div></td><td class="r">${sumU(u.id,h=>h.date.startsWith(ym)).toLocaleString('it-IT')} h</td></tr>`}).join('')}</table></div>
+ <div class="card tbl"><h3>${isBoss?'Tutte le registrazioni':'Le mie registrazioni'}</h3><table><tr><th>Data</th><th>Collaboratore</th><th>Pratica</th><th>Attività</th><th class="r">Ore</th><th></th></tr>
+ ${list.map(h=>`<tr><td>${fIt(h.date)}</td><td>${esc(uName(h.user))}</td><td>${esc(h.pratica?pLabel(h.pratica):'Attività generale')}</td><td>${esc(h.desc)}</td><td class="r">${h.ore}</td><td><button class="s" onclick="editOre('${h.id}')">✎</button></td></tr>`).join('')}</table></div>`;
+}
+window.editOre=id=>{const h=id?DB.hours.find(x=>x.id===id):null;openForm(h?'Modifica ore':'Registra ore',[{k:'user',l:'Collaboratore',t:'select',opts:optUsers,def:me},{k:'date',l:'Data',t:'date',def:isoOff(0),req:1},{k:'ore',l:'Ore',t:'number',step:'0.25',req:1,def:1},{k:'pratica',l:'Pratica',t:'select',opts:optPrat},{k:'desc',l:'Attività'}],h,o=>{if(h)Object.assign(h,o);else DB.hours.push({id:uid(),...o})},h&&(()=>DB.hours=DB.hours.filter(x=>x!==h)))};
+
+/* ============ render ============ */
+const VIEWS={dash:vDash,agenda:vAgenda,todo:vTodo,fatture:vFatture,registro:vRegistro,rubrica:vRubrica,ore:vOre};
+function render(keepFocus){
+ const late=DB.invoices.filter(i=>!i.pagata&&diff(i.scadenza)<0).length;
+ const urgent=upcomingDeadlines().filter(x=>diff(x.date)<=1&&x.kind!=='Fattura').length;
+ $('#nav').innerHTML=`<h1>⚖ Studio Legale<small>Gestionale – proof of concept</small></h1>${PAGES.map(([k,l])=>`<a class="${page===k?'on':''}" onclick="go('${k}')">${l}${k==='dash'&&urgent?`<span class="n">${urgent}</span>`:''}${k==='fatture'&&late?`<span class="n">${late}</span>`:''}</a>`).join('')}
+ <div class="me"><label>Utente attivo</label><select onchange="me=this.value;try{localStorage.setItem(KEY+'-me',me)}catch{};render()">${USERS.map(u=>`<option value="${u.id}" ${u.id===me?'selected':''}>${u.nome}</option>`).join('')}</select></div>`;
+ $('#main').innerHTML=VIEWS[page]();
+ if(keepFocus){const i=$('#qin');if(i){i.focus();i.setSelectionRange(i.value.length,i.value.length)}}
+}
+window.go=k=>{page=k;q='';render();scrollTo(0,0)};
+
+/* ============ BOT (parser linguaggio naturale italiano) ============ */
+const msgs=$('#msgs');
+function say(t,u,html){const d=document.createElement('div');d.className='m'+(u?' u':'');html?d.innerHTML=t:d.textContent=t;msgs.appendChild(d);msgs.scrollTop=1e9;return d}
+function parseCmd(raw){
+ let s=' '+raw.toLowerCase()+' ',cut=[];const take=m=>{if(m)cut.push(m[0]);return m};
+ let date=null,time='';
+ let m;
+ if(take(m=s.match(/\bdopodomani\b/)))date=isoOff(2);
+ else if(take(m=s.match(/\bdomani\b/)))date=isoOff(1);
+ else if(take(m=s.match(/\boggi\b/)))date=isoOff(0);
+ else if(take(m=s.match(/\btra (\d+) (giorn[oi]|settiman[ae]|mesi|mese)\b/))){const n=+m[1],u=m[2][0];date=iso(u==='g'?addD(n):u==='s'?addD(n*7):(()=>{const d=new Date(T0);d.setMonth(d.getMonth()+n);return d})())}
+ else if(take(m=s.match(/\b(\d{1,2})\/(\d{1,2})(?:\/(\d{2,4}))?\b/))){let y=m[3]?+m[3]:T0.getFullYear();if(y<100)y+=2000;let d=new Date(y,m[2]-1,+m[1]);if(!m[3]&&d<T0)d.setFullYear(y+1);date=iso(d)}
+ else if(take(m=s.match(new RegExp(`\\b(\\d{1,2}) (${MESI.join('|')})(?: (\\d{4}))?\\b`)))){let y=m[3]?+m[3]:T0.getFullYear();let d=new Date(y,MESI.indexOf(m[2]),+m[1]);if(!m[3]&&d<T0)d.setFullYear(y+1);date=iso(d)}
+ else if(take(m=s.match(/\b(lunedi|lunedì|martedi|martedì|mercoledi|mercoledì|giovedi|giovedì|venerdi|venerdì|sabato|domenica)(?![a-zà-ù])(?: prossimo)?/))){const w=GIORNI.findIndex(g=>g.normalize('NFD').replace(/\p{M}/g,'')===m[1].normalize('NFD').replace(/\p{M}/g,''));let n=(w-T0.getDay()+7)%7||7;date=iso(addD(n))}
+ else if(take(m=s.match(/\bprossima settimana\b/)))date=iso(addD(7));
+ if(take(m=s.match(/\b(?:alle|ore|h)\s*(\d{1,2})(?:[:.](\d{2}))?\b/))||take(m=s.match(/\b(\d{1,2}):(\d{2})\b/)))time=`${p2(m[1])}:${m[2]||'00'}`;
+ const personal=!!take(s.match(/\b(personale|privato|privata|mio|mia)\b/));
+ let type='Appuntamento',todo=false;
+ if(/udienza/.test(s))type='Udienza';else if(/scadenza|termine|deposit/.test(s))type='Scadenza';else if(/riunione/.test(s))type='Riunione';
+ if(/ricordami|promemoria|to-?do|da fare|devo /.test(s))todo=true;
+ const cl=DB.clients.find(c=>{const n=c.nome.toLowerCase();return s.includes(n)||n.split(/\s+/).some(w=>w.length>3&&!['s.r.l.','s.p.a.','costruzioni','logistica'].includes(w)&&s.includes(' '+w))});
+ const rg=(s.match(/\brg\s*(?:n\.?\s*)?(\d+\/\d{2,4})/)||[])[1];
+ let title=raw;cut.forEach(c=>{title=title.replace(new RegExp(c.trim().replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'i'),'')});
+ title=title.replace(/^\s*(crea|aggiungi|inserisci|fissa|metti|segna)(\s+(un|una|l'|lo|la))?\s*(evento|appuntamento|promemoria)?\s*/i,'').replace(/^\s*(ricordami|ricorda)\s*(di|che)?\s*/i,'').replace(/\s+(il|in data|per il|alle|di|a|per)\s*$/i,'').replace(/\s{2,}/g,' ').trim();
+ title=title.charAt(0).toUpperCase()+title.slice(1);
+ return{title,date,time,type,todo,personal,client:cl,rg};
+}
+let pending=null;
+function handle(text){
+ say(text,true);const l=text.toLowerCase();
+ if(/cosa scade|scadenz[ae].*(settimana|prossim|imminent)|^scadenze|cosa ho|agenda/.test(l)&&!/\d{1,2}\/\d|^(crea|aggiungi|inserisci|fissa)/.test(l)&&!parseCmd(text).date){
+  const lim=/oggi/.test(l)?0:/settimana/.test(l)?7:14;
+  const L=upcomingDeadlines().filter(x=>diff(x.date)<=lim);
+  return say(L.length?`Prossimi ${lim===0?'impegni di oggi':lim+' giorni'}:\n`+L.map(x=>`• ${fIt(x.date).slice(0,5)} – ${x.txt} (${when(x.date)})`).join('\n'):'Nessuna scadenza nel periodo 👍');}
+ if(/fatture (scadute|da incassare|aperte)/.test(l)){const L=DB.invoices.filter(i=>!i.pagata&&(l.includes('scadute')?diff(i.scadenza)<0:true));return say(L.length?L.map(i=>`• ${i.num} ${cName(i.clientId)} – ${eur(i.importo)} (scad. ${fIt(i.scadenza)})`).join('\n'):'Nessuna fattura.')}
+ const r=parseCmd(text);
+ if(!r.date&&!r.todo)return say('Non ho trovato una data. Prova con «domani», «lunedì», «15/12» o «tra 3 giorni».');
+ if(!r.title)return say('Mi manca un titolo per l’evento.');
+ pending=r;const kind=r.todo?'To-do personale':`${r.type} ${r.personal?'(personale)':'(agenda condivisa)'}`;
+ const el=say(`<b>Ho capito:</b><br>📌 ${esc(r.title)}<br>🗂 ${kind}<br>📅 ${r.date?fLong(r.date)+(r.time?' ore '+r.time:''):'senza scadenza'}${r.client?`<br>👤 ${esc(r.client.nome)}`:''}${r.rg?`<br>⚖ RG ${esc(r.rg)}`:''}<br><button class="s p" id="okb">Conferma</button> <button class="s" id="nob">Annulla</button>`,false,true);
+ el.querySelector('#okb').onclick=()=>{const x=pending;if(!x)return;
+  if(x.todo)DB.todos.push({id:uid(),text:x.title,owner:me,due:x.date||'',done:false});
+  else DB.events.push({id:uid(),title:x.title,date:x.date,time:x.time,type:x.type,owner:me,shared:!x.personal,clientId:x.client?.id||'',note:x.rg?'RG '+x.rg:''});
+  pending=null;save();render();el.querySelector('#okb').parentNode.querySelectorAll('button').forEach(b=>b.remove());say('✅ Fatto! Lo trovi in '+(x.todo?'To-do':'Agenda')+'.')};
+ el.querySelector('#nob').onclick=()=>{pending=null;el.querySelectorAll('button').forEach(b=>b.remove());say('Annullato.')};
+}
+$('#botbtn').onclick=()=>{$('#bot').classList.toggle('open');if(!msgs.children.length)say('Ciao! Dimmi cosa creare, ad esempio:\n«udienza Rossi domani alle 10»\n«scadenza memoria Ferrari il 15/12»\n«ricordami di chiamare Conti venerdì»');$('#botin').focus()};
+$('#botform').onsubmit=e=>{e.preventDefault();const v=$('#botin').value.trim();if(v){$('#botin').value='';handle(v)}};
+render();
+</script>
+</body>
+</html>
